@@ -9,13 +9,19 @@ namespace EStudy.Domain.Models
     public class User : BaseModel<int>
     {
         [Required, MinLength(3), MaxLength(25)]
-        public string Firstname { get; set; }
+        public string FirstName { get; set; }
         [MinLength(3), MaxLength(30)]
-        public string Middlename { get; set; }
+        public string MiddleName { get; set; }
         [Required, MinLength(3), MaxLength(25)]
-        public string Lastname { get; set; }
+        public string LastName { get; set; }
         [MinLength(4), MaxLength(25)]
         public string Username { get; set; }
+        [MinLength(5), MaxLength(500)]
+        public string About { get; set; }
+        [MinLength(10), MaxLength(250)]
+        public string Avatar50 { get; set; }
+        [MinLength(10), MaxLength(250)]
+        public string Avatar { get; set; }
         [Required, MinLength(7), MaxLength(50)]
         public string Login { get; set; }
         [Required, MinLength(20), MaxLength(2500)]
