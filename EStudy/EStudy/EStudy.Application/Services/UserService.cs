@@ -65,5 +65,17 @@ namespace EStudy.Application.Services
             //ToDo send to user email confirm
             return new RegisterResult();
         }
+
+        public async Task<LoginResult> LoginUser(LoginViewModel model)
+        {
+            var user = await unitOfWork.UserRepository.GetByWhereAsync(d => d.Login == model.Login);
+            if (user == null)
+                return new LoginResult { Error = Constants.Constants.UserNotExist };
+            if (PasswordManager.VerifyPasswordHash(model.Password, user.PasswordHash))
+                return new LoginResult { Error = Constants.Constants.PasswordNotComapre };
+            if (!user.IsConfirmed)
+                return new LoginResult { Error = Constants.Constants.NotConfirmed };
+            return new LoginResult { User = user };
+        }
     }
 }

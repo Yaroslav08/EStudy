@@ -12,5 +12,6 @@ namespace EStudy.Application.Interfaces
         Task<List<UserShortViewModel>> SearchUsers(string name, int count, int skip, string param = null);
         Task<string> ConfirmUser(ConfirmViewModel model);
         Task<RegisterResult> RegisterUser(RegisterViewModel model);
+        Task<LoginResult> LoginUser(LoginViewModel model);
     }
 }
