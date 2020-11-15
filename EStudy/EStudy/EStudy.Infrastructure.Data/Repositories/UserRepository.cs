@@ -25,6 +25,34 @@ namespace EStudy.Infrastructure.Data.Repositories
                 .ToListAsync();
         }
 
+        public async Task<List<User>> GetUsersByEmail(string email)
+        {
+            return await db.Users.AsNoTracking()
+                .Where(d => d.Email == email)
+                .Select(d => new User
+                {
+                    FirstName = d.FirstName,
+                    LastName = d.LastName,
+                    Username = d.Username,
+                    Avatar50 = d.Avatar50
+                })
+                .ToListAsync();
+        }
+
+        public async Task<List<User>> GetUsersByPhone(string phone)
+        {
+            return await db.Users.AsNoTracking()
+                .Where(d => d.Phone == phone)
+                .Select(d => new User
+                {
+                    FirstName = d.FirstName,
+                    LastName = d.LastName,
+                    Username = d.Username,
+                    Avatar50 = d.Avatar50
+                })
+                .ToListAsync();
+        }
+
         public async Task<List<User>> SearchAsync(string name, int count, int skip)
         {
             return await db.Users.AsNoTracking()

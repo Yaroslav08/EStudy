@@ -11,6 +11,8 @@ namespace EStudy.Domain.Interfaces
         Task<List<User>> SearchAsync(string name, int count, int skip);
         Task<List<User>> SearchStudentsAsync(string name, int count, int skip);
         Task<List<User>> SearchTeachersAsync(string name, int count, int skip);
+        Task<List<User>> GetUsersByEmail(string email);
+        Task<List<User>> GetUsersByPhone(string phone);
         Task<List<User>> GetAllAdmins();
     }
 }
