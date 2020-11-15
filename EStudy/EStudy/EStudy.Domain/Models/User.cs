@@ -1,17 +1,22 @@
-﻿using System;
+﻿using EStudy.Domain.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace EStudy.Domain.Models
 {
-    public class User
+    public class User : BaseModel<int>
     {
-        [Key]
-        public int Id { get; set; }
+        [Required, MinLength(3), MaxLength(25)]
+        public string Firstname { get; set; }
+        [Required, MinLength(3), MaxLength(25)]
+        public string Lastname { get; set; }
+        [Required, MinLength(7), MaxLength(50)]
+        public string Login { get; set; }
+        [Required, MinLength(20), MaxLength(2500)]
+        public string PasswordHash { get; set; }
         [Required]
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
-        [Required, MinLength(3), MaxLength(20)]
-        public string Name { get; set; } = Guid.NewGuid().ToString("N").Substring(0, 10);
+        public RoleType Role { get; set; } = RoleType.Student;
     }
 }
