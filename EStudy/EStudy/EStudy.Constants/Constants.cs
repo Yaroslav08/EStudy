@@ -16,6 +16,7 @@ namespace EStudy.Constants
         public const string TokenExpired = "Життя токену вичерпано";
         public const string TokenNotValid = "Токен не валідний";
         public const string AlreadyConfirmed = "Користувач вже підтверджений";
+        public const string LoginBusy = "Логін вже зайнятий";
         #endregion
     }
 }

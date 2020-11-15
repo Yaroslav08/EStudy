@@ -4,8 +4,14 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation" Version="5.0.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EStudy.Infrastructure.Data\EStudy.Infrastructure.Data.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Extensions">
+      <HintPath>..\Libraries\Extensions.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

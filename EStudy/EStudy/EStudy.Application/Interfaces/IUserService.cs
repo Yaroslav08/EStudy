@@ -11,5 +11,6 @@ namespace EStudy.Application.Interfaces
         Task<UserViewModel> GetUserById(int id);
         Task<List<UserShortViewModel>> SearchUsers(string name, int count, int skip, string param = null);
         Task<string> ConfirmUser(ConfirmViewModel model);
+        Task<RegisterResult> RegisterUser(RegisterViewModel model);
     }
 }

@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using EStudy.Application.ViewModels.Auth;
+using Extensions;
+using EStudy.Domain.Models;
 
 namespace EStudy.Application.Services
 {
@@ -44,6 +46,24 @@ namespace EStudy.Application.Services
             user.ConfirmedFromIP = model.IP;
             user.ConfirmedAt = DateTime.Now;
             return await unitOfWork.UserRepository.UpdateAsync(user);
+        }
+
+        public async Task<RegisterResult> RegisterUser(RegisterViewModel model)
+        {
+            if (await unitOfWork.UserRepository.IsExistAsync(d => d.Login == model.Login))
+                return new RegisterResult { Error = Constants.Constants.LoginBusy };
+            var user = new User();
+            user.FirstName = model.FirstName;
+            user.LastName = model.LastName;
+            user.Login = model.Login;
+            user.PasswordHash = PasswordManager.GeneratePasswordHash(model.Password);
+            user.Role = Domain.Models.Enums.RoleType.Student;
+            user.ConfirmCode = Generator.GetString(new Random().Next(51, 99));
+            var res = await unitOfWork.UserRepository.CreateAsync(user);
+            if (res != Constants.Constants.OK)
+                return new RegisterResult { Error = res };
+            //ToDo send to user email confirm
+            return new RegisterResult();
         }
     }
 }
