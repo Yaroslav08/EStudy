@@ -30,5 +30,13 @@ namespace EStudy.Domain.Models
         public RoleType Role { get; set; } = RoleType.Student;
         [MinLength(2), MaxLength(50)]
         public string RoleString { get; set; }
+        [MinLength(3), MaxLength(25), Phone]
+        public string Phone { get; set; }
+        [Required]
+        public bool IsShowPhone { get; set; } = true;
+        [MinLength(5), MaxLength(100), EmailAddress]
+        public string Email { get; set; }
+        [Required]
+        public bool IsShowEmail { get; set; } = true;
     }
 }
