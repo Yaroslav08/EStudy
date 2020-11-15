@@ -9,5 +9,6 @@ namespace EStudy.Application.Interfaces
     public interface IUserService
     {
         Task<UserViewModel> GetUserById(int id);
+        Task<List<UserShortViewModel>> SearchUsers(string name, int count, int skip, string param = null); 
     }
 }

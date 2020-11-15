@@ -15,6 +15,8 @@ namespace EStudy.Application
                 .ForMember(d => d.Role, s => s.MapFrom(d => d.Role.ToString()))
                 .ForMember(d => d.Email, s => s.MapFrom(d => d.IsShowEmail ? d.Email : null))
                 .ForMember(d => d.Phone, s => s.MapFrom(d => d.IsShowPhone ? d.Phone : null));
+            CreateMap<User, UserShortViewModel>()
+                .ForMember(d => d.Avatar, s => s.MapFrom(d => d.Avatar50));
         }
     }
 }

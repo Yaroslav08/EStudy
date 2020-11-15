@@ -23,5 +23,13 @@ namespace EStudy.Application.Services
         {
             return mapper.Map<UserViewModel>(await unitOfWork.UserRepository.GetByWhereAsync(d => d.Id == id));
         }
+
+        public async Task<List<UserShortViewModel>> SearchUsers(string name, int count, int skip, string param = null) =>
+             param switch
+             {
+                 "s" => mapper.Map<List<UserShortViewModel>>(await unitOfWork.UserRepository.SearchStudentsAsync(name, count, skip)),
+                 "t" => mapper.Map<List<UserShortViewModel>>(await unitOfWork.UserRepository.SearchTeachersAsync(name, count, skip)),
+                 _ => mapper.Map<List<UserShortViewModel>>(await unitOfWork.UserRepository.SearchAsync(name, count, skip))
+             };
     }
 }
