@@ -14,8 +14,12 @@ namespace EStudy.Infrastructure.Data.Configurations
             builder.HasKey(d => d.Id);
             builder.HasIndex(d => new
             {
-                d.Name
+                d.Firstname,
+                d.Middlename,
+                d.Lastname
             });
+            builder.HasIndex(d => d.Login).IsUnique();
+            builder.HasIndex(d => d.Username).IsUnique();
         }
     }
 }
