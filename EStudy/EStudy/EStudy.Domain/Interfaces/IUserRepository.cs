@@ -9,5 +9,8 @@ namespace EStudy.Domain.Interfaces
     public interface IUserRepository : IRepository<User>
     {
         Task<List<User>> SearchAsync(string name, int count, int skip);
+        Task<List<User>> SearchStudentsAsync(string name, int count, int skip);
+        Task<List<User>> SearchTeachersAsync(string name, int count, int skip);
+        Task<List<User>> GetAllAdmins();
     }
 }
