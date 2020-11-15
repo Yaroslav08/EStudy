@@ -36,5 +36,14 @@ namespace EStudy.Domain.Models
         public string Email { get; set; }
         [Required]
         public bool IsShowEmail { get; set; } = true;
+
+        [Required]
+        public bool IsConfirmed { get; set; } = false;
+        [Required, MinLength(50), MaxLength(100)]
+        public string ConfirmCode { get; set; }
+        public DateTime CodeValidUntil { get; set; } = DateTime.Now.AddDays(1);
+        public DateTime? ConfirmedAt { get; set; }
+        [MinLength(3), MaxLength(50)]
+        public string ConfirmedFromIP { get; set; }
     }
 }
