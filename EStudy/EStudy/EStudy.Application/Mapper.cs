@@ -11,7 +11,8 @@ namespace EStudy.Application
     {
         public Mapper()
         {
-            CreateMap<User, UserViewModel>();
+            CreateMap<User, UserViewModel>()
+                .ForMember(d => d.Role, s => s.MapFrom(d => d.Role.ToString()));
         }
     }
 }

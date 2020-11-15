@@ -20,7 +20,8 @@ namespace EStudy.Infrastructure.Data.Repositories
                     FirstName = d.FirstName,
                     LastName = d.LastName,
                     Username = d.Username,
-                    Avatar50 = d.Avatar50
+                    Avatar50 = d.Avatar50,
+                    Role = d.Role
                 })
                 .ToListAsync();
         }
@@ -34,7 +35,8 @@ namespace EStudy.Infrastructure.Data.Repositories
                     FirstName = d.FirstName,
                     LastName = d.LastName,
                     Username = d.Username,
-                    Avatar50 = d.Avatar50
+                    Avatar50 = d.Avatar50,
+                    Role = d.Role
                 })
                 .ToListAsync();
         }
@@ -48,7 +50,8 @@ namespace EStudy.Infrastructure.Data.Repositories
                     FirstName = d.FirstName,
                     LastName = d.LastName,
                     Username = d.Username,
-                    Avatar50 = d.Avatar50
+                    Avatar50 = d.Avatar50,
+                    Role = d.Role
                 })
                 .ToListAsync();
         }
@@ -62,7 +65,8 @@ namespace EStudy.Infrastructure.Data.Repositories
                     FirstName = d.FirstName,
                     LastName = d.LastName,
                     Username = d.Username,
-                    Avatar50 = d.Avatar50
+                    Avatar50 = d.Avatar50,
+                    Role = d.Role
                 })
                 .Skip(skip).Take(count)
                 .ToListAsync();
@@ -77,7 +81,8 @@ namespace EStudy.Infrastructure.Data.Repositories
                     FirstName = d.FirstName,
                     LastName = d.LastName,
                     Username = d.Username,
-                    Avatar50 = d.Avatar50
+                    Avatar50 = d.Avatar50,
+                    Role = d.Role
                 })
                 .Skip(skip).Take(count)
                 .ToListAsync();
@@ -92,7 +97,8 @@ namespace EStudy.Infrastructure.Data.Repositories
                     FirstName = d.FirstName,
                     LastName = d.LastName,
                     Username = d.Username,
-                    Avatar50 = d.Avatar50
+                    Avatar50 = d.Avatar50,
+                    Role = d.Role
                 })
                 .Skip(skip).Take(count)
                 .ToListAsync();
