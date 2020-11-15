@@ -8,5 +8,6 @@ namespace EStudy.Infrastructure.Data
     public interface IUnitOfWork
     {
         IUserRepository UserRepository { get; }
+        IFileRepository FileRepository { get; }
     }
 }
