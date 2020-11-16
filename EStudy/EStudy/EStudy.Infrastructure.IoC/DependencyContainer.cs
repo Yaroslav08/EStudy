@@ -14,11 +14,12 @@ namespace EStudy.Infrastructure.IoC
     {
         public static void RegisterServices(this IServiceCollection services)
         {
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IFileRepository, FileRepository>();
-            services.AddScoped<IIHERepository, IHERepository>();
+            services.AddSingleton<IUnitOfWork, UnitOfWork>();
+            services.AddSingleton<IUserRepository, UserRepository>();
+            services.AddSingleton<IUserService, UserService>();
+            services.AddSingleton<IFileRepository, FileRepository>();
+            services.AddSingleton<IIHERepository, IHERepository>();
+            services.AddSingleton<IIHEService, IHEService>();
         }
     }
 }
