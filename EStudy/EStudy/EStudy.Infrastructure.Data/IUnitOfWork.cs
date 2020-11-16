@@ -9,5 +9,6 @@ namespace EStudy.Infrastructure.Data
     {
         IUserRepository UserRepository { get; }
         IFileRepository FileRepository { get; }
+        IIHERepository IHERepository { get; }
     }
 }

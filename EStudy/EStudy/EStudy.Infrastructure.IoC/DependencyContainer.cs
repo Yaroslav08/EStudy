@@ -18,6 +18,7 @@ namespace EStudy.Infrastructure.IoC
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IFileRepository, FileRepository>();
+            services.AddScoped<IIHERepository, IHERepository>();
         }
     }
 }

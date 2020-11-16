@@ -8,7 +8,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace EStudy.Infrastructure.Data.Repositories
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
@@ -44,6 +43,11 @@ namespace EStudy.Infrastructure.Data.Repositories
             return EStudy.Constants.Constants.OK;
         }
 
+        public async Task<TEntity> FirstAsync()
+        {
+            return await db.Set<TEntity>().AsNoTracking().FirstOrDefaultAsync();
+        }
+
         public async Task<List<TEntity>> GetAllAsync()
         {
             return await db.Set<TEntity>().AsNoTracking().ToListAsync();
@@ -72,6 +76,11 @@ namespace EStudy.Infrastructure.Data.Repositories
         public async Task<bool> IsExistAsync(Expression<Func<TEntity, bool>> match)
         {
             return await db.Set<TEntity>().AsNoTracking().FirstOrDefaultAsync(match) != null ? true : false;
+        }
+
+        public async Task<TEntity> LastAsync()
+        {
+            return await db.Set<TEntity>().AsNoTracking().LastOrDefaultAsync();
         }
 
         public async Task<string> RemoveAsync(TEntity entity)

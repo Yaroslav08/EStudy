@@ -13,11 +13,13 @@ namespace EStudy.Infrastructure.Data.Context
 
         public DbSet<User> Users { get; set; }
         public DbSet<File> Files { get; set; }
+        public DbSet<IHE> IHEs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new FileConfiguration());
+            modelBuilder.ApplyConfiguration(new IHEConfiguration());
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

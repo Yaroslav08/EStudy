@@ -21,5 +21,11 @@ namespace EStudy.Constants
         public const string NotConfirmed = "Користувач не підтвердив акаунт";
         public const string PasswordNotComapre = "Пароль не правильний";
         #endregion
+
+
+
+        #region IHE
+        public const string IHENotFound = "ВНЗ не знайдено";
+        #endregion
     }
 }

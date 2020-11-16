@@ -4,6 +4,7 @@ using EStudy.Application.ViewModels.User;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using EStudy.Application.ViewModels.IHE;
 
 namespace EStudy.Application
 {
@@ -17,6 +18,9 @@ namespace EStudy.Application
                 .ForMember(d => d.Phone, s => s.MapFrom(d => d.IsShowPhone ? d.Phone : null));
             CreateMap<User, UserShortViewModel>()
                 .ForMember(d => d.Avatar, s => s.MapFrom(d => d.Avatar50));
+
+            CreateMap<IHE, IHEViewModel>();
+            CreateMap<IHEEditModel, IHE>();
         }
     }
 }
