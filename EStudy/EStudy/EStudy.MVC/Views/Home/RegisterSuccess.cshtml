@@ -4,9 +4,9 @@
 @{
 
 }
-@if (ViewBag.Data != null)
+@if (ViewBag.Confirm != null)
 {
-    @Html.ActionLink("Підтвердити акаунт", "Confirm", "Home", new { Code=ViewBag.Data.Code, UserId = ViewBag.Data.UserId })
+    @Html.ActionLink("Підтвердити акаунт", "Confirm", "Home", new { Code=ViewBag.Confirm.Code, UserId = ViewBag.Confirm.UserId })
 }
 <p>
     Перейдіть будь-ласка на пошту для підтвердження акаунту

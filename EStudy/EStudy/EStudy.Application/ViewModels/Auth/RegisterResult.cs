@@ -22,6 +22,6 @@ namespace EStudy.Application.ViewModels.Auth
             }
         }
         public string Error { get; set; } = null;
-        public object Object { get; set; }
+        public ConfirmDataModel Confirm { get; set; }
     }
 }

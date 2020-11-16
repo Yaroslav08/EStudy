@@ -2,6 +2,7 @@
 using EStudy.Application.ViewModels.Auth;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -21,6 +22,14 @@ namespace EStudy.MVC.Controllers
             userService = _userService;
         }
 
+        [HttpGet("")]
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+
+
         [HttpGet("register")]
         public IActionResult Register()
         {
@@ -30,12 +39,13 @@ namespace EStudy.MVC.Controllers
         }
 
         [HttpPost("register")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
             var res = await userService.RegisterUser(model);
             if (res.Successed)
             {
-                ViewBag.Data = res.Object;
+                ViewBag.Confirm = res.Confirm;
                 return View("RegisterSuccess");
             }
             ModelState.AddModelError("", res.Error);
@@ -56,6 +66,8 @@ namespace EStudy.MVC.Controllers
         [HttpGet("login")]
         public IActionResult Login(string returnUrl)
         {
+            if (User.Identity.IsAuthenticated)
+                return LocalRedirect("~/");
             return View(new LoginViewModel
             {
                 ReturnUrl = returnUrl
@@ -63,6 +75,7 @@ namespace EStudy.MVC.Controllers
         }
 
         [HttpPost("login")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
             var result = await userService.LoginUser(model);

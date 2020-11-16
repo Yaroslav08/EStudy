@@ -51,7 +51,7 @@ namespace EStudy.Application.Services
         public async Task<RegisterResult> RegisterUser(RegisterViewModel model)
         {
             if (await unitOfWork.UserRepository.IsExistAsync(d => d.Login == model.Login))
-                return new RegisterResult { Error = Constants.Constants.LoginBusy };
+                return new RegisterResult { Error = Constants.Constants.LoginBusy, Successed = false };
             var user = new User();
             user.FirstName = model.FirstName;
             user.LastName = model.LastName;
@@ -61,9 +61,9 @@ namespace EStudy.Application.Services
             user.ConfirmCode = Generator.GetString(new Random().Next(51, 99));
             var res = await unitOfWork.UserRepository.CreateAsync(user);
             if (res != Constants.Constants.OK)
-                return new RegisterResult { Error = res };
+                return new RegisterResult { Error = res, Successed = false };
             //ToDo send to user email confirm
-            return new RegisterResult() { Object = new { Code = user.ConfirmCode, UserId = user.Id } };
+            return new RegisterResult() { Successed = true, Confirm = new ConfirmDataModel { Code = user.ConfirmCode, UserId = user.Id } };
         }
 
         public async Task<LoginResult> LoginUser(LoginViewModel model)
@@ -71,7 +71,7 @@ namespace EStudy.Application.Services
             var user = await unitOfWork.UserRepository.GetByWhereAsync(d => d.Login == model.Login);
             if (user == null)
                 return new LoginResult { Error = Constants.Constants.UserNotExist };
-            if (PasswordManager.VerifyPasswordHash(model.Password, user.PasswordHash))
+            if (!PasswordManager.VerifyPasswordHash(model.Password, user.PasswordHash))
                 return new LoginResult { Error = Constants.Constants.PasswordNotComapre };
             if (!user.IsConfirmed)
                 return new LoginResult { Error = Constants.Constants.NotConfirmed };
