@@ -37,5 +37,6 @@ namespace EStudy.Domain.Models
         public string Region { get; set; }
         [MinLength(3), MaxLength(6)]
         public string PostalCode { get; set; }
+        public List<Department> Departments { get; set; }
     }
 }
