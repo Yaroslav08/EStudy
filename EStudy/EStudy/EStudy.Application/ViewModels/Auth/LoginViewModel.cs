@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,11 @@ namespace EStudy.Application.ViewModels.Auth
 {
     public class LoginViewModel
     {
-        [Required, MinLength(5), MaxLength(50)]
+        [Required(ErrorMessage = "Логін обовя'зковий"), MinLength(5, ErrorMessage = "Мінімальна довжина 5 символів"), MaxLength(50, ErrorMessage = "Максимальна довжина 50 символів")]
+        [DisplayName("Логін")]
         public string Login { get; set; }
-        [Required, MinLength(8), MaxLength(25)]
+        [Required(ErrorMessage = "Пароль обовя'зковий"), MinLength(8, ErrorMessage = "Мінімальна довжина 8 символів"), MaxLength(25, ErrorMessage = "Максимальна довжина 25 символів")]
+        [DisplayName("Пароль")]
         public string Password { get; set; }
         public string ReturnUrl { get; set; }
     }

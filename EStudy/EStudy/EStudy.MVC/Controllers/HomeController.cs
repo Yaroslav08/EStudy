@@ -29,6 +29,14 @@ namespace EStudy.MVC.Controllers
         }
 
 
+        [HttpGet("me")]
+        [Authorize]
+        public async Task<IActionResult> GetMe()
+        {
+            var user = await userService.GetUserById(Convert.ToInt32(User.Identity.Name));
+            return View(user);
+        }
+
 
         [HttpGet("register")]
         public IActionResult Register()
@@ -112,7 +120,7 @@ namespace EStudy.MVC.Controllers
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Login", "Account");
+            return RedirectToAction("Login", "Home");
         }
     }
 }
