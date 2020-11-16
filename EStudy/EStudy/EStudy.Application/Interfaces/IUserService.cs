@@ -13,5 +13,6 @@ namespace EStudy.Application.Interfaces
         Task<string> ConfirmUser(ConfirmViewModel model);
         Task<RegisterResult> RegisterUser(RegisterViewModel model);
         Task<LoginResult> LoginUser(LoginViewModel model);
+        Task<int> GetCountUsers();
     }
 }

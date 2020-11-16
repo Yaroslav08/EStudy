@@ -77,5 +77,10 @@ namespace EStudy.Application.Services
                 return new LoginResult { Error = Constants.Constants.NotConfirmed };
             return new LoginResult { User = user };
         }
+
+        public async Task<int> GetCountUsers()
+        {
+            return await unitOfWork.UserRepository.CountAsync();
+        }
     }
 }
