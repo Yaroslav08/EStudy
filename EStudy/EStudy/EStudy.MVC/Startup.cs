@@ -1,4 +1,5 @@
 using EStudy.Infrastructure.IoC;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -25,6 +26,11 @@ namespace EStudy.MVC
         {
             services.RegisterServices();
             services.AddEStudyAutoMapper();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+               .AddCookie(options =>
+                {
+                   options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/login");
+               });
             services.AddControllersWithViews();
         }
 
@@ -45,14 +51,14 @@ namespace EStudy.MVC
 
             app.UseRouting();
 
-            app.UseAuthorization();
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=User}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

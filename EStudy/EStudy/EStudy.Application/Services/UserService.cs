@@ -63,7 +63,7 @@ namespace EStudy.Application.Services
             if (res != Constants.Constants.OK)
                 return new RegisterResult { Error = res };
             //ToDo send to user email confirm
-            return new RegisterResult();
+            return new RegisterResult() { Object = new { Code = user.ConfirmCode, UserId = user.Id } };
         }
 
         public async Task<LoginResult> LoginUser(LoginViewModel model)

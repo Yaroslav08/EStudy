@@ -12,5 +12,6 @@ namespace EStudy.Application.ViewModels.Auth
         public string Login { get; set; }
         [Required, MinLength(8), MaxLength(25)]
         public string Password { get; set; }
+        public string ReturnUrl { get; set; }
     }
 }
