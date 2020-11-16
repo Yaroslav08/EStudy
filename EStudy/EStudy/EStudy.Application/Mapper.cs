@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using EStudy.Application.ViewModels.IHE;
+using EStudy.Application.ViewModels.Department;
 
 namespace EStudy.Application
 {
@@ -19,8 +20,11 @@ namespace EStudy.Application
             CreateMap<User, UserShortViewModel>()
                 .ForMember(d => d.Avatar, s => s.MapFrom(d => d.Avatar50));
 
-            CreateMap<IHE, IHEViewModel>();
+            CreateMap<IHE, IHEViewModel>()
+                .ForMember(d => d.Departments, s => s.MapFrom(d => d.Departments));
             CreateMap<IHEEditModel, IHE>();
+            CreateMap<Department, DepartmentViewModel>()
+                .ForMember(d => d.IHE, s => s.MapFrom(d => d.IHE));
         }
     }
 }

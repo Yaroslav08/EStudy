@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EStudy.Application.ViewModels.Department;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -25,5 +26,6 @@ namespace EStudy.Application.ViewModels.IHE
         public string Locality { get; set; }
         public string Region { get; set; }
         public string PostalCode { get; set; }
+        public List<DepartmentViewModel> Departments { get; set; }
     }
 }

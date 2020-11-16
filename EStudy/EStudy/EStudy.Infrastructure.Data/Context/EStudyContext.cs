@@ -20,6 +20,7 @@ namespace EStudy.Infrastructure.Data.Context
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new FileConfiguration());
             modelBuilder.ApplyConfiguration(new IHEConfiguration());
+            modelBuilder.ApplyConfiguration(new DepartmentConfiguration());
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

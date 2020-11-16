@@ -10,8 +10,6 @@ namespace EStudy.Domain.Models
     {
         [Required, MinLength(4), MaxLength(60)]
         public string Name { get; set; }
-        [MinLength(4), MaxLength(60)]
-        public string InstituteName { get; set; }
         [MinLength(2), MaxLength(100)]
         public string Shifr { get; set; }
         public int? HeadById { get; set; }

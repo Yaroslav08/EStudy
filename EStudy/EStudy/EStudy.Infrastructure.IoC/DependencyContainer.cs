@@ -19,6 +19,8 @@ namespace EStudy.Infrastructure.IoC
             services.AddSingleton<IFileRepository, FileRepository>();
             services.AddSingleton<IIHERepository, IHERepository>();
             services.AddSingleton<IIHEService, IHEService>();
+            services.AddSingleton<IDepartmentRepository, DepartmentRepository>();
+            services.AddSingleton<IDepartmentService, DepartmentService>();
         }
     }
 }
