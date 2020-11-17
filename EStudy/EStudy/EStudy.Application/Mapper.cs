@@ -21,15 +21,23 @@ namespace EStudy.Application
             CreateMap<User, UserShortViewModel>()
                 .ForMember(d => d.Avatar, s => s.MapFrom(d => d.Avatar50));
 
+
             CreateMap<IHE, IHEViewModel>()
                 .ForMember(d => d.Departments, s => s.MapFrom(d => d.Departments));
+            CreateMap<IHECreateModel, IHE>();
             CreateMap<IHEEditModel, IHE>();
+
 
             CreateMap<Department, DepartmentViewModel>()
                 .ForMember(d => d.IHE, s => s.MapFrom(d => d.IHE));
+            CreateMap<DepartmentCreateModel, Department>();
+            CreateMap<DepartmentEditModel, Department>();
+
 
             CreateMap<Specialty, SpecialtyViewModel>()
                 .ForMember(d => d.Department, s => s.MapFrom(d => d.Department));
+            CreateMap<SpecialtyCreateModel, Specialty>();
+            CreateMap<SpecialtyEditModel, Specialty>();
         }
     }
 }
