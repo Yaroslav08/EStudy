@@ -21,5 +21,6 @@ namespace EStudy.Domain.Models
         public string Description { get; set; }
         public int IHEId { get; set; }
         public IHE IHE { get; set; }
+        public List<Specialty> Specialties { get; set; }
     }
 }
