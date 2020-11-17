@@ -13,7 +13,7 @@ namespace EStudy.Domain.Models
         [MinLength(2), MaxLength(100)]
         public string Shifr { get; set; }
         public int? HeadById { get; set; }
-        [Required, Phone]
+        [Phone]
         public string Phone { get; set; }
         [MinLength(15), MaxLength(3000)]
         public string ContactInformation { get; set; }

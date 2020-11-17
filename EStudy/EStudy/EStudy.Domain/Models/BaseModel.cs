@@ -22,6 +22,8 @@ namespace EStudy.Domain.Models
         [Required]
         public bool IsEdit { get; set; } = false;
         public DateTime? DateLastEdit { get; set; }
+        [MinLength(3), MaxLength(50)]
+        public string EditedFromIP { get; set; }
         public int? EditedByUserId { get; set; }
         public string History { get; set; }
     }

@@ -54,6 +54,7 @@ namespace EStudy.Application.Services
             ihe.IsEdit = true;
             ihe.DateLastEdit = DateTime.Now;
             ihe.EditedByUserId = model.UserId;
+            ihe.EditedFromIP = model.IP;
             return await unitOfWork.IHERepository.UpdateAsync(ihe);
         }
 

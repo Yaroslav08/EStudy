@@ -51,6 +51,7 @@ namespace EStudy.Application.Services
             spec.IsEdit = true;
             spec.DateLastEdit = DateTime.Now;
             spec.EditedByUserId = model.UserId;
+            spec.EditedFromIP = model.IP;
             return await unitOfWork.SpecialtyRepository.UpdateAsync(spec);
         }
 

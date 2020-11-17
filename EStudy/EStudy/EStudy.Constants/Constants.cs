@@ -29,7 +29,7 @@ namespace EStudy.Constants
         #endregion
 
         #region Departmemt
-
+        public const string DepartmentNotFound = "Віділення не знайдено";
         #endregion
 
         #region Specialty

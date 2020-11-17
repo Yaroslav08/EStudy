@@ -9,7 +9,7 @@ namespace EStudy.Application.Interfaces
     public interface IDepartmentService
     {
         Task<string> CreateDepartment(DepartmentCreateModel model);
-        Task<string> EditDepartment(DepartmentCreateModel model);
+        Task<string> EditDepartment(DepartmentEditModel model);
         Task<List<DepartmentViewModel>> GetDepartments();
         Task<DepartmentViewModel> GetDepartmentById(int id);
     }

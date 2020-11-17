@@ -21,12 +21,36 @@ namespace EStudy.Application.Services
 
         public async Task<string> CreateDepartment(DepartmentCreateModel model)
         {
-            throw new NotImplementedException();
+            return await unitOfWork.DepartmentRepository.CreateAsync(new Domain.Models.Department
+            {
+                Name = model.Name,
+                Shifr = model.Shifr,
+                HeadById = model.HeadById,
+                Phone = model.Phone,
+                ContactInformation = model.ContactInformation,
+                Description = model.Description,
+                IHEId = model.IHEId,
+                CreatedByUserId = model.UserId,
+                CreatedFromIP = model.IP
+            });
         }
 
-        public async Task<string> EditDepartment(DepartmentCreateModel model)
+        public async Task<string> EditDepartment(DepartmentEditModel model)
         {
-            throw new NotImplementedException();
+            var depart = await unitOfWork.DepartmentRepository.GetByWhereAsTrackingAsync(d => d.Id == model.Id);
+            if (depart == null) return Constants.Constants.DepartmentNotFound;
+            depart.Name = model.Name;
+            depart.Shifr = model.Shifr;
+            depart.HeadById = model.HeadById;
+            depart.Phone = model.Phone;
+            depart.ContactInformation = model.ContactInformation;
+            depart.Description = model.Description;
+            depart.IHEId = model.IHEId;
+            depart.IsEdit = true;
+            depart.DateLastEdit = DateTime.Now;
+            depart.EditedByUserId = model.UserId;
+            depart.EditedFromIP = model.IP;
+            return await unitOfWork.DepartmentRepository.UpdateAsync(depart);
         }
 
         public async Task<DepartmentViewModel> GetDepartmentById(int id)
