@@ -40,11 +40,18 @@ namespace EStudy.Application
             CreateMap<SpecialtyCreateModel, Specialty>();
             CreateMap<SpecialtyEditModel, Specialty>();
 
+
             CreateMap<Group, GroupViewModel>()
                 .ForMember(d => d.Specialty, s => s.MapFrom(d => d.Specialty))
                 .ForMember(d => d.Emails, s => s.MapFrom(d => d.Emails));
             CreateMap<GroupCreateModel, Group>();
             CreateMap<GroupEditModel, Group>();
+
+
+            CreateMap<Email, EmailViewModel>()
+                .ForMember(d => d.Group, s => s.MapFrom(d => d.Group));
+            CreateMap<EmailCreateModel, Email>();
+            CreateMap<EmailEditModel, Email>();
         }
     }
 }
