@@ -27,5 +27,13 @@ namespace EStudy.Constants
         #region IHE
         public const string IHENotFound = "ВНЗ не знайдено";
         #endregion
+
+        #region Departmemt
+
+        #endregion
+
+        #region Specialty
+        public const string SpecialtyNotFound = "Спеціальність не знайдено";
+        #endregion
     }
 }
