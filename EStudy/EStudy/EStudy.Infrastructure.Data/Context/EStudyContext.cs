@@ -16,6 +16,8 @@ namespace EStudy.Infrastructure.Data.Context
         public DbSet<IHE> IHEs { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Specialty> Specialties { get; set; }
+        public DbSet<Group> Groups { get; set; }
+        public DbSet<Email> Emails { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

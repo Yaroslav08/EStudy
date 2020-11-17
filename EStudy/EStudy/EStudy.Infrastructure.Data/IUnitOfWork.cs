@@ -12,5 +12,7 @@ namespace EStudy.Infrastructure.Data
         IIHERepository IHERepository { get; }
         IDepartmentRepository DepartmentRepository { get; }
         ISpecialtyRepository SpecialtyRepository { get; }
+        IGroupRepository GroupRepository { get; }
+        IEmailRepository EmailRepository { get; }
     }
 }

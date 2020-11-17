@@ -23,6 +23,9 @@ namespace EStudy.Infrastructure.IoC
             services.AddSingleton<IDepartmentService, DepartmentService>();
             services.AddSingleton<ISpecialtyRepository, SpecialtyRepository>();
             services.AddSingleton<ISpecialtyService, SpecialtyService>();
+            services.AddSingleton<IGroupRepository, GroupRepository>();
+            services.AddSingleton<IEmailRepository, EmailRepository>();
+            services.AddSingleton<IGroupService, GroupService>();
         }
     }
 }

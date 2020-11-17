@@ -43,6 +43,11 @@ namespace EStudy.Infrastructure.Data.Repositories
             return EStudy.Constants.Constants.OK;
         }
 
+        public async Task<TEntity> FindByIdAsync(object id)
+        {
+            return await db.Set<TEntity>().FindAsync(id);
+        }
+
         public async Task<TEntity> FirstAsync()
         {
             return await db.Set<TEntity>().AsNoTracking().FirstOrDefaultAsync();

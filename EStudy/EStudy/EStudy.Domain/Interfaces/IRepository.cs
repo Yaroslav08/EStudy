@@ -14,6 +14,7 @@ namespace EStudy.Domain.Interfaces
         Task<string> UpdateRangeAsync(IList<TEntity> entities);
         Task<string> RemoveAsync(TEntity entity);
         Task<string> RemoveRangeAsync(IList<TEntity> entities);
+        Task<TEntity> FindByIdAsync(object id);
         Task<TEntity> FirstAsync();
         Task<TEntity> LastAsync();
         Task<TEntity> GetByWhereAsync(Expression<Func<TEntity, bool>> match);

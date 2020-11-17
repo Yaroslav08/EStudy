@@ -10,15 +10,23 @@ namespace EStudy.Domain.Models
     {
         [Required, MinLength(2), MaxLength(25)]
         public string Name { get; set; }
-        public byte IndexItemToChanged { get; set; }
         [Required]
-        public bool Released { get; set; } = false;
+        public byte Course { get; set; } = 1;
+        [Required]
+        public DateTime StartStudy { get; set; }
+        [Required]
+        public DateTime EndStudy { get; set; }
+        public byte? IndexItemToChanged { get; set; }
+        [Required]
+        public bool IsReleased { get; set; } = false;
+        [Required]
+        public byte CountStudents { get; set; } = 0;
         [Required, MinLength(6), MaxLength(12)]
         public string CodeForConnect { get; set; }
         [MinLength(5), MaxLength(500)]
         public string AdditionalInfo { get; set; }
         [MinLength(7), MaxLength(100), EmailAddress]
-        public string PublicEmail { get; set; }
+        public string Email { get; set; }
         [Required]
         public bool IsShowEmail { get; set; } = true;
         public List<Email> Emails { get; set; }
