@@ -14,6 +14,8 @@ namespace EStudy.Infrastructure.Data.Context
         public DbSet<User> Users { get; set; }
         public DbSet<File> Files { get; set; }
         public DbSet<IHE> IHEs { get; set; }
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<Specialty> Specialties { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
