@@ -25,5 +25,6 @@ namespace EStudy.Domain.Models
         public string About { get; set; }
         public int DepartmentId { get; set; }
         public Department Department { get; set; }
+        public List<Group> Groups { get; set; }
     }
 }
