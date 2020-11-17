@@ -12,5 +12,9 @@ namespace EStudy.Application.Interfaces
         Task<string> EditGroup(GroupEditModel model);
         Task<GroupViewModel> GetGroupById(int id);
         Task<List<GroupViewModel>> SearchGroups(string name, int count, int skip, bool? isReleased = null);
+
+        Task<string> CreateEmail(EmailCreateModel model);
+        Task<string> EditEmail(EmailEditModel model);
+        Task<List<EmailViewModel>> GetEmailsByGroupId(int groupId);
     }
 }

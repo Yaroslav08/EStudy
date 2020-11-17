@@ -35,5 +35,13 @@ namespace EStudy.Constants
         #region Specialty
         public const string SpecialtyNotFound = "Спеціальність не знайдено";
         #endregion
+
+        #region Group
+        public const string GroupNotFound = "Групу не знайдено";
+        #endregion
+
+        #region Email
+        public const string EmailNotFound = "Електронна адреса не знайдена";
+        #endregion
     }
 }
