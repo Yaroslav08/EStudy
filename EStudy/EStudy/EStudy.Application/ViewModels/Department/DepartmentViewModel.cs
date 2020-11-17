@@ -1,4 +1,5 @@
 ﻿using EStudy.Application.ViewModels.IHE;
+using EStudy.Application.ViewModels.Specialty;
 using EStudy.Application.ViewModels.User;
 using System;
 using System.Collections.Generic;
@@ -18,5 +19,6 @@ namespace EStudy.Application.ViewModels.Department
         public string ContactInformation { get; set; }
         public string Description { get; set; }
         public IHEViewModel IHE { get; set; }
+        public List<SpecialtyViewModel> Specialties { get; set; }
     }
 }
