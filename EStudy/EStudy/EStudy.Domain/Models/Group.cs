@@ -32,5 +32,6 @@ namespace EStudy.Domain.Models
         public List<Email> Emails { get; set; }
         public int SpecialtyId { get; set; }
         public Specialty Specialty { get; set; }
+        public List<GroupMember> GroupMembers { get; set; }
     }
 }

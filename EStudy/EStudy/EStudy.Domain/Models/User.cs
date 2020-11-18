@@ -45,5 +45,6 @@ namespace EStudy.Domain.Models
         public DateTime? ConfirmedAt { get; set; }
         [MinLength(3), MaxLength(50)]
         public string ConfirmedFromIP { get; set; }
+        public List<GroupMember> GroupMembers { get; set; }
     }
 }
