@@ -2,6 +2,7 @@
 using EStudy.Application.Interfaces;
 using EStudy.Application.ViewModels.Group;
 using EStudy.Domain.Models;
+using EStudy.Domain.Models.Enums;
 using EStudy.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
@@ -81,6 +82,48 @@ namespace EStudy.Application.Services
         public async Task<List<EmailViewModel>> GetEmailsByGroupId(int groupId)
         {
             return mapper.Map<List<EmailViewModel>>(await unitOfWork.EmailRepository.GetListByWhereAsync(d => d.GroupId == groupId));
+        }
+
+        public async Task<string> AddUserToGroup(GroupMemberModel model)
+        {
+            var group = await unitOfWork.GroupRepository.FindByIdAsync(model.GroupId);
+            if (group == null)
+                return Constants.Constants.GroupNotFound;
+            var groupMember = new GroupMember
+            {
+                GroupId = model.GroupId,
+                UserId = model.UserId,
+                Title = model.Title
+            };
+            groupMember.CreatedByUserId = model.UserId;
+            groupMember.CreatedFromIP = model.IP;
+            groupMember.MemberRole = model.MemberRole switch
+            {
+                GroupMemberRoleModel.ClassTeacher => GroupMemberRole.ClassTeacher,
+                GroupMemberRoleModel.Headman => GroupMemberRole.Headman,
+                GroupMemberRoleModel.Student => GroupMemberRole.Student,
+                _=> throw new ArgumentNullException()
+            };
+            var result = await unitOfWork.GroupMemberRepository.CreateAsync(groupMember);
+            return await unitOfWork.GroupRepository.UpdateAsync(group);
+        }
+
+        public async Task<string> EditGroupMember(GroupMemberModel model)
+        {
+            var groupMember = await unitOfWork.GroupMemberRepository.FindByIdAsync(model.Id);
+            if (groupMember == null)
+                return Constants.Constants.GroupMemberNotFound;
+            groupMember.GroupId = model.GroupId;
+            groupMember.Title = model.Title;
+            groupMember.EditedByUserId = model.UserId;
+            groupMember.EditedFromIP = model.IP;
+            return await unitOfWork.GroupMemberRepository.UpdateAsync(groupMember);
+        }
+
+        public async Task<int> GetCountStudents(int groupId)
+        {
+            return await unitOfWork.GroupMemberRepository
+                .CountAsync(d => d.GroupId == groupId && d.MemberRole != GroupMemberRole.ClassTeacher);
         }
     }
 }

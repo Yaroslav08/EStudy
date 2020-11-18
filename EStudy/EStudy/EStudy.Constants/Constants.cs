@@ -38,6 +38,7 @@ namespace EStudy.Constants
 
         #region Group
         public const string GroupNotFound = "Групу не знайдено";
+        public const string GroupMemberNotFound = "Учасника групи не знайдено";
         #endregion
 
         #region Email

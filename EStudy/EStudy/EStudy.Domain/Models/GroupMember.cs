@@ -16,7 +16,7 @@ namespace EStudy.Domain.Models
         public Group Group { get; set; }
 
         public GroupMemberRole MemberRole { get; set; }
-        [MinLength(3), MaxLength(25)]
+        [MinLength(2), MaxLength(25)]
         public string Title { get; set; }
     }
 }

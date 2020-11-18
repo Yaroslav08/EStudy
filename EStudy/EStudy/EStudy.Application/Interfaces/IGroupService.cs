@@ -16,5 +16,9 @@ namespace EStudy.Application.Interfaces
         Task<string> CreateEmail(EmailCreateModel model);
         Task<string> EditEmail(EmailEditModel model);
         Task<List<EmailViewModel>> GetEmailsByGroupId(int groupId);
+
+        Task<string> AddUserToGroup(GroupMemberModel model);
+        Task<string> EditGroupMember(GroupMemberModel model);
+        Task<int> GetCountStudents(int groupId);
     }
 }
