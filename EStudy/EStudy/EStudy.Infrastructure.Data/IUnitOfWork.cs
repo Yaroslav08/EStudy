@@ -14,5 +14,6 @@ namespace EStudy.Infrastructure.Data
         ISpecialtyRepository SpecialtyRepository { get; }
         IGroupRepository GroupRepository { get; }
         IEmailRepository EmailRepository { get; }
+        IGroupMemberRepository GroupMemberRepository { get; }
     }
 }

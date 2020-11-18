@@ -14,6 +14,7 @@ namespace EStudy.Infrastructure.Data
         private ISpecialtyRepository specRepository;
         private IGroupRepository groupRepository;
         private IEmailRepository emailRepository;
+        private IGroupMemberRepository groupMemberRepository;
 
         public UnitOfWork(
             IUserRepository _userRepository,
@@ -22,7 +23,8 @@ namespace EStudy.Infrastructure.Data
             IDepartmentRepository _departmentRepository,
             ISpecialtyRepository _specRepository,
             IGroupRepository _groupRepository,
-            IEmailRepository _emailRepository)
+            IEmailRepository _emailRepository,
+            IGroupMemberRepository _groupMemberRepository)
         {
             userRepository = _userRepository;
             fileRepository = _fileRepository;
@@ -31,6 +33,7 @@ namespace EStudy.Infrastructure.Data
             specRepository = _specRepository;
             groupRepository = _groupRepository;
             emailRepository = _emailRepository;
+            groupMemberRepository = _groupMemberRepository;
         }
 
         public IUserRepository UserRepository => userRepository;
@@ -40,5 +43,6 @@ namespace EStudy.Infrastructure.Data
         public ISpecialtyRepository SpecialtyRepository => specRepository;
         public IGroupRepository GroupRepository => groupRepository;
         public IEmailRepository EmailRepository => emailRepository;
+        public IGroupMemberRepository GroupMemberRepository => groupMemberRepository;
     }
 }
