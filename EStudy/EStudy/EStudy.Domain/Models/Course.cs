@@ -42,6 +42,7 @@ namespace EStudy.Domain.Models
         public User Teacher { get; set; }
         public int GroupId { get; set; }
         public Group Group { get; set; }
+        public List<Lesson> Lessons { get; set; }
     }
     public enum TypeSubject
     {
