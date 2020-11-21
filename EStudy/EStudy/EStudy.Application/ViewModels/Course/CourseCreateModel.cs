@@ -1,12 +1,13 @@
-﻿using System;
+﻿using EStudy.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-namespace EStudy.Domain.Models
+namespace EStudy.Application.ViewModels.Course
 {
-    public class Course : BaseModel<int>
+    public class CourseCreateModel : RequestModel
     {
         [Required, MinLength(7), MaxLength(100)]
         public string Name { get; set; }
@@ -39,27 +40,6 @@ namespace EStudy.Domain.Models
         [Required]
         public PreparationLevel Level { get; set; }
         public int TeacherId { get; set; }
-        public User Teacher { get; set; }
         public int GroupId { get; set; }
-        public Group Group { get; set; }
-    }
-    public enum TypeSubject
-    {
-        Regular,
-        Practical,
-        Course,
-        Diploma
-    }
-    public enum PreparationLevel
-    {
-        Starter,
-        Essential,
-        Advanced,
-        Professional
-    }
-    public enum MarkType
-    {
-        Average,
-        Sum
     }
 }

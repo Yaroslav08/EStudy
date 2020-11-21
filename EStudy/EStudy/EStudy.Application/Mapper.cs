@@ -8,6 +8,7 @@ using EStudy.Application.ViewModels.IHE;
 using EStudy.Application.ViewModels.Department;
 using EStudy.Application.ViewModels.Specialty;
 using EStudy.Application.ViewModels.Group;
+using EStudy.Application.ViewModels.Course;
 
 namespace EStudy.Application
 {
@@ -52,6 +53,11 @@ namespace EStudy.Application
                 .ForMember(d => d.Group, s => s.MapFrom(d => d.Group));
             CreateMap<EmailCreateModel, Email>();
             CreateMap<EmailEditModel, Email>();
+
+            CreateMap<Course, CourseViewModel>()
+                .ForMember(d => d.Teacher, s => s.MapFrom(d => d.Teacher))
+                .ForMember(d => d.Group, s => s.MapFrom(d => d.Group));
+            CreateMap<CourseCreateModel, Course>();
         }
     }
 }

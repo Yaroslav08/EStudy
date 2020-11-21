@@ -1,4 +1,5 @@
-﻿using EStudy.Application.ViewModels.Specialty;
+﻿using EStudy.Application.ViewModels.Course;
+using EStudy.Application.ViewModels.Specialty;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,5 +22,6 @@ namespace EStudy.Application.ViewModels.Group
         public string Email { get; set; }
         public List<EmailViewModel> Emails { get; set; }
         public SpecialtyViewModel Specialty { get; set; }
+        public List<CourseViewModel> Courses { get; set; }
     }
 }
