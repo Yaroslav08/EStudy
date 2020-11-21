@@ -13,6 +13,7 @@ namespace EStudy.Application.ViewModels.Lesson
         public DateTime CreatedAt { get; set; }
         public string Theme { get; set; }
         public string Text { get; set; }
+        public int Mark { get; set; }
         public DateTime DateLesson { get; set; }
         public TypeLesson TypeLesson { get; set; }
         public CourseViewModel Course { get; set; }

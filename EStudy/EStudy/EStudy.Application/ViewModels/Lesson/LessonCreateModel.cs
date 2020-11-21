@@ -14,6 +14,8 @@ namespace EStudy.Application.ViewModels.Lesson
         [MinLength(5), MaxLength(2500)]
         public string Text { get; set; }
         [Required]
+        public int Mark { get; set; }
+        [Required]
         public DateTime DateLesson { get; set; }
         [Required]
         public TypeLesson TypeLesson { get; set; }

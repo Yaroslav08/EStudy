@@ -12,6 +12,8 @@ namespace EStudy.Domain.Models
         public string Theme { get; set; }
         [MinLength(5), MaxLength(2500)]
         public string Text { get; set; }
+        [Required]
+        public int Mark { get; set; }
         public DateTime DateLesson { get; set; } = DateTime.Now;
         [Required]
         public TypeLesson TypeLesson { get; set; }
