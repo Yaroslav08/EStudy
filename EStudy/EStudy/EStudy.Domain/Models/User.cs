@@ -18,6 +18,8 @@ namespace EStudy.Domain.Models
         public string Username { get; set; }
         [MinLength(5), MaxLength(500)]
         public string About { get; set; }
+        public DateTime? Born { get; set; }
+        public int? Age { get; set; }
         [MinLength(10), MaxLength(250)]
         public string Avatar50 { get; set; }
         [MinLength(10), MaxLength(250)]
@@ -46,5 +48,6 @@ namespace EStudy.Domain.Models
         [MinLength(3), MaxLength(50)]
         public string ConfirmedFromIP { get; set; }
         public List<GroupMember> GroupMembers { get; set; }
+        public List<Course> Courses { get; set; }
     }
 }

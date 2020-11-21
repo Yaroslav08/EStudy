@@ -27,9 +27,10 @@ namespace EStudy.Domain.Models
         public string Email { get; set; }
         [Required]
         public bool IsShowEmail { get; set; } = true;
-        public List<Email> Emails { get; set; }
         public int SpecialtyId { get; set; }
         public Specialty Specialty { get; set; }
+        public List<Email> Emails { get; set; }
         public List<GroupMember> GroupMembers { get; set; }
+        public List<Course> Courses { get; set; }
     }
 }
