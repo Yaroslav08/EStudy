@@ -16,6 +16,8 @@ namespace EStudy.Infrastructure.Data
         private IEmailRepository emailRepository;
         private IGroupMemberRepository groupMemberRepository;
         private ICourseRepository courseRepository;
+        private ILessonRepository lessonRepository;
+        private ILessonFileRepository lessonFileRepository;
 
         public UnitOfWork(
             IUserRepository _userRepository,
@@ -26,7 +28,9 @@ namespace EStudy.Infrastructure.Data
             IGroupRepository _groupRepository,
             IEmailRepository _emailRepository,
             IGroupMemberRepository _groupMemberRepository,
-            ICourseRepository _courseRepository)
+            ICourseRepository _courseRepository,
+            ILessonRepository _lessonRepository,
+            ILessonFileRepository _lessonFileRepository)
         {
             userRepository = _userRepository;
             fileRepository = _fileRepository;
@@ -37,6 +41,8 @@ namespace EStudy.Infrastructure.Data
             emailRepository = _emailRepository;
             groupMemberRepository = _groupMemberRepository;
             courseRepository = _courseRepository;
+            lessonRepository = _lessonRepository;
+            lessonFileRepository = _lessonFileRepository;
         }
 
         public IUserRepository UserRepository => userRepository;
@@ -48,5 +54,7 @@ namespace EStudy.Infrastructure.Data
         public IEmailRepository EmailRepository => emailRepository;
         public IGroupMemberRepository GroupMemberRepository => groupMemberRepository;
         public ICourseRepository CourseRepository => courseRepository;
+        public ILessonRepository LessonRepository => lessonRepository;
+        public ILessonFileRepository LessonFileRepository => lessonFileRepository;
     }
 }

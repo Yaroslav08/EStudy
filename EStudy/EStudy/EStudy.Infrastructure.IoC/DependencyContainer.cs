@@ -31,6 +31,7 @@ namespace EStudy.Infrastructure.IoC
             services.AddSingleton<ICourseService, CourseService>();
             services.AddSingleton<ILessonRepository, LessonRepository>();
             services.AddSingleton<ILessonFileRepository, LessonFileRepository>();
+            services.AddSingleton<ILessonService, LessonService>();
         }
     }
 }

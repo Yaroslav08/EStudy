@@ -8,6 +8,6 @@ namespace EStudy.Domain.Interfaces
 {
     public interface ILessonRepository : IRepository<Lesson>
     {
-
+        Task<List<Lesson>> GetAllLessonsByCourseIdAsync(int id);
     }
 }

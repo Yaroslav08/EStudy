@@ -31,5 +31,6 @@ namespace EStudy.Application.ViewModels.Course
         public PreparationLevel Level { get; set; }
         public UserViewModel Teacher { get; set; }
         public GroupViewModel Group { get; set; }
+        public List<LessonViewModel> Lessons { get; set; }
     }
 }

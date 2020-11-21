@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-namespace EStudy.Domain.Models
+namespace EStudy.Application.ViewModels.Lesson
 {
-    public class LessonFile
+    public class LessonFileCreateViewModel : RequestModel
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public string Id { get; set; } = Guid.NewGuid().ToString("N");
         [Required]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         [MinLength(5), MaxLength(50)]
@@ -23,6 +20,5 @@ namespace EStudy.Domain.Models
         [MinLength(5), MaxLength(250)]
         public string Path { get; set; }
         public long LessonId { get; set; }
-        public Lesson Lesson { get; set; }
     }
 }

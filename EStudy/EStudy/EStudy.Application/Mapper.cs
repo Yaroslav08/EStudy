@@ -9,6 +9,7 @@ using EStudy.Application.ViewModels.Department;
 using EStudy.Application.ViewModels.Specialty;
 using EStudy.Application.ViewModels.Group;
 using EStudy.Application.ViewModels.Course;
+using EStudy.Application.ViewModels.Lesson;
 
 namespace EStudy.Application
 {
@@ -58,6 +59,16 @@ namespace EStudy.Application
                 .ForMember(d => d.Teacher, s => s.MapFrom(d => d.Teacher))
                 .ForMember(d => d.Group, s => s.MapFrom(d => d.Group));
             CreateMap<CourseCreateModel, Course>();
+
+
+            CreateMap<Lesson, LessonViewModel>()
+                .ForMember(d => d.Course, s => s.MapFrom(d => d.Course))
+                .ForMember(d => d.LessonFiles, s => s.MapFrom(d => d.LessonFiles));
+            CreateMap<LessonCreateModel, Lesson>();
+
+            CreateMap<LessonFile, LessonFileViewModel>()
+                .ForMember(d => d.Lesson, s => s.MapFrom(d => d.Lesson));
+            CreateMap<LessonCreateModel, Lesson>();
         }
     }
 }
