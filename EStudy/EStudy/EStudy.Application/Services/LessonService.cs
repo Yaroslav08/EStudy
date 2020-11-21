@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EStudy.Application.Interfaces;
 using EStudy.Application.ViewModels.Lesson;
+using EStudy.Domain.Models;
 using EStudy.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
@@ -27,5 +28,13 @@ namespace EStudy.Application.Services
 
         public async Task<LessonViewModel> GetById(long id) =>
             mapper.Map<LessonViewModel>(await unitOfWork.LessonRepository.GetByWhereAsync(d => d.Id == id));
+
+        public async Task<string> CreateLesson(LessonCreateModel model)
+        {
+            var lesson = mapper.Map<Lesson>(model);
+            lesson.CreatedByUserId = model.UserId;
+            lesson.CreatedFromIP = model.IP;
+            return await unitOfWork.LessonRepository.CreateAsync(lesson);
+        }
     }
 }

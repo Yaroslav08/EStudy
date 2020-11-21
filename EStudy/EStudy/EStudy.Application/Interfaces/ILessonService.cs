@@ -11,5 +11,6 @@ namespace EStudy.Application.Interfaces
         Task<List<LessonViewModel>> GetAll();
         Task<List<LessonViewModel>> GetAllLessonsByCourseId(int id);
         Task<LessonViewModel> GetById(long id);
+        Task<string> CreateLesson(LessonCreateModel model);
     }
 }
