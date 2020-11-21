@@ -2,6 +2,7 @@
 using EStudy.Application.Interfaces;
 using EStudy.Application.ViewModels.Course;
 using EStudy.Domain.Interfaces;
+using EStudy.Domain.Models;
 using EStudy.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
@@ -20,19 +21,21 @@ namespace EStudy.Application.Services
             mapper = _mapper;
         }
 
-        public async Task<CourseViewModel> GetCourseById(int id)
-        {
-            return mapper.Map<CourseViewModel>(await unitOfWork.CourseRepository.GetByWhereAsync(d => d.Id == id));
-        }
+        public async Task<CourseViewModel> GetCourseById(int id) =>
+            mapper.Map<CourseViewModel>(await unitOfWork.CourseRepository.GetByWhereAsync(d => d.Id == id));
 
-        public async Task<List<CourseViewModel>> GetAll()
-        {
-            return mapper.Map<List<CourseViewModel>>(await unitOfWork.CourseRepository.GetAllAsync());
-        }
+        public async Task<List<CourseViewModel>> GetAll() =>
+            mapper.Map<List<CourseViewModel>>(await unitOfWork.CourseRepository.GetAllAsync());
 
-        public async Task<List<CourseViewModel>> GetCoursesByGroupId(int groupId)
+        public async Task<List<CourseViewModel>> GetCoursesByGroupId(int groupId) =>
+            mapper.Map<List<CourseViewModel>>(await unitOfWork.CourseRepository.GetCoursesByGroupIdAsync(groupId));
+
+        public async Task<string> CreateCourse(CourseCreateModel model)
         {
-            return mapper.Map<List<CourseViewModel>>(await unitOfWork.CourseRepository.GetCoursesByGroupIdAsync(groupId));
+            var course = mapper.Map<Course>(model);
+            course.CreatedFromIP = model.IP;
+            course.CreatedByUserId = model.UserId;
+            return await unitOfWork.CourseRepository.CreateAsync(course);
         }
     }
 }
