@@ -26,6 +26,8 @@ namespace EStudy.Infrastructure.IoC
             services.AddSingleton<IGroupRepository, GroupRepository>();
             services.AddSingleton<IEmailRepository, EmailRepository>();
             services.AddSingleton<IGroupService, GroupService>();
+            services.AddSingleton<IGroupMemberRepository, GroupMemberRepository>();
+            services.AddSingleton<ICourseRepository, CourseRepository>();
         }
     }
 }
