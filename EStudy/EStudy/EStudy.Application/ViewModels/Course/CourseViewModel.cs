@@ -1,4 +1,5 @@
 ﻿using EStudy.Application.ViewModels.Group;
+using EStudy.Application.ViewModels.Lesson;
 using EStudy.Application.ViewModels.User;
 using EStudy.Domain.Models;
 using System;
