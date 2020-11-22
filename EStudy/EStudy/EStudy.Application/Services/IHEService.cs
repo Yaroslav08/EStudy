@@ -39,23 +39,7 @@ namespace EStudy.Application.Services
         {
             var ihe = await unitOfWork.IHERepository.GetByWhereAsTrackingAsync(d => d.Id == model.Id);
             if (ihe == null) return Constants.Constants.IHENotFound;
-            ihe.Name = model.Name;
-            ihe.ShortName = model.ShortName;
-            ihe.EnglishName = model.EnglishName;
-            ihe.Accreditation = model.Accreditation;
-            ihe.AddressInfo = model.AddressInfo;
-            ihe.Area = model.Area;
-            ihe.CodeEDEBO = model.CodeEDEBO;
-            ihe.Description = model.Description;
-            ihe.Locality = model.Locality;
-            ihe.PostalCode = model.PostalCode;
-            ihe.Region = model.Region;
-            ihe.Type = model.Type;
-            ihe.IsEdit = true;
-            ihe.DateLastEdit = DateTime.Now;
-            ihe.EditedByUserId = model.UserId;
-            ihe.EditedFromIP = model.IP;
-            return await unitOfWork.IHERepository.UpdateAsync(ihe);
+            return await unitOfWork.IHERepository.UpdateAsync(model.GetIHEToDb(ihe));
         }
 
         public async Task<IHEViewModel> GetIhe()

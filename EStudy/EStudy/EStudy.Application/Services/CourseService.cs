@@ -42,16 +42,7 @@ namespace EStudy.Application.Services
         {
             var course = await unitOfWork.CourseRepository.GetByWhereAsync(d => d.Id == model.Id);
             if (course == null) return Constants.Constants.CourseNotFound;
-            var editCourse = mapper.Map<Course>(model);
-            editCourse.CreatedByUserId = course.CreatedByUserId;
-            editCourse.CreatedAt = course.CreatedAt;
-            editCourse.CreatedFromIP = course.CreatedFromIP;
-            editCourse.GroupId = course.GroupId;
-            editCourse.IsEdit = true;
-            editCourse.DateLastEdit = DateTime.Now;
-            editCourse.EditedByUserId = model.UserId;
-            editCourse.EditedFromIP = model.IP;
-            return await unitOfWork.CourseRepository.UpdateAsync(course);
+            return await unitOfWork.CourseRepository.UpdateAsync(model.GetCourseToDb(course));
         }
     }
 }
