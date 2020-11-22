@@ -33,16 +33,7 @@ namespace EStudy.Application.Services
         {
             var group = await unitOfWork.GroupRepository.GetByWhereAsync(d => d.Id == model.Id);
             if (group == null) return Constants.Constants.GroupNotFound;
-            var editGroup = mapper.Map<Group>(model);
-            editGroup.Id = group.Id;
-            editGroup.CreatedAt = group.CreatedAt;
-            editGroup.CreatedByUserId = group.CreatedByUserId;
-            editGroup.CreatedFromIP = group.CreatedFromIP;
-            editGroup.IsEdit = true;
-            editGroup.DateLastEdit = DateTime.Now;
-            editGroup.EditedByUserId = model.UserId;
-            editGroup.EditedFromIP = model.IP;
-            return await unitOfWork.GroupRepository.UpdateAsync(editGroup);
+            return await unitOfWork.GroupRepository.UpdateAsync(model.GetGroupToDb(group));
         }
 
         public async Task<GroupViewModel> GetGroupById(int id)

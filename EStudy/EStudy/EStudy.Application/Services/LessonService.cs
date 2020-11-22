@@ -36,5 +36,12 @@ namespace EStudy.Application.Services
             lesson.CreatedFromIP = model.IP;
             return await unitOfWork.LessonRepository.CreateAsync(lesson);
         }
+
+        public async Task<string> EditLesson(LessonEditModel model)
+        {
+            var lesson = await unitOfWork.LessonRepository.GetByWhereAsTrackingAsync(d => d.Id == model.Id);
+            if (lesson == null) return Constants.Constants.LessonNotFound;
+            return await unitOfWork.LessonRepository.UpdateAsync(model.GetLessonToDb(lesson));
+        }
     }
 }

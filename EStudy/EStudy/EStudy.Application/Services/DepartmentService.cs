@@ -39,18 +39,7 @@ namespace EStudy.Application.Services
         {
             var depart = await unitOfWork.DepartmentRepository.GetByWhereAsTrackingAsync(d => d.Id == model.Id);
             if (depart == null) return Constants.Constants.DepartmentNotFound;
-            depart.Name = model.Name;
-            depart.Shifr = model.Shifr;
-            depart.HeadById = model.HeadById;
-            depart.Phone = model.Phone;
-            depart.ContactInformation = model.ContactInformation;
-            depart.Description = model.Description;
-            depart.IHEId = model.IHEId;
-            depart.IsEdit = true;
-            depart.DateLastEdit = DateTime.Now;
-            depart.EditedByUserId = model.UserId;
-            depart.EditedFromIP = model.IP;
-            return await unitOfWork.DepartmentRepository.UpdateAsync(depart);
+            return await unitOfWork.DepartmentRepository.UpdateAsync(model.GetDepartmentToDb(depart));
         }
 
         public async Task<DepartmentViewModel> GetDepartmentById(int id)

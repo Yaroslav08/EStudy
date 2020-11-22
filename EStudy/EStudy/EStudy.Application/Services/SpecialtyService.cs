@@ -40,19 +40,7 @@ namespace EStudy.Application.Services
         {
             var spec = await unitOfWork.SpecialtyRepository.GetByWhereAsTrackingAsync(d => d.Id == model.Id);
             if (spec == null) return Constants.Constants.SpecialtyNotFound;
-            spec.Name = model.Name;
-            spec.Shifr = model.Shifr;
-            spec.Code = model.Code;
-            spec.Qualification = model.Qualification;
-            spec.EducationalProgram = model.EducationalProgram;
-            spec.ProfessionalQualification = model.ProfessionalQualification;
-            spec.About = model.About;
-            spec.DepartmentId = model.DepartmentId;
-            spec.IsEdit = true;
-            spec.DateLastEdit = DateTime.Now;
-            spec.EditedByUserId = model.UserId;
-            spec.EditedFromIP = model.IP;
-            return await unitOfWork.SpecialtyRepository.UpdateAsync(spec);
+            return await unitOfWork.SpecialtyRepository.UpdateAsync(model.GetSpecialtyToDb(spec));
         }
 
         public async Task<SpecialtyViewModel> GetSpecialtyById(int id)

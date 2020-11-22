@@ -50,7 +50,7 @@ namespace EStudy.Constants
         #endregion
 
         #region Lesson
-
+        public const string LessonNotFound = "Урок не знайдено";
         #endregion
     }
 }
