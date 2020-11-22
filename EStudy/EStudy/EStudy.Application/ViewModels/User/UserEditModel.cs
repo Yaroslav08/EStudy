@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-namespace EStudy.Domain.Models.Enums
+namespace EStudy.Application.ViewModels.User
 {
-    public enum RoleType
+    public class UserEditModel : RequestModel
     {
-        Admin = 1,
-        Teacher,
-        Student
+
     }
 }

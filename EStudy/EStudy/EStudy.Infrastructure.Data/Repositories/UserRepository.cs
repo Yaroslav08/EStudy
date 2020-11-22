@@ -26,6 +26,27 @@ namespace EStudy.Infrastructure.Data.Repositories
                 .ToListAsync();
         }
 
+        public async Task<List<User>> GetNotConfirmedUsersAsync(int count, int skip)
+        {
+            return await db.Users
+                .AsNoTracking()
+                .Where(d => !d.IsConfirmed)
+                .Select(d => new User
+                {
+                    Id = d.Id,
+                    CreatedAt = d.CreatedAt,
+                    FirstName = d.FirstName,
+                    MiddleName = d.MiddleName,
+                    LastName = d.LastName,
+                    Login = d.Login,
+                    CreatedFromIP = d.CreatedFromIP,
+                    Role = d.Role
+                })
+                .Skip(skip).Take(count)
+                .OrderByDescending(d => d.CreatedAt)
+                .ToListAsync();
+        }
+
         public async Task<List<User>> GetUsersByEmail(string email)
         {
             return await db.Users.AsNoTracking()

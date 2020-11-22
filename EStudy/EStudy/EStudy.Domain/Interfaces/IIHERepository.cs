@@ -8,6 +8,7 @@ namespace EStudy.Domain.Interfaces
 {
     public interface IIHERepository : IRepository<IHE>
     {
-
+        Task<bool> ValidStudentCodeConnectAsync(string code);
+        Task<bool> ValidTeacherCodeConnectAsync(string code);
     }
 }

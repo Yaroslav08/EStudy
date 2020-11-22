@@ -52,17 +52,37 @@ namespace EStudy.Application.Services
         {
             if (await unitOfWork.UserRepository.IsExistAsync(d => d.Login == model.Login))
                 return new RegisterResult { Error = Constants.Constants.LoginBusy, Successed = false };
+
             var user = new User();
             user.FirstName = model.FirstName;
             user.LastName = model.LastName;
             user.Login = model.Login;
             user.PasswordHash = PasswordManager.GeneratePasswordHash(model.Password);
-            user.Role = Domain.Models.Enums.RoleType.Student;
             user.ConfirmCode = Generator.GetString(new Random().Next(51, 99));
+            if (model.TypeUser == TypeUser.Student)
+            {
+                if(!await unitOfWork.IHERepository.ValidStudentCodeConnectAsync(model.Code))
+                {
+                    return new RegisterResult { Error = Constants.Constants.CodeNotValid, Successed = false };
+                }
+                user.Role = Domain.Models.Enums.RoleType.Student;
+            }
+            if(model.TypeUser == TypeUser.Teacher)
+            {
+                if (!await unitOfWork.IHERepository.ValidTeacherCodeConnectAsync(model.Code))
+                {
+                    return new RegisterResult { Error = Constants.Constants.CodeNotValid, Successed = false };
+                }
+                user.Role = Domain.Models.Enums.RoleType.Teacher;
+            }
+
+
             var res = await unitOfWork.UserRepository.CreateAsync(user);
             if (res != Constants.Constants.OK)
                 return new RegisterResult { Error = res, Successed = false };
+
             //ToDo send to user email confirm
+            
             return new RegisterResult() { Successed = true, Confirm = new ConfirmDataModel { Code = user.ConfirmCode, UserId = user.Id } };
         }
 
@@ -81,6 +101,11 @@ namespace EStudy.Application.Services
         public async Task<int> GetCountUsers()
         {
             return await unitOfWork.UserRepository.CountAsync();
+        }
+
+        public async Task<List<UserNotConfirmed>> GetNotConfirmedUsers(int count, int skip)
+        {
+            return mapper.Map<List<UserNotConfirmed>>(await unitOfWork.UserRepository.GetNotConfirmedUsersAsync(count, skip));
         }
     }
 }

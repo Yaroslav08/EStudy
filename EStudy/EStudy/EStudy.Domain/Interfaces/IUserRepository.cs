@@ -14,5 +14,6 @@ namespace EStudy.Domain.Interfaces
         Task<List<User>> GetUsersByEmail(string email);
         Task<List<User>> GetUsersByPhone(string phone);
         Task<List<User>> GetAllAdmins();
+        Task<List<User>> GetNotConfirmedUsersAsync(int count, int skip);
     }
 }

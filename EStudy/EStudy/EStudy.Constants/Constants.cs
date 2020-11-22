@@ -17,6 +17,7 @@ namespace EStudy.Constants
         public const string TokenNotValid = "Токен не валідний";
         public const string AlreadyConfirmed = "Користувач вже підтверджений";
         public const string LoginBusy = "Логін вже зайнятий";
+        public const string CodeNotValid = "Код не є валідним";
         public const string UserNotExist = "Користувача з таким логіном не існує";
         public const string NotConfirmed = "Користувач не підтвердив акаунт";
         public const string PasswordNotComapre = "Пароль не правильний";

@@ -25,6 +25,10 @@ namespace EStudy.Application
                 .ForMember(d => d.Avatar, s => s.MapFrom(d => d.Avatar50));
 
 
+            CreateMap<User, UserNotConfirmed>()
+                .ForMember(d => d.Role, s => s.MapFrom(d => d.Role.ToString()));
+
+
             CreateMap<IHE, IHEViewModel>()
                 .ForMember(d => d.Departments, s => s.MapFrom(d => d.Departments));
             CreateMap<IHECreateModel, IHE>();
