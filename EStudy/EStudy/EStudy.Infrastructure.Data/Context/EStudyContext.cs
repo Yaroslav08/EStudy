@@ -22,6 +22,7 @@ namespace EStudy.Infrastructure.Data.Context
         public DbSet<Course> Courses { get; set; }
         public DbSet<Lesson> Lessons { get; set; }
         public DbSet<LessonFile> LessonFiles { get; set; }
+        public DbSet<Homework> Homeworks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -36,6 +37,7 @@ namespace EStudy.Infrastructure.Data.Context
             modelBuilder.ApplyConfiguration(new CourseConfiguration());
             modelBuilder.ApplyConfiguration(new LessonConfiguration());
             modelBuilder.ApplyConfiguration(new LessonFileConfiguration());
+            modelBuilder.ApplyConfiguration(new HomeworkConfiguration());
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

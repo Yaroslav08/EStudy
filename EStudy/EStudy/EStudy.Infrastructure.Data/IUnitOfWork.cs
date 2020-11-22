@@ -18,5 +18,6 @@ namespace EStudy.Infrastructure.Data
         ICourseRepository CourseRepository { get; }
         ILessonRepository LessonRepository { get; }
         ILessonFileRepository LessonFileRepository { get; }
+        IHomeworkRepository HomeworkRepository { get; }
     }
 }

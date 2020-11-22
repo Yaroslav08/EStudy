@@ -49,5 +49,6 @@ namespace EStudy.Domain.Models
         public string ConfirmedFromIP { get; set; }
         public List<GroupMember> GroupMembers { get; set; }
         public List<Course> Courses { get; set; }
+        public List<Homework> Homeworks { get; set; }
     }
 }

@@ -20,6 +20,7 @@ namespace EStudy.Domain.Models
         public int CourseId { get; set; }
         public Course Course { get; set; }
         public List<LessonFile> LessonFiles { get; set; }
+        public List<Homework> Homeworks { get; set; }
     }
 
     public enum TypeLesson
