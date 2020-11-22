@@ -44,5 +44,13 @@ namespace EStudy.Constants
         #region Email
         public const string EmailNotFound = "Електронна адреса не знайдена";
         #endregion
+
+        #region Course
+        public const string CourseNotFound = "Курс не знайдено";
+        #endregion
+
+        #region Lesson
+
+        #endregion
     }
 }
