@@ -1,6 +1,7 @@
 ﻿using EStudy.Application.ViewModels.Course;
 using EStudy.Application.ViewModels.Department;
 using EStudy.Application.ViewModels.Group;
+using EStudy.Application.ViewModels.Homework;
 using EStudy.Application.ViewModels.IHE;
 using EStudy.Application.ViewModels.Lesson;
 using EStudy.Application.ViewModels.Specialty;
@@ -142,6 +143,18 @@ namespace EStudy.Application
             lesson.EditedByUserId = model.UserId;
             lesson.EditedFromIP = model.IP;
             return lesson;
+        }
+
+        public static Homework GetHomeworkToDb(this HomeworkEditModel model, Homework homework)
+        {
+            homework.IsComplate = model.IsComplate;
+            homework.Text = model.Text;
+            homework.Links = model.Links;
+            homework.IsEdit = true;
+            homework.DateLastEdit = DateTime.Now;
+            homework.EditedByUserId = model.UserId;
+            homework.EditedFromIP = model.IP;
+            return homework;
         }
     }
 }

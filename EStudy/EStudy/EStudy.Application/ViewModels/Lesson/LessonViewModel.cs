@@ -1,4 +1,5 @@
 ﻿using EStudy.Application.ViewModels.Course;
+using EStudy.Application.ViewModels.Homework;
 using EStudy.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -18,5 +19,6 @@ namespace EStudy.Application.ViewModels.Lesson
         public TypeLesson TypeLesson { get; set; }
         public CourseViewModel Course { get; set; }
         public List<LessonFileViewModel> LessonFiles { get; set; }
+        public List<HomeworkViewModel> Homeworks { get; set; }
     }
 }

@@ -8,6 +8,6 @@ namespace EStudy.Domain.Interfaces
 {
     public interface IHomeworkRepository : IRepository<Homework>
     {
-
+        Task<List<Homework>> GetHomeworkByCourseIdOfStudentAsync(int courseId, int userId);
     }
 }

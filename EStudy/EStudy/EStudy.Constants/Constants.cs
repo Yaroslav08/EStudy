@@ -53,5 +53,9 @@ namespace EStudy.Constants
         #region Lesson
         public const string LessonNotFound = "Урок не знайдено";
         #endregion
+
+        #region Homework
+        public const string HomeworkNotFound = "Домашнє завдання не знайдено";
+        #endregion
     }
 }
