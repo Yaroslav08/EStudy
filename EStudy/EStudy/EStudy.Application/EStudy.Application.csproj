@@ -1,17 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation" Version="5.0.0" />
+    <PackageReference Include="Yaroslav08.Extensions" Version="1.3.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EStudy.Infrastructure.Data\EStudy.Infrastructure.Data.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Extensions">
-      <HintPath>..\Libraries\Extensions.dll</HintPath>
-    </Reference>
   </ItemGroup>
 </Project>

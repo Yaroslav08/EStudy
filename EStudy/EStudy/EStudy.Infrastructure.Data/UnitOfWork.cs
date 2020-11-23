@@ -59,6 +59,6 @@ namespace EStudy.Infrastructure.Data
         public ICourseRepository CourseRepository => courseRepository;
         public ILessonRepository LessonRepository => lessonRepository;
         public ILessonFileRepository LessonFileRepository => lessonFileRepository;
-        private IHomeworkRepository HomeworkRepository => homeworkRepository;
+        public IHomeworkRepository HomeworkRepository => homeworkRepository;
     }
 }
