@@ -46,5 +46,10 @@ namespace EStudy.Application.Services
         {
             return mapper.Map<UniversityViewModel>(await unitOfWork.UniversityRepository.FirstAsync());
         }
+
+        public async Task<UniversityEditModel> LoadForEdit()
+        {
+            return mapper.Map<UniversityEditModel>(await unitOfWork.UniversityRepository.FirstAsync());
+        }
     }
 }

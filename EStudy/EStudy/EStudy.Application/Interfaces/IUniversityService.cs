@@ -11,5 +11,6 @@ namespace EStudy.Application.Interfaces
         Task<string> CreateUniversity(UniversityCreateModel model);
         Task<string> EditUniversity(UniversityEditModel model);
         Task<UniversityViewModel> GetUniversity();
+        Task<UniversityEditModel> LoadForEdit();
     }
 }
