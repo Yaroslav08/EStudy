@@ -14,6 +14,8 @@ namespace EStudy.Application.ViewModels.Homework
         public bool IsComplate { get; set; }
         public string Text { get; set; }
         public string Links { get; set; }
+        public string Mark { get; set; }
+        public DateTime? MarkSetAt { get; set; }
         public UserViewModel User { get; set; }
         public LessonViewModel Lesson { get; set; }
     }

@@ -14,6 +14,10 @@ namespace EStudy.Domain.Models
         public string Text { get; set; }
         [MinLength(5), MaxLength(500)]
         public string Links { get; set; }
+        [MinLength(1), MaxLength(5)]
+        public string Mark { get; set; }
+        public DateTime? MarkSetAt { get; set; }
+        public int UserSetMark { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
         public long LessonId { get; set; }
