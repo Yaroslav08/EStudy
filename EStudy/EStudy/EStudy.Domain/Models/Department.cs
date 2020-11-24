@@ -19,8 +19,8 @@ namespace EStudy.Domain.Models
         public string ContactInformation { get; set; }
         [MinLength(10), MaxLength(300)]
         public string Description { get; set; }
-        public int IHEId { get; set; }
-        public IHE IHE { get; set; }
+        public int UniversityId { get; set; }
+        public University University { get; set; }
         public List<Specialty> Specialties { get; set; }
     }
 }

@@ -4,7 +4,7 @@ using EStudy.Application.ViewModels.User;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using EStudy.Application.ViewModels.IHE;
+using EStudy.Application.ViewModels.University;
 using EStudy.Application.ViewModels.Department;
 using EStudy.Application.ViewModels.Specialty;
 using EStudy.Application.ViewModels.Group;
@@ -30,14 +30,14 @@ namespace EStudy.Application
                 .ForMember(d => d.Role, s => s.MapFrom(d => d.Role.ToString()));
 
 
-            CreateMap<IHE, IHEViewModel>()
+            CreateMap<University, UniversityViewModel>()
                 .ForMember(d => d.Departments, s => s.MapFrom(d => d.Departments));
-            CreateMap<IHECreateModel, IHE>();
-            CreateMap<IHEEditModel, IHE>();
+            CreateMap<UniversityCreateModel, University>();
+            CreateMap<UniversityEditModel, University>();
 
 
             CreateMap<Department, DepartmentViewModel>()
-                .ForMember(d => d.IHE, s => s.MapFrom(d => d.IHE));
+                .ForMember(d => d.University, s => s.MapFrom(d => d.University));
             CreateMap<DepartmentCreateModel, Department>();
             CreateMap<DepartmentEditModel, Department>();
 

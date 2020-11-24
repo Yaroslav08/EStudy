@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 namespace EStudy.Domain.Models
 {
-    public class IHE : BaseModel<int>
+    public class University : BaseModel<int>
     {
         [Required, MinLength(3), MaxLength(200)]
         public string Name { get; set; }

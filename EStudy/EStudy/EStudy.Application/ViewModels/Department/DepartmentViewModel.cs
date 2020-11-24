@@ -1,4 +1,4 @@
-﻿using EStudy.Application.ViewModels.IHE;
+﻿using EStudy.Application.ViewModels.University;
 using EStudy.Application.ViewModels.Specialty;
 using EStudy.Application.ViewModels.User;
 using System;
@@ -18,7 +18,7 @@ namespace EStudy.Application.ViewModels.Department
         public string Phone { get; set; }
         public string ContactInformation { get; set; }
         public string Description { get; set; }
-        public IHEViewModel IHE { get; set; }
+        public UniversityViewModel University { get; set; }
         public List<SpecialtyViewModel> Specialties { get; set; }
     }
 }

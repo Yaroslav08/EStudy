@@ -19,6 +19,6 @@ namespace EStudy.Application.ViewModels.Department
         public string ContactInformation { get; set; }
         [MinLength(10), MaxLength(300)]
         public string Description { get; set; }
-        public int IHEId { get; set; }
+        public int UniversityId { get; set; }
     }
 }

@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-namespace EStudy.Application.ViewModels.IHE
+namespace EStudy.Application.ViewModels.University
 {
-    public class IHECreateModel : RequestModel
+    public class UniversityCreateModel : RequestModel
     {
         [Required, MinLength(3), MaxLength(200)]
         public string Name { get; set; }

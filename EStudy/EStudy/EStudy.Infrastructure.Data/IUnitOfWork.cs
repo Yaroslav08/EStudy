@@ -9,7 +9,7 @@ namespace EStudy.Infrastructure.Data
     {
         IUserRepository UserRepository { get; }
         IFileRepository FileRepository { get; }
-        IIHERepository IHERepository { get; }
+        IUniversityRepository UniversityRepository { get; }
         IDepartmentRepository DepartmentRepository { get; }
         ISpecialtyRepository SpecialtyRepository { get; }
         IGroupRepository GroupRepository { get; }

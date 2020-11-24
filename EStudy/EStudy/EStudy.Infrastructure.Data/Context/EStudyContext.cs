@@ -13,7 +13,7 @@ namespace EStudy.Infrastructure.Data.Context
 
         public DbSet<User> Users { get; set; }
         public DbSet<File> Files { get; set; }
-        public DbSet<IHE> IHEs { get; set; }
+        public DbSet<University> Universities { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Specialty> Specialties { get; set; }
         public DbSet<Group> Groups { get; set; }
@@ -29,7 +29,7 @@ namespace EStudy.Infrastructure.Data.Context
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new EmailConfiguration());
             modelBuilder.ApplyConfiguration(new FileConfiguration());
-            modelBuilder.ApplyConfiguration(new IHEConfiguration());
+            modelBuilder.ApplyConfiguration(new UniversityConfiguration());
             modelBuilder.ApplyConfiguration(new DepartmentConfiguration());
             modelBuilder.ApplyConfiguration(new SpecialtyConfiguration());
             modelBuilder.ApplyConfiguration(new GroupConfiguration());

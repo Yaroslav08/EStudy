@@ -18,7 +18,7 @@ namespace EStudy.Infrastructure.Data.Configurations
                 d.Name,
                 d.Phone,
                 d.Shifr,
-                d.IHEId
+                d.UniversityId
             });
         }
     }

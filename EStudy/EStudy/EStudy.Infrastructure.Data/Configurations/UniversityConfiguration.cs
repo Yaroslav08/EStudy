@@ -8,9 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 namespace EStudy.Infrastructure.Data.Configurations
 {
-    public class IHEConfiguration : IEntityTypeConfiguration<IHE>
+    public class UniversityConfiguration : IEntityTypeConfiguration<University>
     {
-        public void Configure(EntityTypeBuilder<IHE> builder)
+        public void Configure(EntityTypeBuilder<University> builder)
         {
             builder.HasKey(d => d.Id);
             builder.HasIndex(d => new

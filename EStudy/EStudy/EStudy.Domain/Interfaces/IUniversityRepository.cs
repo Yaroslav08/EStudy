@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 namespace EStudy.Domain.Interfaces
 {
-    public interface IIHERepository : IRepository<IHE>
+    public interface IUniversityRepository : IRepository<University>
     {
         Task<bool> ValidStudentCodeConnectAsync(string code);
         Task<bool> ValidTeacherCodeConnectAsync(string code);

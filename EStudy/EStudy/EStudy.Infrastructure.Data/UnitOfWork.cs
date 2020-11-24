@@ -9,7 +9,7 @@ namespace EStudy.Infrastructure.Data
     {
         private IUserRepository userRepository;
         private IFileRepository fileRepository;
-        private IIHERepository iHERepository;
+        private IUniversityRepository universityRepository;
         private IDepartmentRepository departmentRepository;
         private ISpecialtyRepository specRepository;
         private IGroupRepository groupRepository;
@@ -23,7 +23,7 @@ namespace EStudy.Infrastructure.Data
         public UnitOfWork(
             IUserRepository _userRepository,
             IFileRepository _fileRepository,
-            IIHERepository _iHERepository,
+            IUniversityRepository _universityRepository,
             IDepartmentRepository _departmentRepository,
             ISpecialtyRepository _specRepository,
             IGroupRepository _groupRepository,
@@ -36,7 +36,7 @@ namespace EStudy.Infrastructure.Data
         {
             userRepository = _userRepository;
             fileRepository = _fileRepository;
-            iHERepository = _iHERepository;
+            universityRepository = _universityRepository;
             departmentRepository = _departmentRepository;
             specRepository = _specRepository;
             groupRepository = _groupRepository;
@@ -50,7 +50,7 @@ namespace EStudy.Infrastructure.Data
 
         public IUserRepository UserRepository => userRepository;
         public IFileRepository FileRepository => fileRepository;
-        public IIHERepository IHERepository => iHERepository;
+        public IUniversityRepository UniversityRepository => universityRepository;
         public IDepartmentRepository DepartmentRepository => departmentRepository;
         public ISpecialtyRepository SpecialtyRepository => specRepository;
         public IGroupRepository GroupRepository => groupRepository;

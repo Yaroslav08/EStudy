@@ -61,7 +61,7 @@ namespace EStudy.Application.Services
             user.ConfirmCode = Generator.GetString(new Random().Next(51, 99));
             if (model.TypeUser == TypeUser.Student)
             {
-                if(!await unitOfWork.IHERepository.ValidStudentCodeConnectAsync(model.Code))
+                if(!await unitOfWork.UniversityRepository.ValidStudentCodeConnectAsync(model.Code))
                 {
                     return new RegisterResult { Error = Constants.Constants.CodeNotValid, Successed = false };
                 }
@@ -69,7 +69,7 @@ namespace EStudy.Application.Services
             }
             if(model.TypeUser == TypeUser.Teacher)
             {
-                if (!await unitOfWork.IHERepository.ValidTeacherCodeConnectAsync(model.Code))
+                if (!await unitOfWork.UniversityRepository.ValidTeacherCodeConnectAsync(model.Code))
                 {
                     return new RegisterResult { Error = Constants.Constants.CodeNotValid, Successed = false };
                 }

@@ -2,7 +2,7 @@
 using EStudy.Application.ViewModels.Department;
 using EStudy.Application.ViewModels.Group;
 using EStudy.Application.ViewModels.Homework;
-using EStudy.Application.ViewModels.IHE;
+using EStudy.Application.ViewModels.University;
 using EStudy.Application.ViewModels.Lesson;
 using EStudy.Application.ViewModels.Specialty;
 using EStudy.Domain.Models;
@@ -15,28 +15,28 @@ namespace EStudy.Application
 {
     public static class Converter
     {
-        public static IHE GetIHEToDb(this IHEEditModel model, IHE ihe)
+        public static University GetUniversityToDb(this UniversityEditModel model, University university)
         {
-            ihe.Name = model.Name;
-            ihe.ShortName = model.ShortName;
-            ihe.EnglishName = model.EnglishName;
-            ihe.CodeEDEBO = model.CodeEDEBO;
-            ihe.Type = model.Type;
-            ihe.Area = model.Area;
-            ihe.Accreditation = model.Accreditation;
-            ihe.Logo = model.Logo;
-            ihe.Logo50 = model.Logo50;
-            ihe.Logo150 = model.Logo150;
-            ihe.Description = model.Description;
-            ihe.AddressInfo = model.AddressInfo;
-            ihe.Locality = model.Locality;
-            ihe.Region = model.Region;
-            ihe.PostalCode = model.PostalCode;
-            ihe.IsEdit = true;
-            ihe.DateLastEdit = DateTime.Now;
-            ihe.EditedByUserId = model.UserId;
-            ihe.EditedFromIP = model.IP;
-            return ihe;
+            university.Name = model.Name;
+            university.ShortName = model.ShortName;
+            university.EnglishName = model.EnglishName;
+            university.CodeEDEBO = model.CodeEDEBO;
+            university.Type = model.Type;
+            university.Area = model.Area;
+            university.Accreditation = model.Accreditation;
+            university.Logo = model.Logo;
+            university.Logo50 = model.Logo50;
+            university.Logo150 = model.Logo150;
+            university.Description = model.Description;
+            university.AddressInfo = model.AddressInfo;
+            university.Locality = model.Locality;
+            university.Region = model.Region;
+            university.PostalCode = model.PostalCode;
+            university.IsEdit = true;
+            university.DateLastEdit = DateTime.Now;
+            university.EditedByUserId = model.UserId;
+            university.EditedFromIP = model.IP;
+            return university;
         }
 
         public static Department GetDepartmentToDb(this DepartmentEditModel model, Department department)
@@ -47,7 +47,7 @@ namespace EStudy.Application
             department.Phone = model.Phone;
             department.ContactInformation = model.ContactInformation;
             department.Description = model.Description;
-            department.IHEId = model.IHEId;
+            department.UniversityId = model.UniversityId;
             department.IsEdit = true;
             department.DateLastEdit = DateTime.Now;
             department.EditedByUserId = model.UserId;

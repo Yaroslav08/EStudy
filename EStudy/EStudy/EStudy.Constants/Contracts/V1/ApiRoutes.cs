@@ -35,15 +35,15 @@ namespace EStudy.Constants.Contracts.V1
             public const string GetByName = Base + "/users/{name}";
         }
 
-        public static class IHE
+        public static class University
         {
-            public const string Create = Base + "/ihes";
+            public const string Create = Base + "/universities";
 
-            public const string Update = Base + "/ihes/{id}";
+            public const string Update = Base + "/universities/{id}";
 
-            public const string Delete = Base + "/ihes/{id}";
+            public const string Delete = Base + "/universities/{id}";
 
-            public const string Get = Base + "/ihes";
+            public const string Get = Base + "/universities";
         }
 
         public static class Department

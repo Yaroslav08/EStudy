@@ -25,8 +25,8 @@ namespace EStudy.Constants
 
 
 
-        #region IHE
-        public const string IHENotFound = "ВНЗ не знайдено";
+        #region University
+        public const string UniversityNotFound = "ВНЗ не знайдено";
         #endregion
 
         #region Departmemt

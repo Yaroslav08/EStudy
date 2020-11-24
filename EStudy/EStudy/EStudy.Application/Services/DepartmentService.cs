@@ -29,7 +29,7 @@ namespace EStudy.Application.Services
                 Phone = model.Phone,
                 ContactInformation = model.ContactInformation,
                 Description = model.Description,
-                IHEId = model.IHEId,
+                UniversityId = model.UniversityId,
                 CreatedByUserId = model.UserId,
                 CreatedFromIP = model.IP
             });
