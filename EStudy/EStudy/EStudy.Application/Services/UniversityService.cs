@@ -3,6 +3,7 @@ using EStudy.Application.Interfaces;
 using EStudy.Application.ViewModels.University;
 using EStudy.Domain.Models;
 using EStudy.Infrastructure.Data;
+using Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace EStudy.Application.Services
         public async Task<string> CreateUniversity(UniversityCreateModel model)
         {
             if (await unitOfWork.UniversityRepository.CountAsync() > 0)
-                return Constants.Constants.AccessDenited;
+                return Constants.Constants.UniversityIsExist;
             return await unitOfWork.UniversityRepository.CreateAsync(new Domain.Models.University
             {
                 Name = model.Name,
@@ -31,7 +32,9 @@ namespace EStudy.Application.Services
                 EnglishName = model.EnglishName,
                 CodeEDEBO = model.CodeEDEBO,
                 CreatedFromIP = model.IP,
-                CreatedByUserId = model.UserId
+                CreatedByUserId = model.UserId,
+                CodeForStudent = Generator.GetString(17),
+                CodeForTeacher = Generator.GetString(17)
             });
         }
 

@@ -29,6 +29,7 @@ namespace EStudy.Constants
 
         #region University
         public const string UniversityNotFound = "ВНЗ не знайдено";
+        public const string UniversityIsExist = "Неможливо створити другий університет";
         #endregion
 
         #region Departmemt

@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 namespace EStudy.MVC.Controllers
 {
@@ -105,9 +106,11 @@ namespace EStudy.MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
+            Console.OutputEncoding = Encoding.UTF8;
             var result = await userService.LoginUser(model);
             if(result.Successed)
             {
+                Console.WriteLine(result.Successed.ToString());
                 await Authenticate(result.User);
                 if (string.IsNullOrEmpty(model.ReturnUrl))
                     return LocalRedirect("~/");

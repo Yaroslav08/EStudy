@@ -1,5 +1,6 @@
 ﻿using EStudy.Application.Interfaces;
 using EStudy.Application.ViewModels.University;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 namespace EStudy.MVC.Controllers
 {
     [Route("university")]
+    [Authorize(Roles = "Admin")]
     public class UniversityController : Controller
     {
         private readonly IUniversityService universityService;
@@ -22,9 +24,13 @@ namespace EStudy.MVC.Controllers
 
 
         [HttpGet("")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetUniversity()
         {
-            return View(await universityService.GetUniversity());
+            var res = await universityService.GetUniversity();
+            if (res == null)
+                return LocalRedirect("~/university/create");
+            return View(res);
         }
 
         [HttpGet("edit")]
@@ -40,11 +46,32 @@ namespace EStudy.MVC.Controllers
         }
 
         [HttpPost("edit")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(UniversityEditModel model)
         {
             model.IP = HttpContext.Connection.RemoteIpAddress.ToString();
             model.UserId = Convert.ToInt32(User.Identity.Name);
             var result = await universityService.EditUniversity(model);
+            if (result == Constants.Constants.OK)
+                return LocalRedirect("~/university");
+            ModelState.AddModelError("", result);
+            return View(model);
+        }
+
+        [HttpGet("create")]
+        [AllowAnonymous]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost("create")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(UniversityCreateModel model)
+        {
+            model.IP = HttpContext.Connection.RemoteIpAddress.ToString();
+            model.UserId = Convert.ToInt32(User.Identity.Name);
+            var result = await universityService.CreateUniversity(model);
             if (result == Constants.Constants.OK)
                 return LocalRedirect("~/university");
             ModelState.AddModelError("", result);

@@ -34,6 +34,7 @@ namespace EStudy.Application
                 .ForMember(d => d.Departments, s => s.MapFrom(d => d.Departments));
             CreateMap<UniversityCreateModel, University>();
             CreateMap<UniversityEditModel, University>();
+            CreateMap<University, UniversityEditModel>();
 
 
             CreateMap<Department, DepartmentViewModel>()
