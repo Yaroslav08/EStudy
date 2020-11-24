@@ -59,10 +59,7 @@ namespace EStudy.Application.Services
         {
             var homework = await unitOfWork.HomeworkRepository.GetByWhereAsTrackingAsync(d => d.Id == model.Id);
             if (homework == null) return Constants.Constants.HomeworkNotFound;
-            homework.Mark = model.Mark;
-            homework.MarkSetAt = DateTime.Now;
-            homework.UserSetMark = model.UserId;
-            return await unitOfWork.HomeworkRepository.UpdateAsync(homework);
+            return await unitOfWork.HomeworkRepository.UpdateAsync(model.GetHomeworkMarkToDb(homework));
         }
     }
 }

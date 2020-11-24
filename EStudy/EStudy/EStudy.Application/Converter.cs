@@ -156,5 +156,13 @@ namespace EStudy.Application
             homework.EditedFromIP = model.IP;
             return homework;
         }
+
+        public static Homework GetHomeworkMarkToDb(this HomeworkMarkCreateModel model, Homework homework)
+        {
+            homework.Mark = model.Mark;
+            homework.MarkSetAt = DateTime.Now;
+            homework.UserSetMark = model.UserId;
+            return homework;
+        }
     }
 }
