@@ -4,6 +4,7 @@ using EStudy.Application.ViewModels.Group;
 using EStudy.Domain.Models;
 using EStudy.Domain.Models.Enums;
 using EStudy.Infrastructure.Data;
+using Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,7 @@ namespace EStudy.Application.Services
             var group = mapper.Map<Group>(model);
             group.CreatedFromIP = model.IP;
             group.CreatedByUserId = model.UserId;
+            group.CodeForConnect = Generator.GetString(11, false, true);
             return await unitOfWork.GroupRepository.CreateAsync(group);
         }
 

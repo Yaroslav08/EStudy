@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 namespace EStudy.Application.ViewModels.Auth
 {
-    public class RegisterViewModel
+    public class RegisterViewModel : RequestModel
     {
         [Required(ErrorMessage = "Ім'я обов'язково"), MinLength(3, ErrorMessage = "Мінімальна довжина 3 символів"), MaxLength(25, ErrorMessage = "Максимальна довжина 25 символів")]
         [DisplayName("Ім'я")]

@@ -19,7 +19,7 @@ namespace EStudy.Domain.Models
         public byte? IndexItemToChanged { get; set; }
         [Required]
         public bool IsReleased { get; set; } = false;
-        [Required, MinLength(6), MaxLength(12)]
+        [Required, MinLength(10), MaxLength(12)]
         public string CodeForConnect { get; set; }
         [MinLength(5), MaxLength(500)]
         public string AdditionalInfo { get; set; }

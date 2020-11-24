@@ -21,8 +21,6 @@ namespace EStudy.Application.ViewModels.Group
         public bool IsReleased { get; set; }
         [Required]
         public byte CountStudents { get; set; }
-        [Required, MinLength(6), MaxLength(12)]
-        public string CodeForConnect { get; set; }
         [MinLength(5), MaxLength(500)]
         public string AdditionalInfo { get; set; }
         [MinLength(7), MaxLength(100), EmailAddress]

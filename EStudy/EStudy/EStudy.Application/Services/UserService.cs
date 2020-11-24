@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using EStudy.Application.ViewModels.Auth;
 using Extensions;
 using EStudy.Domain.Models;
+using EStudy.Application.Builders;
+using EStudy.Domain.Models.Enums;
 
 namespace EStudy.Application.Services
 {
@@ -37,53 +39,70 @@ namespace EStudy.Application.Services
 
         public async Task<string> ConfirmUser(ConfirmViewModel model)
         {
-            var user = await unitOfWork.UserRepository.GetByWhereAsTrackingAsync(d => d.Id == model.UserId);
-            if (user == null) return Constants.Constants.UserNotFoundById;
+            var user = await unitOfWork.UserRepository.GetByWhereAsTrackingAsync(d => d.ConfirmCode == model.Code);
+            if (user == null) return Constants.Constants.TokenNotValid;
             if (user.IsConfirmed) return Constants.Constants.AlreadyConfirmed;
-            if (user.ConfirmCode != model.Code) return Constants.Constants.TokenNotValid;
             if (user.CodeValidUntil < DateTime.Now) return Constants.Constants.TokenExpired;
             user.IsConfirmed = true;
-            user.ConfirmedFromIP = model.IP;
             user.ConfirmedAt = DateTime.Now;
-            return await unitOfWork.UserRepository.UpdateAsync(user);
+            user.ConfirmedFromIP = model.IP;
+            if(user.Role!=RoleType.Student)
+            {
+                return await unitOfWork.UserRepository.UpdateAsync(user);
+            }
+            var group = await unitOfWork.GroupRepository.GetByWhereAsync(d => d.CodeForConnect == model.GroupCode);
+            if (group == null) return Constants.Constants.GroupByCodeNotFound;
+            var groupMember = new GroupMember
+            {
+                UserId = user.Id,
+                GroupId = group.Id,
+                MemberRole = GroupMemberRole.Student,
+                CreatedFromIP = model.IP,
+                CreatedByUserId = model.UserId,
+                Title = "Студент"
+            };
+            await unitOfWork.UserRepository.UpdateAsync(user);
+            return await unitOfWork.GroupMemberRepository.CreateAsync(groupMember);
+
         }
 
         public async Task<RegisterResult> RegisterUser(RegisterViewModel model)
         {
             if (await unitOfWork.UserRepository.IsExistAsync(d => d.Login == model.Login))
-                return new RegisterResult { Error = Constants.Constants.LoginBusy, Successed = false };
+                return new RegisterResult { Successed = false, Error = Constants.Constants.LoginBusy };
 
-            var user = new User();
-            user.FirstName = model.FirstName;
-            user.LastName = model.LastName;
-            user.Login = model.Login;
-            user.PasswordHash = PasswordManager.GeneratePasswordHash(model.Password);
-            user.ConfirmCode = Generator.GetString(new Random().Next(51, 99));
-            if (model.TypeUser == TypeUser.Student)
+            var user = new UserBuilder()
+                .SetFirstname(model.FirstName)
+                .SetLastname(model.LastName)
+                .SetLogin(model.Login)
+                .SetPassword(PasswordManager.GeneratePasswordHash(model.Password))
+                .SetConfirmCode(Generator.GetString(30))
+                .Build();
+
+            if(await unitOfWork.UserRepository.CountAsync() == 0)
             {
-                if(!await unitOfWork.UniversityRepository.ValidStudentCodeConnectAsync(model.Code))
-                {
-                    return new RegisterResult { Error = Constants.Constants.CodeNotValid, Successed = false };
-                }
-                user.Role = Domain.Models.Enums.RoleType.Student;
-            }
-            if(model.TypeUser == TypeUser.Teacher)
-            {
-                if (!await unitOfWork.UniversityRepository.ValidTeacherCodeConnectAsync(model.Code))
-                {
-                    return new RegisterResult { Error = Constants.Constants.CodeNotValid, Successed = false };
-                }
-                user.Role = Domain.Models.Enums.RoleType.Teacher;
+                user.Role = RoleType.Admin;
+                user.IsConfirmed = true;
+                user.ConfirmedFromIP = model.IP;
+                user.ConfirmedAt = DateTime.Now;
+                var resultAdminReg = await unitOfWork.UserRepository.CreateAsync(user);
+                if (resultAdminReg == Constants.Constants.OK)
+                    return new RegisterResult { Successed = true };
+                return new RegisterResult { Successed = false, Error = resultAdminReg };
             }
 
+            user.Role = model.TypeUser switch
+            {
+                TypeUser.Student => RoleType.Student,
+                TypeUser.Teacher => RoleType.Teacher,
+                _ => RoleType.Admin
+            };
 
-            var res = await unitOfWork.UserRepository.CreateAsync(user);
-            if (res != Constants.Constants.OK)
-                return new RegisterResult { Error = res, Successed = false };
+            var result = await unitOfWork.UserRepository.CreateAsync(user);
+            if (result == Constants.Constants.OK)
+                return new RegisterResult { Successed = true };
 
-            //ToDo send to user email confirm
-            
-            return new RegisterResult() { Successed = true, Confirm = new ConfirmDataModel { Code = user.ConfirmCode, UserId = user.Id } };
+            return new RegisterResult { Successed = false, Error = result };
         }
 
         public async Task<LoginResult> LoginUser(LoginViewModel model)
@@ -106,6 +125,16 @@ namespace EStudy.Application.Services
         public async Task<List<UserNotConfirmed>> GetNotConfirmedUsers(int count, int skip)
         {
             return mapper.Map<List<UserNotConfirmed>>(await unitOfWork.UserRepository.GetNotConfirmedUsersAsync(count, skip));
+        }
+
+        public async Task<bool> ValidTeacherCode(string code)
+        {
+            return await unitOfWork.UniversityRepository.ValidTeacherCodeConnectAsync(code);
+        }
+
+        public async Task<bool> ValidStudentCode(string code)
+        {
+            return await unitOfWork.UniversityRepository.ValidStudentCodeConnectAsync(code);
         }
     }
 }

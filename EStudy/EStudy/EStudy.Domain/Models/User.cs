@@ -41,7 +41,7 @@ namespace EStudy.Domain.Models
 
         [Required]
         public bool IsConfirmed { get; set; } = false;
-        [Required, MinLength(50), MaxLength(100)]
+        [Required, MinLength(20), MaxLength(40)]
         public string ConfirmCode { get; set; }
         public DateTime CodeValidUntil { get; set; } = DateTime.Now.AddDays(1);
         public DateTime? ConfirmedAt { get; set; }
