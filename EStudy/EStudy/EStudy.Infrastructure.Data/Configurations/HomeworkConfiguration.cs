@@ -20,6 +20,8 @@ namespace EStudy.Infrastructure.Data.Configurations
                 d.IsComplate,
                 d.Text
             });
+            builder.HasOne(d => d.Lesson).WithMany(d => d.Homeworks).HasForeignKey(d => d.LessonId).OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(d => d.User).WithMany(d => d.Homeworks).HasForeignKey(d => d.UserId).OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

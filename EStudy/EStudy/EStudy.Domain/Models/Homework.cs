@@ -18,7 +18,7 @@ namespace EStudy.Domain.Models
         public string Mark { get; set; }
         public DateTime? MarkSetAt { get; set; }
         public int UserSetMark { get; set; }
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
         public User User { get; set; }
         public long LessonId { get; set; }
         public Lesson Lesson { get; set; }
