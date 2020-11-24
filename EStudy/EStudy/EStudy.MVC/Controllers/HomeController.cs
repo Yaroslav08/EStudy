@@ -50,10 +50,21 @@ namespace EStudy.MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
+
+            if (model.TypeUser == TypeUser.Student && !await userService.ValidStudentCode(model.Code))
+            {
+                ModelState.AddModelError("", Constants.Constants.StudentCodeNotValid);
+                return View();
+            }
+            if (model.TypeUser == TypeUser.Teacher && !await userService.ValidTeacherCode(model.Code))
+            {
+                ModelState.AddModelError("", Constants.Constants.TeacherCodeNotValid);
+                return View();
+            }
+
             var res = await userService.RegisterUser(model);
             if (res.Successed)
             {
-                ViewBag.Confirm = res.Confirm;
                 return View("RegisterSuccess");
             }
             ModelState.AddModelError("", res.Error);
@@ -61,15 +72,23 @@ namespace EStudy.MVC.Controllers
         }
 
         [HttpGet("confirm")]
-        public async Task<IActionResult> Confirm([FromQuery]ConfirmViewModel model)
+        public IActionResult Confirm(string code)
+        {
+            return View();
+        }
+
+
+        [HttpPost("confirm")]
+        public async Task<IActionResult> Confirm([FromQuery] string code, ConfirmViewModel model)
         {
             model.IP = HttpContext.Connection.RemoteIpAddress.ToString();
             var result = await userService.ConfirmUser(model);
             if (result == Constants.Constants.OK)
                 return LocalRedirect("~/login");
-            ViewBag.Error = result;
-            return View("Error");
+            ModelState.AddModelError("", result);
+            return View();
         }
+
 
         [HttpGet("login")]
         public IActionResult Login(string returnUrl)

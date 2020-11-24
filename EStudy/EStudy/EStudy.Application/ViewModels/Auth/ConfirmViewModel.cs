@@ -6,14 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 namespace EStudy.Application.ViewModels.Auth
 {
-    public class ConfirmViewModel
+    public class ConfirmViewModel : RequestModel
     {
-        [Required, MinLength(20), MaxLength(40)]
+        [MinLength(20), MaxLength(40)]
         public string Code { get; set; }
-        [Required]
+        [Required, MinLength(10), MaxLength(12)]
         public string GroupCode { get; set; }
-        public string IP { get; set; }
-        [Required]
-        public int UserId { get; set; }
     }
 }
