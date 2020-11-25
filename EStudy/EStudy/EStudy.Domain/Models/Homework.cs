@@ -22,5 +22,6 @@ namespace EStudy.Domain.Models
         public User User { get; set; }
         public long LessonId { get; set; }
         public Lesson Lesson { get; set; }
+        public List<HomeworkFile> HomeworkFiles { get; set; }
     }
 }

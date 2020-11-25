@@ -19,6 +19,7 @@ namespace EStudy.Infrastructure.Data
         private ILessonRepository lessonRepository;
         private ILessonFileRepository lessonFileRepository;
         private IHomeworkRepository homeworkRepository;
+        private IHomeworkFileRepository homeworkFileRepository;
 
         public UnitOfWork(
             IUserRepository _userRepository,
@@ -32,7 +33,8 @@ namespace EStudy.Infrastructure.Data
             ICourseRepository _courseRepository,
             ILessonRepository _lessonRepository,
             ILessonFileRepository _lessonFileRepository,
-            IHomeworkRepository _homeworkRepository)
+            IHomeworkRepository _homeworkRepository,
+            IHomeworkFileRepository _homeworkFileRepository)
         {
             userRepository = _userRepository;
             fileRepository = _fileRepository;
@@ -60,5 +62,6 @@ namespace EStudy.Infrastructure.Data
         public ILessonRepository LessonRepository => lessonRepository;
         public ILessonFileRepository LessonFileRepository => lessonFileRepository;
         public IHomeworkRepository HomeworkRepository => homeworkRepository;
+        public IHomeworkFileRepository HomeworkFileRepository => homeworkFileRepository;
     }
 }

@@ -23,6 +23,7 @@ namespace EStudy.Infrastructure.Data.Context
         public DbSet<Lesson> Lessons { get; set; }
         public DbSet<LessonFile> LessonFiles { get; set; }
         public DbSet<Homework> Homeworks { get; set; }
+        public DbSet<HomeworkFile> HomeworkFiles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
