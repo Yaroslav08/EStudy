@@ -61,5 +61,31 @@ namespace EStudy.Application.Services
             if (homework == null) return Constants.Constants.HomeworkNotFound;
             return await unitOfWork.HomeworkRepository.UpdateAsync(model.GetHomeworkMarkToDb(homework));
         }
+
+        public async Task<string> CreateHomeworkFiles(FilesLoadModel model)
+        {
+            if (model.files.Count <= 0)
+                return Constants.Constants.NotFound;
+            var homeworkFiles = new List<HomeworkFile>();
+            model.files.ForEach(d =>
+            {
+                homeworkFiles.Add(new HomeworkFile
+                {
+                    HomeworkId = d.HomeworkId,
+                    LoadByUserId = d.UserId,
+                    Path = d.Path,
+                    OriginalName = d.OriginalName
+                });
+            });
+            return await unitOfWork.HomeworkFileRepository.CreateRangeAsync(homeworkFiles);
+        }
+
+        public async Task<string> RemoveHomeworkFile(string id, int userId)
+        {
+            var hfile = await unitOfWork.HomeworkFileRepository.GetByWhereAsTrackingAsync(d => d.Id == id);
+            if (hfile == null) return Constants.Constants.FileNotFound;
+            if (hfile.LoadByUserId != userId) return Constants.Constants.AccessDenited;
+            return await unitOfWork.HomeworkFileRepository.RemoveAsync(hfile);
+        }
     }
 }

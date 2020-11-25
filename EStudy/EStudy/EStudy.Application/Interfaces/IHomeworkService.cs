@@ -13,6 +13,8 @@ namespace EStudy.Application.Interfaces
         Task<List<HomeworkViewModel>> GetHomeworkByLessonId(long id);
         Task<List<HomeworkViewModel>> GetHomeworkByCourseIdOfStudent(int id, int userId);
         Task<string> CreateHomework(HomeworkCreateModel model);
+        Task<string> CreateHomeworkFiles(FilesLoadModel model);
+        Task<string> RemoveHomeworkFile(string id, int userId);
         Task<string> SetMark(HomeworkMarkCreateModel model);
         Task<string> EditHomework(HomeworkEditModel model);
     }
