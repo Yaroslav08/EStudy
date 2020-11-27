@@ -28,6 +28,8 @@ namespace EStudy.MVC.Controllers
                 ViewBag.Error = Constants.Constants.NotFound;
                 return View("Error");
             }
+            if (Convert.ToInt32(Id) == Convert.ToInt32(User.Identity.Name))
+                return LocalRedirect("~/me");
             return View(await userService.GetUserById(Convert.ToInt32(Id)));
         }
     }
