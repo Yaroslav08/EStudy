@@ -21,6 +21,7 @@ namespace EStudy.Application.Services
 
         public async Task<string> CreateDepartment(DepartmentCreateModel model)
         {
+            var univers = await unitOfWork.UniversityRepository.FirstAsync();
             return await unitOfWork.DepartmentRepository.CreateAsync(new Domain.Models.Department
             {
                 Name = model.Name,
@@ -29,7 +30,7 @@ namespace EStudy.Application.Services
                 Phone = model.Phone,
                 ContactInformation = model.ContactInformation,
                 Description = model.Description,
-                UniversityId = model.UniversityId,
+                UniversityId = univers.Id,
                 CreatedByUserId = model.UserId,
                 CreatedFromIP = model.IP
             });
@@ -50,6 +51,11 @@ namespace EStudy.Application.Services
         public async Task<List<DepartmentViewModel>> GetDepartments()
         {
             return mapper.Map<List<DepartmentViewModel>>(await unitOfWork.DepartmentRepository.GetAllAsync());
+        }
+
+        public async Task<DepartmentEditModel> GetDepartmentForEdit(int id)
+        {
+            return mapper.Map<DepartmentEditModel>(await unitOfWork.DepartmentRepository.GetByWhereAsync(d => d.Id == id));
         }
     }
 }

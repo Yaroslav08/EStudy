@@ -10,6 +10,7 @@ namespace EStudy.Application.Interfaces
     {
         Task<string> CreateDepartment(DepartmentCreateModel model);
         Task<string> EditDepartment(DepartmentEditModel model);
+        Task<DepartmentEditModel> GetDepartmentForEdit(int id);
         Task<List<DepartmentViewModel>> GetDepartments();
         Task<DepartmentViewModel> GetDepartmentById(int id);
     }

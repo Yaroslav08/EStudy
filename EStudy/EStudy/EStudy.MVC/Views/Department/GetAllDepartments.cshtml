@@ -1,0 +1,61 @@
+﻿@model IEnumerable<EStudy.Application.ViewModels.Department.DepartmentViewModel>
+
+@{
+    ViewData["Title"] = "GetAllDepartments";
+}
+
+<h1>GetAllDepartments</h1>
+@if (Model == null || Model.Count() == 0)
+{
+    <p class="text-center">Віділення ще немає</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Shifr)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Phone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ContactInformation)
+                </th>
+                @if (User.IsInRole("Admin"))
+                {
+                    <th></th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Shifr)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ContactInformation)
+                    </td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <td>
+                            @Html.ActionLink("Редагувати", "Edit", new { id = item.Id })
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+}
