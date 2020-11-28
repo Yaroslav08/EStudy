@@ -10,6 +10,7 @@ namespace EStudy.Application.Interfaces
     {
         Task<string> CreateSpecialty(SpecialtyCreateModel model);
         Task<string> EditSpecialty(SpecialtyEditModel model);
+        Task<SpecialtyEditModel> GetForEdit(int id);
         Task<SpecialtyViewModel> GetSpecialtyById(int id);
         Task<List<SpecialtyViewModel>> GetAllSpecialties();
         Task<List<SpecialtyViewModel>> GetSpecialtiesByDepartmentId(int id);

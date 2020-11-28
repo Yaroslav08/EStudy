@@ -48,6 +48,7 @@ namespace EStudy.Application
                 .ForMember(d => d.Department, s => s.MapFrom(d => d.Department));
             CreateMap<SpecialtyCreateModel, Specialty>();
             CreateMap<SpecialtyEditModel, Specialty>();
+            CreateMap<Specialty, SpecialtyEditModel>();
 
 
             CreateMap<Group, GroupViewModel>()

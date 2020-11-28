@@ -57,5 +57,10 @@ namespace EStudy.Application.Services
         {
             return mapper.Map<List<SpecialtyViewModel>>(await unitOfWork.SpecialtyRepository.GetListByWhereAsync(d => d.DepartmentId == id));
         }
+
+        public async Task<SpecialtyEditModel> GetForEdit(int id)
+        {
+            return mapper.Map<SpecialtyEditModel>(await unitOfWork.SpecialtyRepository.GetByWhereAsync(d => d.Id == id));
+        }
     }
 }
