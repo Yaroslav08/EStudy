@@ -30,6 +30,16 @@ namespace EStudy.MVC.Controllers
         }
 
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetDepartment(int id)
+        {
+            var depart = await departmentService.GetDepartmentById(id);
+            if (depart != null)
+                return View(depart);
+            ViewBag.Error = Constants.Constants.DepartmentNotFound;
+            return View("Error");
+        }
+
         [HttpGet("create")]
         public IActionResult Create()
         {
