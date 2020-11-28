@@ -1,0 +1,77 @@
+﻿@model EStudy.Application.ViewModels.Group.GroupCreateModel
+
+@{
+    ViewData["Title"] = "- Створення групи";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateGroup">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Course" class="control-label"></label>
+                <input asp-for="Course" class="form-control" />
+                <span asp-validation-for="Course" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartStudy" class="control-label"></label>
+                <input asp-for="StartStudy" class="form-control" />
+                <span asp-validation-for="StartStudy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndStudy" class="control-label"></label>
+                <input asp-for="EndStudy" class="form-control" />
+                <span asp-validation-for="EndStudy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IndexItemToChanged" class="control-label"></label>
+                <input asp-for="IndexItemToChanged" class="form-control" />
+                <span asp-validation-for="IndexItemToChanged" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsReleased" /> @Html.DisplayNameFor(model => model.IsReleased)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="CountStudents" class="control-label"></label>
+                <input asp-for="CountStudents" class="form-control" />
+                <span asp-validation-for="CountStudents" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AdditionalInfo" class="control-label"></label>
+                <input asp-for="AdditionalInfo" class="form-control" />
+                <span asp-validation-for="AdditionalInfo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsShowEmail" /> @Html.DisplayNameFor(model => model.IsShowEmail)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="SpecialtyId" class="control-label"></label>
+                <select asp-for="SpecialtyId" class="form-control"
+                        asp-items="@(new SelectList(ViewBag.Spec, "Id", "Name"))"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Створити" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-action="GetAllGroups">Повернутися до списку</a>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

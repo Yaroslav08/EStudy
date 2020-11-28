@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EStudy.Application.Interfaces;
 using EStudy.Application.ViewModels.Group;
+using EStudy.Application.ViewModels.Specialty;
 using EStudy.Domain.Models;
 using EStudy.Domain.Models.Enums;
 using EStudy.Infrastructure.Data;
@@ -117,6 +118,17 @@ namespace EStudy.Application.Services
         {
             return await unitOfWork.GroupMemberRepository
                 .CountAsync(d => d.GroupId == groupId && d.MemberRole != GroupMemberRole.ClassTeacher);
+        }
+
+        public async Task<List<GroupViewModel>> GetAllGroups()
+        {
+            return mapper.Map<List<GroupViewModel>>(await unitOfWork.GroupRepository.GetAllAsync())
+                .OrderByDescending(d => d.CreatedAt).ToList();
+        }
+
+        public async Task<List<SpecialtyViewModel>> GetAllSpecialties()
+        {
+            return mapper.Map<List<SpecialtyViewModel>>(await unitOfWork.SpecialtyRepository.GetAllShortSpecialtyAsync());
         }
     }
 }

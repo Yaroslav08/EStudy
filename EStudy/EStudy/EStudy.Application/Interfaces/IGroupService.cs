@@ -1,4 +1,5 @@
 ﻿using EStudy.Application.ViewModels.Group;
+using EStudy.Application.ViewModels.Specialty;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,5 +21,8 @@ namespace EStudy.Application.Interfaces
         Task<string> AddUserToGroup(GroupMemberModel model);
         Task<string> EditGroupMember(GroupMemberModel model);
         Task<int> GetCountStudents(int groupId);
+
+        Task<List<GroupViewModel>> GetAllGroups();
+        Task<List<SpecialtyViewModel>> GetAllSpecialties();
     }
 }
