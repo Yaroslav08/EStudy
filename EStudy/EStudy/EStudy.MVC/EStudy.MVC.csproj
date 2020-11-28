@@ -11,9 +11,6 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\EStudy.Application\EStudy.Application.csproj" />
     <ProjectReference Include="..\EStudy.Constants\EStudy.Constants.csproj" />
     <ProjectReference Include="..\EStudy.Infrastructure.IoC\EStudy.Infrastructure.IoC.csproj" />
