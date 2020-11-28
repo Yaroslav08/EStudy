@@ -20,10 +20,10 @@ namespace EStudy.MVC.Controllers
             userService = _userService;
         }
 
-        [HttpGet("{Id?}")]
-        public async Task<IActionResult> GetUser(int? Id)
+        [HttpGet("{Id}")]
+        public async Task<IActionResult> GetUser(int Id)
         {
-            if (Id == null)
+            if (Id <= 0)
             {
                 ViewBag.Error = Constants.Constants.NotFound;
                 return View("Error");

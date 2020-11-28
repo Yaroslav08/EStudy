@@ -53,6 +53,7 @@ namespace EStudy.MVC.Controllers
         }
 
         [HttpPost("create")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateSpecialty(SpecialtyCreateModel model)
         {
             model.IP = HttpContext.Connection.RemoteIpAddress.ToString();
@@ -79,6 +80,7 @@ namespace EStudy.MVC.Controllers
         }
 
         [HttpPost("edit")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditSpecialty(SpecialtyEditModel model)
         {
             model.IP = HttpContext.Connection.RemoteIpAddress.ToString();

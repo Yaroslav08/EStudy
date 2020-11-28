@@ -41,6 +41,7 @@ namespace EStudy.MVC.Controllers
         }
 
         [HttpPost("create")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateGroup(GroupCreateModel model)
         {
             model.IP = HttpContext.Connection.RemoteIpAddress.ToString();
