@@ -122,6 +122,21 @@ namespace EStudy.MVC.Controllers
 
 
 
+        [HttpGet("search")]
+        public IActionResult Search(string query)
+        {
+            var req = HttpContext.Request.Headers["Referer"].ToString();
+            if (req.Contains("/department/"))
+                return LocalRedirect($"~/department/search?q={query}");
+            if (req.Contains("/specialty/"))
+                return LocalRedirect($"~/specialty/search?q={query}");
+            if (req.Contains("/group/"))
+                return LocalRedirect($"~/group/search?q={query}");
+            else
+                return LocalRedirect($"~/");
+        }
+
+
 
         private async Task Authenticate(Domain.Models.User user)
         {

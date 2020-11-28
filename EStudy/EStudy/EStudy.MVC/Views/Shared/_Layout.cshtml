@@ -33,8 +33,8 @@
                     <a class="nav-link" href="~/group/all">Групи</a>
                 </li>
             </ul>
-            <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="Пошук" aria-label="Search" />
+            <form class="form-inline" asp-action="Search" asp-controller="Home" method="get">
+                <input class="form-control mr-sm-2" type="search" name="query" placeholder="Пошук" aria-label="Search" />
                 <button class="btn btn-outline-light my-2 my-sm-0">Знайти</button>
             </form>
             <ul class="navbar-nav">
