@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>E-Study - @ViewData["Title"] </title>
+    <title>E-Study @ViewData["Title"] </title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
@@ -29,9 +29,26 @@
                 </li>
             </ul>
             <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="Пошук" aria-label="Search"/>
+                <input class="form-control mr-sm-2" type="search" placeholder="Пошук" aria-label="Search" />
                 <button class="btn btn-outline-light my-2 my-sm-0">Знайти</button>
             </form>
+            <ul class="navbar-nav">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item">
+                        @Html.ActionLink(User.Claims.FirstOrDefault(d=>d.Type=="Fullname").Value, "GetMe", "Home", null, new { @class= "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Вийти", "Logout", "Home", null, new { @class = "nav-link" })
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        @Html.ActionLink("Увійти", "Login", "Home", null, new { @class = "nav-link" })
+                    </li>
+                }
+            </ul>
         </div>
     </nav>
     <div class="container">

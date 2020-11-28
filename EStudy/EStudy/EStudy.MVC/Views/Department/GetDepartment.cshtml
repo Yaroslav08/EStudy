@@ -1,10 +1,10 @@
 ﻿@model EStudy.Application.ViewModels.Department.DepartmentViewModel
 
 @{
-    ViewData["Title"] = "GetDepartment";
+    ViewData["Title"] = $"- Інститут {Model.Name}";
 }
 
-<h1>GetDepartment</h1>
+<h1>@Model.Name</h1>
 
 <div>
     <hr />
@@ -20,12 +20,6 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.CreatedAt)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Shifr)
