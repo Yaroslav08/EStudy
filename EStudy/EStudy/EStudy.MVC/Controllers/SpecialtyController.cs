@@ -31,6 +31,17 @@ namespace EStudy.MVC.Controllers
         }
 
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetSpecialty(int id)
+        {
+            var spec = await specialtyService.GetSpecialtyById(id);
+            if (spec != null)
+                return View(spec);
+            ViewBag.Error = Constants.Constants.SpecialtyNotFound;
+            return View("Error");
+        }
+
+
         [HttpGet("create")]
         public IActionResult Create()
         {

@@ -40,6 +40,7 @@ namespace EStudy.MVC.Controllers
             return View("Error");
         }
 
+
         [HttpGet("create")]
         public IActionResult Create()
         {
