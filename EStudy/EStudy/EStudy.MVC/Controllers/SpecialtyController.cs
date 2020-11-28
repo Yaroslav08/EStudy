@@ -31,6 +31,14 @@ namespace EStudy.MVC.Controllers
         }
 
 
+        [HttpGet("search")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Search(string q)
+        {
+            return View("GetAllSpecialties", await specialtyService.Search(q));
+        }
+
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetSpecialty(int id)
         {

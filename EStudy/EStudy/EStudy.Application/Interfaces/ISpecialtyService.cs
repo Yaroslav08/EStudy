@@ -16,5 +16,6 @@ namespace EStudy.Application.Interfaces
         Task<List<SpecialtyViewModel>> GetAllSpecialties();
         Task<List<SpecialtyViewModel>> GetSpecialtiesByDepartmentId(int id);
         Task<List<DepartmentViewModel>> GetAllDepartments();
+        Task<List<SpecialtyViewModel>> Search(string q);
     }
 }

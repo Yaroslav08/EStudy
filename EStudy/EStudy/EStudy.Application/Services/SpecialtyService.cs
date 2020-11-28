@@ -68,5 +68,10 @@ namespace EStudy.Application.Services
         {
             return mapper.Map<List<DepartmentViewModel>>(await unitOfWork.DepartmentRepository.GetAllShortDepartmentsAsync());
         }
+
+        public async Task<List<SpecialtyViewModel>> Search(string q)
+        {
+            return mapper.Map<List<SpecialtyViewModel>>(await unitOfWork.SpecialtyRepository.SearchAsync(q));
+        }
     }
 }

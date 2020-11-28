@@ -18,5 +18,13 @@ namespace EStudy.Infrastructure.Data.Repositories
                 Name = d.Name
             }).ToListAsync();
         }
+
+        public async Task<List<Department>> SearchAsync(string q)
+        {
+            return await db.Departments
+                .AsNoTracking()
+                .Where(d => d.Name.Contains(q) || d.Phone.Contains(q))
+                .ToListAsync();
+        }
     }
 }

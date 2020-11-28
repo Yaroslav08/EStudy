@@ -123,9 +123,11 @@ namespace EStudy.MVC.Controllers
 
 
         [HttpGet("search")]
-        public IActionResult Search(string query)
+        public IActionResult Search([FromQuery]string query)
         {
             var req = HttpContext.Request.Headers["Referer"].ToString();
+            if (query.Length <= 2)
+                return Redirect(req);
             if (req.Contains("/department/"))
                 return LocalRedirect($"~/department/search?q={query}");
             if (req.Contains("/specialty/"))

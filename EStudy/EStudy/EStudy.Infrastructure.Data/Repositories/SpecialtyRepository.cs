@@ -19,5 +19,13 @@ namespace EStudy.Infrastructure.Data.Repositories
                     Name = d.Name
                 }).ToListAsync();
         }
+
+        public async Task<List<Specialty>> SearchAsync(string q)
+        {
+            return await db.Specialties
+                .AsNoTracking()
+                .Where(d => d.Name.Contains(q) || d.Shifr.Contains(q))
+                .ToListAsync();
+        }
     }
 }

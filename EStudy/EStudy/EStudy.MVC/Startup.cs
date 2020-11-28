@@ -1,5 +1,4 @@
 using EStudy.Infrastructure.IoC;
-using EStudy.MVC.Middlewares;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -47,7 +46,6 @@ namespace EStudy.MVC
 
                 app.UseHsts();
             }
-            app.UseMiddleware<SearchMiddleware>();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

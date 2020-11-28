@@ -130,5 +130,10 @@ namespace EStudy.Application.Services
         {
             return mapper.Map<List<SpecialtyViewModel>>(await unitOfWork.SpecialtyRepository.GetAllShortSpecialtyAsync());
         }
+
+        public async Task<List<GroupViewModel>> Search(string q, int count, int skip, bool? IsReleased)
+        {
+            return mapper.Map<List<GroupViewModel>>(await unitOfWork.GroupRepository.SearchGroupsAsync(q, count, skip, IsReleased));
+        }
     }
 }

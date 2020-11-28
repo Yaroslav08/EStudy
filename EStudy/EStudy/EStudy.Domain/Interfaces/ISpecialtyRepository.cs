@@ -9,5 +9,6 @@ namespace EStudy.Domain.Interfaces
     public interface ISpecialtyRepository : IRepository<Specialty>
     {
         Task<List<Specialty>> GetAllShortSpecialtyAsync();
+        Task<List<Specialty>> SearchAsync(string q);
     }
 }

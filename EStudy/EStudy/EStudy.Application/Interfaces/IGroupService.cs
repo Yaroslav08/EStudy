@@ -24,5 +24,6 @@ namespace EStudy.Application.Interfaces
 
         Task<List<GroupViewModel>> GetAllGroups();
         Task<List<SpecialtyViewModel>> GetAllSpecialties();
+        Task<List<GroupViewModel>> Search(string q, int count, int skip, bool? IsReleased);
     }
 }

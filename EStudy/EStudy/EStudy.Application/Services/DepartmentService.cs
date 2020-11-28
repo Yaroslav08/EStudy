@@ -57,5 +57,10 @@ namespace EStudy.Application.Services
         {
             return mapper.Map<DepartmentEditModel>(await unitOfWork.DepartmentRepository.GetByWhereAsync(d => d.Id == id));
         }
+
+        public async Task<List<DepartmentViewModel>> Search(string q)
+        {
+            return mapper.Map<List<DepartmentViewModel>>(await unitOfWork.DepartmentRepository.SearchAsync(q));
+        }
     }
 }

@@ -13,5 +13,6 @@ namespace EStudy.Application.Interfaces
         Task<DepartmentEditModel> GetDepartmentForEdit(int id);
         Task<List<DepartmentViewModel>> GetDepartments();
         Task<DepartmentViewModel> GetDepartmentById(int id);
+        Task<List<DepartmentViewModel>> Search(string q);
     }
 }

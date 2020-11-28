@@ -30,6 +30,14 @@ namespace EStudy.MVC.Controllers
             return View(await groupService.GetAllGroups());
         }
 
+        [HttpGet("search")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Search(string q, bool? IsReleased, int count = 50, int skip = 2)
+        {
+            return View("GetAllGroups", await groupService.Search(q, count, skip, IsReleased));
+        }
+
+
         [HttpGet("create")]
         public async Task<IActionResult> CreateGroup()
         {
