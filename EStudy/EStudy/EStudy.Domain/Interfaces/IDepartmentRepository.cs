@@ -8,6 +8,6 @@ namespace EStudy.Domain.Interfaces
 {
     public interface IDepartmentRepository : IRepository<Department>
     {
-
+        Task<List<Department>> GetAllShortDepartmentsAsync();
     }
 }

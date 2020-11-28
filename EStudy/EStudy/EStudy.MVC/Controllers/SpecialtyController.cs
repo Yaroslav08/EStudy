@@ -43,8 +43,12 @@ namespace EStudy.MVC.Controllers
 
 
         [HttpGet("create")]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            var req = await specialtyService.GetAllDepartments();
+            if (req == null || req.Count == 0)
+                return LocalRedirect("~/department/create");
+            ViewBag.Departments = req;
             return View();
         }
 
@@ -70,6 +74,7 @@ namespace EStudy.MVC.Controllers
                 ViewBag.Error = Constants.Constants.SpecialtyNotFound;
                 return View("Error");
             }
+            ViewBag.Departments = await specialtyService.GetAllDepartments();
             return View(editSpec);
         }
 

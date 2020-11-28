@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EStudy.Application.Interfaces;
+using EStudy.Application.ViewModels.Department;
 using EStudy.Application.ViewModels.Specialty;
 using EStudy.Infrastructure.Data;
 using System;
@@ -61,6 +62,11 @@ namespace EStudy.Application.Services
         public async Task<SpecialtyEditModel> GetForEdit(int id)
         {
             return mapper.Map<SpecialtyEditModel>(await unitOfWork.SpecialtyRepository.GetByWhereAsync(d => d.Id == id));
+        }
+
+        public async Task<List<DepartmentViewModel>> GetAllDepartments()
+        {
+            return mapper.Map<List<DepartmentViewModel>>(await unitOfWork.DepartmentRepository.GetAllShortDepartmentsAsync());
         }
     }
 }

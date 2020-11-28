@@ -1,4 +1,5 @@
-﻿using EStudy.Application.ViewModels.Specialty;
+﻿using EStudy.Application.ViewModels.Department;
+using EStudy.Application.ViewModels.Specialty;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,6 @@ namespace EStudy.Application.Interfaces
         Task<SpecialtyViewModel> GetSpecialtyById(int id);
         Task<List<SpecialtyViewModel>> GetAllSpecialties();
         Task<List<SpecialtyViewModel>> GetSpecialtiesByDepartmentId(int id);
+        Task<List<DepartmentViewModel>> GetAllDepartments();
     }
 }
