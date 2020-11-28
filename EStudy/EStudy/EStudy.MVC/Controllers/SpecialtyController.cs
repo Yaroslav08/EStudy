@@ -43,7 +43,7 @@ namespace EStudy.MVC.Controllers
 
 
         [HttpGet("create")]
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> CreateSpecialty()
         {
             var req = await specialtyService.GetAllDepartments();
             if (req == null || req.Count == 0)
@@ -53,7 +53,7 @@ namespace EStudy.MVC.Controllers
         }
 
         [HttpPost("create")]
-        public async Task<IActionResult> Create(SpecialtyCreateModel model)
+        public async Task<IActionResult> CreateSpecialty(SpecialtyCreateModel model)
         {
             model.IP = HttpContext.Connection.RemoteIpAddress.ToString();
             model.UserId = Convert.ToInt32(User.Identity.Name);
@@ -66,7 +66,7 @@ namespace EStudy.MVC.Controllers
 
 
         [HttpGet("edit")]
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> EditSpecialty(int id)
         {
             var editSpec = await specialtyService.GetForEdit(id);
             if (editSpec == null)
@@ -79,7 +79,7 @@ namespace EStudy.MVC.Controllers
         }
 
         [HttpPost("edit")]
-        public async Task<IActionResult> Edit(SpecialtyEditModel model)
+        public async Task<IActionResult> EditSpecialty(SpecialtyEditModel model)
         {
             model.IP = HttpContext.Connection.RemoteIpAddress.ToString();
             model.UserId = Convert.ToInt32(User.Identity.Name);

@@ -9,14 +9,14 @@
     <h2 class="text-center">Спеціальностей ще немає</h2>
     @if (User.IsInRole("Admin"))
     {
-        <a asp-action="Create" asp-controller="Specialty">Створити спеціальність</a>
+        <a asp-action="CreateSpecialty" asp-controller="Specialty">Створити спеціальність</a>
     }
 }
 else
 {
     @if (User.IsInRole("Admin"))
     {
-        <a asp-action="Create" asp-controller="Specialty">Створити спеціальність</a>
+        <a asp-action="CreateSpecialty" asp-controller="Specialty">Створити спеціальність</a>
     }
     <table class="table">
         <thead>
