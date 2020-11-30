@@ -15,7 +15,4 @@
     <ProjectReference Include="..\EStudy.Constants\EStudy.Constants.csproj" />
     <ProjectReference Include="..\EStudy.Infrastructure.IoC\EStudy.Infrastructure.IoC.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Middlewares\" />
-  </ItemGroup>
 </Project>
