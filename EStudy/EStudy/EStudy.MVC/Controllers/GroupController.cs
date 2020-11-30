@@ -60,5 +60,24 @@ namespace EStudy.MVC.Controllers
             ModelState.AddModelError("", result);
             return View(model);
         }
+
+        [HttpGet("edit")]
+        public async Task<IActionResult> EditGroup(int id)
+        {
+            var group = await groupService.GetForEdit(id);
+            if (group != null)
+                return View(group);
+            ViewBag.Error = Constants.Constants.GroupNotFound;
+            return View("Error");
+        }
+
+        [HttpPost("edit")]
+        public async Task<IActionResult> EditGroup(GroupEditModel model)
+        {
+            model.IP = HttpContext.Connection.RemoteIpAddress.ToString();
+            model.UserId = Convert.ToInt32(User.Identity.Name);
+            var result = await groupService.EditGroup(model);
+            return Ok();
+        }
     }
 }

@@ -56,6 +56,7 @@ namespace EStudy.Application
                 .ForMember(d => d.Emails, s => s.MapFrom(d => d.Emails));
             CreateMap<GroupCreateModel, Group>();
             CreateMap<GroupEditModel, Group>();
+            CreateMap<Group, GroupEditModel>();
 
 
             CreateMap<Email, EmailViewModel>()
