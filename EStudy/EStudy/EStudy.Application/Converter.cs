@@ -83,7 +83,6 @@ namespace EStudy.Application
             group.AdditionalInfo = model.AdditionalInfo;
             group.Email = model.Email;
             group.IsShowEmail = model.IsShowEmail;
-            group.SpecialtyId = model.SpecialtyId;
             group.IsEdit = true;
             group.DateLastEdit = DateTime.Now;
             group.EditedByUserId = model.UserId;

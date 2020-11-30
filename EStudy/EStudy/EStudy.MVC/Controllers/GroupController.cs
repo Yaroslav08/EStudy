@@ -61,6 +61,7 @@ namespace EStudy.MVC.Controllers
             return View(model);
         }
 
+
         [HttpGet("edit")]
         public async Task<IActionResult> EditGroup(int id)
         {
@@ -77,7 +78,10 @@ namespace EStudy.MVC.Controllers
             model.IP = HttpContext.Connection.RemoteIpAddress.ToString();
             model.UserId = Convert.ToInt32(User.Identity.Name);
             var result = await groupService.EditGroup(model);
-            return Ok();
+            if (result == Constants.Constants.OK)
+                return LocalRedirect("~/group/all");
+            ModelState.AddModelError("", result);
+            return View(model);
         }
     }
 }

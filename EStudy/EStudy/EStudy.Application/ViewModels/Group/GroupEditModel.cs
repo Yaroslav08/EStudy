@@ -27,6 +27,6 @@ namespace EStudy.Application.ViewModels.Group
         public string Email { get; set; }
         [Required]
         public bool IsShowEmail { get; set; }
-        public int SpecialtyId { get; set; }
+        public int? SpecialtyId { get; set; }
     }
 }
