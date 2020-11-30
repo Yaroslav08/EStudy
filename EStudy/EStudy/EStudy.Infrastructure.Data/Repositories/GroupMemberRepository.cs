@@ -10,6 +10,15 @@ namespace EStudy.Infrastructure.Data.Repositories
 {
     public class GroupMemberRepository : Repository<GroupMember>, IGroupMemberRepository
     {
+        public async Task<List<GroupMember>> GetGroupMembersAsync(int id)
+        {
+            return await db.GroupMembers
+                .AsNoTracking()
+                .Where(d => d.GroupId == id)
+                .Include(d => d.User)
+                .ToListAsync();
+        }
+
         public async Task<bool> IsClassTeacherAsync(int groupId, int userId)
         {
             var member = await db.GroupMembers.AsNoTracking().FirstOrDefaultAsync(d => d.GroupId == groupId && d.UserId == userId);

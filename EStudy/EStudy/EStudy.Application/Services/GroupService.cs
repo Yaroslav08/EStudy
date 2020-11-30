@@ -140,5 +140,10 @@ namespace EStudy.Application.Services
         {
             return mapper.Map<GroupEditModel>(await unitOfWork.GroupRepository.GetByWhereAsync(d => d.Id == id));
         }
+
+        public async Task<List<GroupMemberViewModel>> GetGroupMembers(int id)
+        {
+            return mapper.Map<List<GroupMemberViewModel>>(await unitOfWork.GroupMemberRepository.GetGroupMembersAsync(id));
+        }
     }
 }

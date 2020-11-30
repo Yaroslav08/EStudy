@@ -17,5 +17,6 @@ namespace EStudy.Application.Interfaces
         Task<int> GetCountUsers();
         Task<bool> ValidTeacherCode(string code);
         Task<bool> ValidStudentCode(string code);
+        Task<List<UserShortViewModel>> GetAllStudents();
     }
 }

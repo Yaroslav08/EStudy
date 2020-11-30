@@ -12,5 +12,6 @@ namespace EStudy.Domain.Interfaces
         Task<bool> IsHeadmanAsync(int groupId, int userId);
         Task<bool> IsStudentAsync(int groupId, int userId);
         Task<bool> IsMemberGroupAsync(int groupId, int userId);
+        Task<List<GroupMember>> GetGroupMembersAsync(int id);
     }
 }

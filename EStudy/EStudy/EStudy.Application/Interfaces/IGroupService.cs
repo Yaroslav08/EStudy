@@ -26,5 +26,6 @@ namespace EStudy.Application.Interfaces
         Task<List<SpecialtyViewModel>> GetAllSpecialties();
         Task<GroupEditModel> GetForEdit(int id);
         Task<List<GroupViewModel>> Search(string q, int count, int skip, bool? IsReleased);
+        Task<List<GroupMemberViewModel>> GetGroupMembers(int id);
     }
 }

@@ -136,5 +136,10 @@ namespace EStudy.Application.Services
         {
             return await unitOfWork.UniversityRepository.ValidStudentCodeConnectAsync(code);
         }
+
+        public async Task<List<UserShortViewModel>> GetAllStudents()
+        {
+            return mapper.Map<List<UserShortViewModel>>(await unitOfWork.UserRepository.GetListByWhereAsync(d => d.Role == RoleType.Student));
+        }
     }
 }
