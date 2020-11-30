@@ -1,7 +1,7 @@
 ﻿@model EStudy.Application.ViewModels.Group.GroupEditModel
 
 @{
-    ViewData["Title"] = "EditGroup";
+    ViewData["Title"] = "- Редагування групи";
 }
 
 <h1>EditGroup</h1>
@@ -11,9 +11,7 @@
         <form asp-action="EditGroup">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
+                <input asp-for="Id" class="form-control" type="hidden" />
             </div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
@@ -61,14 +59,14 @@
                 </label>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Зберегти" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Повернутися до спсику</a>
 </div>
 
 @section Scripts {

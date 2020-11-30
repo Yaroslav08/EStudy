@@ -34,7 +34,7 @@ namespace EStudy.Application.Services
 
         public async Task<string> EditGroup(GroupEditModel model)
         {
-            var group = await unitOfWork.GroupRepository.GetByWhereAsync(d => d.Id == model.Id);
+            var group = await unitOfWork.GroupRepository.GetByWhereAsTrackingAsync(d => d.Id == model.Id);
             if (group == null) return Constants.Constants.GroupNotFound;
             return await unitOfWork.GroupRepository.UpdateAsync(model.GetGroupToDb(group));
         }

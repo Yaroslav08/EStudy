@@ -14,9 +14,9 @@ namespace EStudy.Application.ViewModels.Group
         public string Name { get; set; }
         [Required]
         public byte Course { get; set; }
-        [Required]
+        [Required, DataType(DataType.Date)]
         public DateTime StartStudy { get; set; }
-        [Required]
+        [Required, DataType(DataType.Date)]
         public DateTime EndStudy { get; set; }
         public byte? IndexItemToChanged { get; set; }
         [Required]
