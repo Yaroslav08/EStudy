@@ -79,6 +79,9 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+    @if (User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Редагувати", "Edit", new { /* id = Model.PrimaryKey */ })
+    }
+    <a asp-action="GetAllGroups">Повернутися до спсику</a>
 </div>
