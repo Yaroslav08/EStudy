@@ -24,5 +24,20 @@ namespace EStudy.Infrastructure.Data.Repositories
                     End = d.End
                 }).ToListAsync();
         }
+
+        public async Task<List<Course>> GetCoursesByTeacherId(int id)
+        {
+            return await db.Courses.AsNoTracking()
+                .Where(d => d.TeacherId == id)
+                .Select(d => new Course
+                {
+                    Id = d.Id,
+                    Name = d.Name,
+                    ShortName = d.ShortName,
+                    Start = d.Start,
+                    End = d.End
+                })
+                .ToListAsync();
+        }
     }
 }

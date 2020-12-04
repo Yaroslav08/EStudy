@@ -9,5 +9,6 @@ namespace EStudy.Domain.Interfaces
     public interface ICourseRepository : IRepository<Course>
     {
         Task<List<Course>> GetCoursesByGroupIdAsync(int id);
+        Task<List<Course>> GetCoursesByTeacherId(int id);
     }
 }
