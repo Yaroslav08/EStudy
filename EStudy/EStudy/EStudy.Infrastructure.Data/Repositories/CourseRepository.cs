@@ -25,7 +25,7 @@ namespace EStudy.Infrastructure.Data.Repositories
                 }).ToListAsync();
         }
 
-        public async Task<List<Course>> GetCoursesByTeacherId(int id)
+        public async Task<List<Course>> GetCoursesByTeacherIdAsync(int id)
         {
             return await db.Courses.AsNoTracking()
                 .Where(d => d.TeacherId == id)
