@@ -44,5 +44,8 @@ namespace EStudy.Application.Services
             if (course == null) return Constants.Constants.CourseNotFound;
             return await unitOfWork.CourseRepository.UpdateAsync(model.GetCourseToDb(course));
         }
+
+        public async Task<List<CourseViewModel>> GetCoursesByTeacherId(int teacherId) =>
+            mapper.Map<List<CourseViewModel>>(await unitOfWork.CourseRepository.GetCoursesByTeacherIdAsync(teacherId));
     }
 }
