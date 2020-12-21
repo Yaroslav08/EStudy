@@ -117,7 +117,7 @@ namespace EStudy.Application.Services
             return new LoginResult { User = user, Successed = true };
         }
 
-        public async Task<int> GetCountUsers()
+        public async Task<int> GetAllUsersCount()
         {
             return await unitOfWork.UserRepository.CountAsync();
         }
