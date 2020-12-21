@@ -110,10 +110,10 @@ namespace EStudy.Application.Services
             var user = await unitOfWork.UserRepository.GetByWhereAsync(d => d.Login == model.Login);
             if (user == null)
                 return new LoginResult { Error = Constants.Constants.UserNotExist, Successed = false };
-            if (!PasswordManager.VerifyPasswordHash(model.Password, user.PasswordHash))
-                return new LoginResult { Error = Constants.Constants.PasswordNotComapre, Successed = false };
             if (!user.IsConfirmed)
                 return new LoginResult { Error = Constants.Constants.NotConfirmed, Successed = false };
+            if (!PasswordManager.VerifyPasswordHash(model.Password, user.PasswordHash))
+                return new LoginResult { Error = Constants.Constants.PasswordNotComapre, Successed = false };
             return new LoginResult { User = user, Successed = true };
         }
 
