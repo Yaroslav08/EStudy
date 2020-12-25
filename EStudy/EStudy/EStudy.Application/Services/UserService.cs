@@ -141,5 +141,10 @@ namespace EStudy.Application.Services
         {
             return mapper.Map<List<UserShortViewModel>>(await unitOfWork.UserRepository.GetListByWhereAsync(d => d.Role == RoleType.Student));
         }
+
+        public async Task<List<UserShortViewModel>> GetAllTeachers()
+        {
+            return mapper.Map<List<UserShortViewModel>>(await unitOfWork.UserRepository.GetListByWhereAsync(d => d.Role == RoleType.Teacher));
+        }
     }
 }
