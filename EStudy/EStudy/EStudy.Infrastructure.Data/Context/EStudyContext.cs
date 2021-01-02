@@ -9,7 +9,8 @@ namespace EStudy.Infrastructure.Data.Context
 {
     public class EStudyContext : DbContext
     {
-        private const string LocalConn = "Server=(localdb)\\MSSQLLocalDB;Database=EStudyDb;Trusted_Connection=True;";
+        private const string WinLocalSqlConn = "Server=(localdb)\\MSSQLLocalDB;Database=EStudyDb;Trusted_Connection=True;";
+        private string SqliteConn = $"EStudy.db";
 
         public DbSet<User> Users { get; set; }
         public DbSet<File> Files { get; set; }
@@ -43,7 +44,8 @@ namespace EStudy.Infrastructure.Data.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(LocalConn);
+            optionsBuilder.UseSqlite(SqliteConn);
+            //optionsBuilder.UseSqlServer(WinLocalSqlConn);
         }
     }
 }
