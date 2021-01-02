@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EStudy.Application;
 
 namespace EStudy.MVC.Controllers
 {
@@ -14,14 +15,12 @@ namespace EStudy.MVC.Controllers
     [Authorize(Roles = "Admin")]
     public class GroupController : Controller
     {
-        private readonly IGroupService groupService;
-        private readonly IUserService userService;
+        private readonly IDataManager dataManager;
         private readonly ILogger<GroupController> logger;
-        public GroupController(ILogger<GroupController> _logger, IGroupService _groupService, IUserService _userService)
+        public GroupController(ILogger<GroupController> _logger, IDataManager dataManager)
         {
             logger = _logger;
-            groupService = _groupService;
-            userService = _userService;
+            this.dataManager = dataManager;
         }
 
 
@@ -29,21 +28,21 @@ namespace EStudy.MVC.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> GetAllGroups()
         {
-            return View(await groupService.GetAllGroups());
+            return View(await dataManager.GroupService.GetAllGroups());
         }
 
         [HttpGet("search")]
         [AllowAnonymous]
         public async Task<IActionResult> Search(string q, bool? IsReleased, int count = 50, int skip = 2)
         {
-            return View("GetAllGroups", await groupService.Search(q, count, skip, IsReleased));
+            return View("GetAllGroups", await dataManager.GroupService.Search(q, count, skip, IsReleased));
         }
 
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetGroup(int id)
         {
-            var group = await groupService.GetGroupById(id);
+            var group = await dataManager.GroupService.GetGroupById(id);
             return View(group);
         }
 
@@ -51,14 +50,14 @@ namespace EStudy.MVC.Controllers
         public async Task<IActionResult> GetGroupMembers(int id)
         {
             //var members = await groupService.GetGroupMembers(id);
-            return View(await groupService.GetGroupMembers(id));
+            return View(await dataManager.GroupService.GetGroupMembers(id));
         }
 
 
         [HttpGet("create")]
         public async Task<IActionResult> CreateGroup()
         {
-            var req = await groupService.GetAllSpecialties();
+            var req = await dataManager.GroupService.GetAllSpecialties();
             if (req == null || req.Count == 0)
                 return LocalRedirect("~/specialty/create");
             ViewBag.Spec = req;
@@ -71,7 +70,7 @@ namespace EStudy.MVC.Controllers
         {
             model.IP = HttpContext.Connection.RemoteIpAddress.ToString();
             model.UserId = Convert.ToInt32(User.Identity.Name);
-            var result = await groupService.CreateGroup(model);
+            var result = await dataManager.GroupService.CreateGroup(model);
             if (result == Constants.Constants.OK)
                 return LocalRedirect("~/group/all");
             ModelState.AddModelError("", result);
@@ -82,7 +81,7 @@ namespace EStudy.MVC.Controllers
         [HttpGet("edit")]
         public async Task<IActionResult> EditGroup(int id)
         {
-            var group = await groupService.GetForEdit(id);
+            var group = await dataManager.GroupService.GetForEdit(id);
             if (group != null)
                 return View(group);
             ViewBag.Error = Constants.Constants.GroupNotFound;
@@ -94,7 +93,7 @@ namespace EStudy.MVC.Controllers
         {
             model.IP = HttpContext.Connection.RemoteIpAddress.ToString();
             model.UserId = Convert.ToInt32(User.Identity.Name);
-            var result = await groupService.EditGroup(model);
+            var result = await dataManager.GroupService.EditGroup(model);
             if (result == Constants.Constants.OK)
                 return LocalRedirect("~/group/all");
             ModelState.AddModelError("", result);
@@ -105,7 +104,7 @@ namespace EStudy.MVC.Controllers
         [HttpGet("{id}/addmember")]
         public async Task<IActionResult> AddMember(int id)
         {
-            var students = await userService.GetAllStudents();
+            var students = await dataManager.UserService.GetAllStudents();
             if(students==null || students.Count==0)
             {
                 ModelState.AddModelError("","Не знайдено жодного студента");
@@ -124,7 +123,7 @@ namespace EStudy.MVC.Controllers
         [HttpPost("addmember")]
         public async Task<IActionResult> AddMember(GroupMemberModel model)
         {
-            var res = await groupService.AddUserToGroup(model);
+            var res = await dataManager.GroupService.AddUserToGroup(model);
             if (res == Constants.Constants.OK)
                 return LocalRedirect($"~/group/{model.GroupId}");
             ModelState.AddModelError("", res);

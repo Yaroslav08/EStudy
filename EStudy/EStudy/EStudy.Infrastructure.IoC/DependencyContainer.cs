@@ -7,13 +7,17 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using EStudy.Application;
+using EStudy.Application.ViewModels;
+
 namespace EStudy.Infrastructure.IoC
 {
     public static class DependencyContainer
     {
-        public static void RegisterServices(this IServiceCollection services)
+        public static void AddServices(this IServiceCollection services)
         {
             services.AddSingleton<IUnitOfWork, UnitOfWork>();
+            services.AddSingleton<IDataManager, DataManager>();
             services.AddSingleton<IUserRepository, UserRepository>();
             services.AddSingleton<IUserService, UserService>();
             services.AddSingleton<IFileRepository, FileRepository>();

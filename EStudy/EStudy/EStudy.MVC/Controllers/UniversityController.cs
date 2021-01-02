@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EStudy.Application;
 
 namespace EStudy.MVC.Controllers
 {
@@ -14,12 +15,12 @@ namespace EStudy.MVC.Controllers
     [Authorize(Roles = "Admin")]
     public class UniversityController : Controller
     {
-        private readonly IUniversityService universityService;
+        private readonly IDataManager dataManager;
         private readonly ILogger<UniversityController> logger;
-        public UniversityController(ILogger<UniversityController> _logger, IUniversityService _universityService)
+        public UniversityController(ILogger<UniversityController> _logger, IDataManager dataManager)
         {
             logger = _logger;
-            universityService = _universityService;
+            this.dataManager = dataManager;
         }
 
 
@@ -27,7 +28,7 @@ namespace EStudy.MVC.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> GetUniversity()
         {
-            var res = await universityService.GetUniversity();
+            var res = await dataManager.UniversityService.GetUniversity();
             if (res == null)
                 return LocalRedirect("~/university/create");
             return View(res);
@@ -36,7 +37,7 @@ namespace EStudy.MVC.Controllers
         [HttpGet("edit")]
         public async Task<IActionResult> Edit()
         {
-            var univ = await universityService.LoadForEdit();
+            var univ = await dataManager.UniversityService.LoadForEdit();
             if (univ == null)
             {
                 ViewBag.Error = Constants.Constants.UniversityNotFound;
@@ -51,7 +52,7 @@ namespace EStudy.MVC.Controllers
         {
             model.IP = HttpContext.Connection.RemoteIpAddress.ToString();
             model.UserId = Convert.ToInt32(User.Identity.Name);
-            var result = await universityService.EditUniversity(model);
+            var result = await dataManager.UniversityService.EditUniversity(model);
             if (result == Constants.Constants.OK)
                 return LocalRedirect("~/university");
             ModelState.AddModelError("", result);
@@ -71,7 +72,7 @@ namespace EStudy.MVC.Controllers
         {
             model.IP = HttpContext.Connection.RemoteIpAddress.ToString();
             model.UserId = Convert.ToInt32(User.Identity.Name);
-            var result = await universityService.CreateUniversity(model);
+            var result = await dataManager.UniversityService.CreateUniversity(model);
             if (result == Constants.Constants.OK)
                 return LocalRedirect("~/university");
             ModelState.AddModelError("", result);

@@ -11,16 +11,19 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using EStudy.Application;
+
 namespace EStudy.MVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IUserService userService;
+        private readonly IDataManager dataManager;
         private readonly ILogger<HomeController> logger;
-        public HomeController(ILogger<HomeController> _logger, IUserService _userService)
+
+        public HomeController(IDataManager dataManager, ILogger<HomeController> logger)
         {
-            logger = _logger;
-            userService = _userService;
+            this.dataManager = dataManager;
+            this.logger = logger;
         }
 
         [HttpGet("")]
@@ -34,7 +37,7 @@ namespace EStudy.MVC.Controllers
         [Authorize]
         public async Task<IActionResult> GetMe()
         {
-            var user = await userService.GetUserById(Convert.ToInt32(User.Identity.Name));
+            var user = await dataManager.UserService.GetUserById(Convert.ToInt32(User.Identity.Name));
             return View(user);
         }
 
@@ -52,18 +55,18 @@ namespace EStudy.MVC.Controllers
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
 
-            if (model.TypeUser == TypeUser.Student && !await userService.ValidStudentCode(model.Code))
+            if (model.TypeUser == TypeUser.Student && !await dataManager.UserService.ValidStudentCode(model.Code))
             {
                 ModelState.AddModelError("", Constants.Constants.StudentCodeNotValid);
                 return View();
             }
-            if (model.TypeUser == TypeUser.Teacher && !await userService.ValidTeacherCode(model.Code))
+            if (model.TypeUser == TypeUser.Teacher && !await dataManager.UserService.ValidTeacherCode(model.Code))
             {
                 ModelState.AddModelError("", Constants.Constants.TeacherCodeNotValid);
                 return View();
             }
 
-            var res = await userService.RegisterUser(model);
+            var res = await dataManager.UserService.RegisterUser(model);
             if (res.Successed)
             {
                 return View("RegisterSuccess");
@@ -83,7 +86,7 @@ namespace EStudy.MVC.Controllers
         public async Task<IActionResult> Confirm([FromQuery] string code, ConfirmViewModel model)
         {
             model.IP = HttpContext.Connection.RemoteIpAddress.ToString();
-            var result = await userService.ConfirmUser(model);
+            var result = await dataManager.UserService.ConfirmUser(model);
             if (result == Constants.Constants.OK)
                 return LocalRedirect("~/login");
             ModelState.AddModelError("", result);
@@ -107,7 +110,7 @@ namespace EStudy.MVC.Controllers
         public async Task<IActionResult> Login(LoginViewModel model)
         {
             Console.OutputEncoding = Encoding.UTF8;
-            var result = await userService.LoginUser(model);
+            var result = await dataManager.UserService.LoginUser(model);
             if(result.Successed)
             {
                 Console.WriteLine(result.Successed.ToString());

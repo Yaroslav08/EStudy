@@ -24,7 +24,7 @@ namespace EStudy.MVC
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.RegisterServices();
+            services.AddServices();
             services.AddEStudyAutoMapper();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                .AddCookie(options =>

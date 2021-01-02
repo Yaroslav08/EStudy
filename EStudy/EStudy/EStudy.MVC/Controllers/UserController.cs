@@ -6,18 +6,19 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using EStudy.Application;
 
 namespace EStudy.MVC.Controllers
 {
     [Route("user")]
     public class UserController : Controller
     {
-        private readonly IUserService userService;
+        private readonly IDataManager dataManager;
         private readonly ILogger<UserController> logger;
-        public UserController(ILogger<UserController> _logger, IUserService _userService)
+        public UserController(ILogger<UserController> _logger, IDataManager dataManager)
         {
             logger = _logger;
-            userService = _userService;
+            this.dataManager = dataManager;
         }
 
         [HttpGet("{Id}")]
@@ -30,7 +31,7 @@ namespace EStudy.MVC.Controllers
             }
             if (Convert.ToInt32(Id) == Convert.ToInt32(User.Identity.Name))
                 return LocalRedirect("~/me");
-            return View(await userService.GetUserById(Convert.ToInt32(Id)));
+            return View(await dataManager.UserService.GetUserById(Convert.ToInt32(Id)));
         }
     }
 }

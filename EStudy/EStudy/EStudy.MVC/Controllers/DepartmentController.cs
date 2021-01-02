@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EStudy.Application;
 
 namespace EStudy.MVC.Controllers
 {
@@ -14,19 +15,19 @@ namespace EStudy.MVC.Controllers
     [Authorize(Roles = "Admin")]
     public class DepartmentController : Controller
     {
-        private readonly IDepartmentService departmentService;
+        private readonly IDataManager dataManager;
         private readonly ILogger<DepartmentController> logger;
-        public DepartmentController(ILogger<DepartmentController> _logger, IDepartmentService _departmentService)
+        public DepartmentController(ILogger<DepartmentController> _logger, IDataManager dataManager)
         {
             logger = _logger;
-            departmentService = _departmentService;
+            this.dataManager = dataManager;
         }
 
         [HttpGet("all")]
         [AllowAnonymous]
         public async Task<IActionResult> GetAllDepartments()
         {
-            return View(await departmentService.GetDepartments());
+            return View(await dataManager.DepartmentService.GetDepartments());
         }
 
 
@@ -34,14 +35,14 @@ namespace EStudy.MVC.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Search(string q)
         {
-            return View("GetAllDepartments", await departmentService.Search(q));
+            return View("GetAllDepartments", await dataManager.DepartmentService.Search(q));
         }
 
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetDepartment(int id)
         {
-            var depart = await departmentService.GetDepartmentById(id);
+            var depart = await dataManager.DepartmentService.GetDepartmentById(id);
             if (depart != null)
                 return View(depart);
             ViewBag.Error = Constants.Constants.DepartmentNotFound;
@@ -61,7 +62,7 @@ namespace EStudy.MVC.Controllers
         {
             model.IP = HttpContext.Connection.RemoteIpAddress.ToString();
             model.UserId = Convert.ToInt32(User.Identity.Name);
-            var result = await departmentService.CreateDepartment(model);
+            var result = await dataManager.DepartmentService.CreateDepartment(model);
             if (result == Constants.Constants.OK)
                 return LocalRedirect("~/department/all");
             ModelState.AddModelError("", result);
@@ -72,7 +73,7 @@ namespace EStudy.MVC.Controllers
         [HttpGet("edit")]
         public async Task<IActionResult> EditDepartment(int id)
         {
-            var result = await departmentService.GetDepartmentForEdit(id);
+            var result = await dataManager.DepartmentService.GetDepartmentForEdit(id);
             if (result == null)
             {
                 ViewBag.Error = result;
@@ -87,7 +88,7 @@ namespace EStudy.MVC.Controllers
         {
             model.IP = HttpContext.Connection.RemoteIpAddress.ToString();
             model.UserId = Convert.ToInt32(User.Identity.Name);
-            var result = await departmentService.EditDepartment(model);
+            var result = await dataManager.DepartmentService.EditDepartment(model);
             if (result == Constants.Constants.OK)
                 return LocalRedirect("~/department/all");
             ModelState.AddModelError("", result);

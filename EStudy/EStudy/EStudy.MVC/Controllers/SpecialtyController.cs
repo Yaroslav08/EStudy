@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EStudy.Application;
 
 namespace EStudy.MVC.Controllers
 {
@@ -14,12 +15,12 @@ namespace EStudy.MVC.Controllers
     [Authorize(Roles = "Admin")]
     public class SpecialtyController : Controller
     {
-        private readonly ISpecialtyService specialtyService;
+        private readonly IDataManager dataManager;
         private readonly ILogger<SpecialtyController> logger;
-        public SpecialtyController(ILogger<SpecialtyController> _logger, ISpecialtyService _specialtyService)
+        public SpecialtyController(ILogger<SpecialtyController> _logger, IDataManager dataManager)
         {
             logger = _logger;
-            specialtyService = _specialtyService;
+            this.dataManager = dataManager;
         }
 
 
@@ -27,7 +28,7 @@ namespace EStudy.MVC.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> GetAllSpecialties()
         {
-            return View(await specialtyService.GetAllSpecialties());
+            return View(await dataManager.SpecialtyService.GetAllSpecialties());
         }
 
 
@@ -35,14 +36,14 @@ namespace EStudy.MVC.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Search(string q)
         {
-            return View("GetAllSpecialties", await specialtyService.Search(q));
+            return View("GetAllSpecialties", await dataManager.SpecialtyService.Search(q));
         }
 
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetSpecialty(int id)
         {
-            var spec = await specialtyService.GetSpecialtyById(id);
+            var spec = await dataManager.SpecialtyService.GetSpecialtyById(id);
             if (spec != null)
                 return View(spec);
             ViewBag.Error = Constants.Constants.SpecialtyNotFound;
@@ -53,7 +54,7 @@ namespace EStudy.MVC.Controllers
         [HttpGet("create")]
         public async Task<IActionResult> CreateSpecialty()
         {
-            var req = await specialtyService.GetAllDepartments();
+            var req = await dataManager.SpecialtyService.GetAllDepartments();
             if (req == null || req.Count == 0)
                 return LocalRedirect("~/department/create");
             ViewBag.Departments = req;
@@ -66,7 +67,7 @@ namespace EStudy.MVC.Controllers
         {
             model.IP = HttpContext.Connection.RemoteIpAddress.ToString();
             model.UserId = Convert.ToInt32(User.Identity.Name);
-            var result = await specialtyService.CreateSpecialty(model);
+            var result = await dataManager.SpecialtyService.CreateSpecialty(model);
             if (result == Constants.Constants.OK)
                 return LocalRedirect("~/specialty/all");
             ModelState.AddModelError("", result);
@@ -77,13 +78,13 @@ namespace EStudy.MVC.Controllers
         [HttpGet("edit")]
         public async Task<IActionResult> EditSpecialty(int id)
         {
-            var editSpec = await specialtyService.GetForEdit(id);
+            var editSpec = await dataManager.SpecialtyService.GetForEdit(id);
             if (editSpec == null)
             {
                 ViewBag.Error = Constants.Constants.SpecialtyNotFound;
                 return View("Error");
             }
-            ViewBag.Departments = await specialtyService.GetAllDepartments();
+            ViewBag.Departments = await dataManager.SpecialtyService.GetAllDepartments();
             return View(editSpec);
         }
 
@@ -93,7 +94,7 @@ namespace EStudy.MVC.Controllers
         {
             model.IP = HttpContext.Connection.RemoteIpAddress.ToString();
             model.UserId = Convert.ToInt32(User.Identity.Name);
-            var result = await specialtyService.EditSpecialty(model);
+            var result = await dataManager.SpecialtyService.EditSpecialty(model);
             if (result == Constants.Constants.OK)
                 return LocalRedirect("~/specialty/all");
             ModelState.AddModelError("", result);
