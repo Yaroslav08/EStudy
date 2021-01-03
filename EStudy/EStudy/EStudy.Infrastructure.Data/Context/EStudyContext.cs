@@ -44,8 +44,8 @@ namespace EStudy.Infrastructure.Data.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite(SqliteConn);
-            //optionsBuilder.UseSqlServer(WinLocalSqlConn);
+            //optionsBuilder.UseSqlite(SqliteConn);
+            optionsBuilder.UseSqlServer(WinLocalSqlConn);
         }
     }
 }
