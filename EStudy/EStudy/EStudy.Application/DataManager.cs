@@ -1,5 +1,5 @@
 using EStudy.Application.Interfaces;
-namespace EStudy.Application.ViewModels
+namespace EStudy.Application
 {
     public class DataManager : IDataManager
     {
