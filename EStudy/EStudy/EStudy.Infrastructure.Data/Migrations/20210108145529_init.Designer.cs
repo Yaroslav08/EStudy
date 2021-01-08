@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EStudy.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(EStudyContext))]
-    [Migration("20201124172842_Init")]
-    partial class Init
+    [Migration("20210108145529_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,7 +19,7 @@ namespace EStudy.Infrastructure.Data.Migrations
             modelBuilder
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.0");
+                .HasAnnotation("ProductVersion", "5.0.1");
 
             modelBuilder.Entity("EStudy.Domain.Models.Course", b =>
                 {
@@ -506,6 +506,35 @@ namespace EStudy.Infrastructure.Data.Migrations
                     b.HasIndex("UserId", "LessonId", "IsComplate", "Text");
 
                     b.ToTable("Homeworks");
+                });
+
+            modelBuilder.Entity("EStudy.Domain.Models.HomeworkFile", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("HomeworkId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("LoadByUserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("OriginalName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Path")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HomeworkId");
+
+                    b.ToTable("HomeworkFiles");
                 });
 
             modelBuilder.Entity("EStudy.Domain.Models.Lesson", b =>
@@ -1010,6 +1039,17 @@ namespace EStudy.Infrastructure.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("EStudy.Domain.Models.HomeworkFile", b =>
+                {
+                    b.HasOne("EStudy.Domain.Models.Homework", "Homework")
+                        .WithMany("HomeworkFiles")
+                        .HasForeignKey("HomeworkId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Homework");
+                });
+
             modelBuilder.Entity("EStudy.Domain.Models.Lesson", b =>
                 {
                     b.HasOne("EStudy.Domain.Models.Course", "Course")
@@ -1060,6 +1100,11 @@ namespace EStudy.Infrastructure.Data.Migrations
                     b.Navigation("Emails");
 
                     b.Navigation("GroupMembers");
+                });
+
+            modelBuilder.Entity("EStudy.Domain.Models.Homework", b =>
+                {
+                    b.Navigation("HomeworkFiles");
                 });
 
             modelBuilder.Entity("EStudy.Domain.Models.Lesson", b =>

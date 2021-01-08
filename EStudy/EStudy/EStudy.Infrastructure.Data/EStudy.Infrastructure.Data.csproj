@@ -11,9 +11,13 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+    <PackageReference Include="Yaroslav08.Extensions" Version="1.4.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EStudy.Constants\EStudy.Constants.csproj" />
     <ProjectReference Include="..\EStudy.Domain\EStudy.Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Seed\" />
   </ItemGroup>
 </Project>

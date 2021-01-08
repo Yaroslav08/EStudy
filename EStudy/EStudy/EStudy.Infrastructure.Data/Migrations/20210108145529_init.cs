@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EStudy.Infrastructure.Data.Migrations
 {
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -421,6 +421,28 @@ namespace EStudy.Infrastructure.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "HomeworkFiles",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LoadByUserId = table.Column<int>(type: "int", nullable: false),
+                    Path = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    OriginalName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HomeworkId = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HomeworkFiles", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_HomeworkFiles_Homeworks_HomeworkId",
+                        column: x => x.HomeworkId,
+                        principalTable: "Homeworks",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Courses_GroupId",
                 table: "Courses",
@@ -480,6 +502,11 @@ namespace EStudy.Infrastructure.Data.Migrations
                 name: "IX_Groups_SpecialtyId",
                 table: "Groups",
                 column: "SpecialtyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_HomeworkFiles_HomeworkId",
+                table: "HomeworkFiles",
+                column: "HomeworkId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Homeworks_LessonId",
@@ -557,10 +584,13 @@ namespace EStudy.Infrastructure.Data.Migrations
                 name: "GroupMembers");
 
             migrationBuilder.DropTable(
-                name: "Homeworks");
+                name: "HomeworkFiles");
 
             migrationBuilder.DropTable(
                 name: "LessonFiles");
+
+            migrationBuilder.DropTable(
+                name: "Homeworks");
 
             migrationBuilder.DropTable(
                 name: "Lessons");
