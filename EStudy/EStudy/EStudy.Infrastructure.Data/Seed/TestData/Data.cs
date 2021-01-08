@@ -176,5 +176,32 @@ namespace EStudy.Infrastructure.Data.Seed.TestData
             Logo50 = "http://www.dut.edu.ua/img/logo.png",
             Logo150 = "http://www.dut.edu.ua/img/logo_ny.png"
         };
+        public static List<Department> GetDepartments() => new List<Department>
+        {
+            new Department
+            {
+                Name = "Навчально-науковий інститут Інформаційних технологій",
+                Description = "Деякий опис",
+                Phone = "+044 245 235 34",
+                Shifr = "10101",
+                UniversityId = 1
+            },
+            new Department
+            {
+                Name = "Навчально-науковий інститут захисту інформації",
+                Description = "Деякий опис",
+                Phone = "+044 245 235 35",
+                Shifr = "10102",
+                UniversityId = 1
+            },
+            new Department
+            {
+                Name = "Навчально-науковий інститут Телекомунікацій",
+                Description = "Деякий опис",
+                Phone = "+044 245 235 36",
+                Shifr = "10103",
+                UniversityId = 1
+            }
+        };
     }
 }

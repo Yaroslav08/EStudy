@@ -14,8 +14,7 @@ namespace EStudy.Infrastructure.Data.Seed
         {
             await context.Users.AddRangeAsync(TestData.Data.GetUsers());
             await context.Universities.AddAsync(TestData.Data.GetUniversity());
-            await context.Departments.AddRangeAsync();
-
+            await context.Departments.AddRangeAsync(TestData.Data.GetDepartments());
         }
     }
 }
