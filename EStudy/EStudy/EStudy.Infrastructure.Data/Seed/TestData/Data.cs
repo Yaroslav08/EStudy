@@ -174,33 +174,81 @@ namespace EStudy.Infrastructure.Data.Seed.TestData
             Region = "Київська область",
             PostalCode = "03110",
             Logo50 = "http://www.dut.edu.ua/img/logo.png",
-            Logo150 = "http://www.dut.edu.ua/img/logo_ny.png"
-        };
-        public static List<Department> GetDepartments() => new List<Department>
-        {
-            new Department
+            Logo150 = "http://www.dut.edu.ua/img/logo_ny.png",
+            Departments = new List<Department>
             {
-                Name = "Навчально-науковий інститут Інформаційних технологій",
-                Description = "Деякий опис",
-                Phone = "+044 245 235 34",
-                Shifr = "10101",
-                UniversityId = 1
-            },
-            new Department
-            {
-                Name = "Навчально-науковий інститут захисту інформації",
-                Description = "Деякий опис",
-                Phone = "+044 245 235 35",
-                Shifr = "10102",
-                UniversityId = 1
-            },
-            new Department
-            {
-                Name = "Навчально-науковий інститут Телекомунікацій",
-                Description = "Деякий опис",
-                Phone = "+044 245 235 36",
-                Shifr = "10103",
-                UniversityId = 1
+                new Department
+                {
+                    Name = "Навчально-науковий інститут Інформаційних технологій",
+                    Description = "Деякий опис",
+                    Phone = "+044 245 235 34",
+                    Shifr = "10101",
+                    UniversityId = 1,
+                    Specialties = new List<Specialty>
+                    {
+                        new Specialty
+                        {
+                            Name = "Інженерія програмного забезпечення",
+                            Qualification = Domain.Models.Enums.TypeDiploma.BachelorsDegree,
+                            DepartmentId = 1,
+                            Groups = new List<Group>
+                            {
+                                new Group
+                                {
+                                    Name = "ПД-24",
+                                    Course = 2,
+                                    StartStudy = new DateTime(2019, 9, 1),
+                                    EndStudy = new DateTime(2023, 6, 30),
+                                    SpecialtyId = 1
+                                },
+                                new Group
+                                {
+                                    Name = "ПД-34",
+                                    Course = 3,
+                                    StartStudy = new DateTime(2018, 9, 1),
+                                    EndStudy = new DateTime(2022, 6, 30),
+                                    SpecialtyId = 1
+                                }
+                            }
+                        },
+                    }
+                },
+                new Department
+                {
+                    Name = "Навчально-науковий інститут Телекомунікацій",
+                    Description = "Деякий опис",
+                    Phone = "+044 245 235 36",
+                    Shifr = "10103",
+                    UniversityId = 1,
+                    Specialties = new List<Specialty>
+                    {
+                        new Specialty
+                        {
+                            Name = "Управління телекомунікаціями",
+                            Qualification = Domain.Models.Enums.TypeDiploma.BachelorsDegree,
+                            DepartmentId = 2,
+                            Groups = new List<Group>
+                            {
+                                new Group
+                                {
+                                    Name = "УБД-24",
+                                    Course = 2,
+                                    StartStudy = new DateTime(2019, 9, 1),
+                                    EndStudy = new DateTime(2023, 6, 30),
+                                    SpecialtyId = 2
+                                },
+                                new Group
+                                {
+                                    Name = "УБД-34",
+                                    Course = 3,
+                                    StartStudy = new DateTime(2018, 9, 1),
+                                    EndStudy = new DateTime(2022, 6, 30),
+                                    SpecialtyId = 2
+                                }
+                            }
+                        },
+                    }
+                }
             }
         };
     }
