@@ -46,7 +46,7 @@ namespace EStudy.Application.Services
             user.IsConfirmed = true;
             user.ConfirmedAt = DateTime.Now;
             user.ConfirmedFromIP = model.IP;
-            if(user.Role!=RoleType.Student)
+            if (user.Role != RoleType.Student)
             {
                 return await unitOfWork.UserRepository.UpdateAsync(user);
             }
@@ -63,46 +63,6 @@ namespace EStudy.Application.Services
             };
             await unitOfWork.UserRepository.UpdateAsync(user);
             return await unitOfWork.GroupMemberRepository.CreateAsync(groupMember);
-
-        }
-
-        public async Task<RegisterResult> RegisterUser(RegisterViewModel model)
-        {
-            if (await unitOfWork.UserRepository.IsExistAsync(d => d.Login == model.Login))
-                return new RegisterResult { Successed = false, Error = Constants.Constants.LoginBusy };
-
-            var user = new UserBuilder()
-                .SetFirstname(model.FirstName)
-                .SetLastname(model.LastName)
-                .SetLogin(model.Login)
-                .SetPassword(PasswordManager.GeneratePasswordHash(model.Password))
-                .SetConfirmCode(Generator.GetString(30))
-                .Build();
-
-            if(await unitOfWork.UserRepository.CountAsync() == 0)
-            {
-                user.Role = RoleType.Admin;
-                user.IsConfirmed = true;
-                user.ConfirmedFromIP = model.IP;
-                user.ConfirmedAt = DateTime.Now;
-                var resultAdminReg = await unitOfWork.UserRepository.CreateAsync(user);
-                if (resultAdminReg == Constants.Constants.OK)
-                    return new RegisterResult { Successed = true };
-                return new RegisterResult { Successed = false, Error = resultAdminReg };
-            }
-
-            user.Role = model.TypeUser switch
-            {
-                TypeUser.Student => RoleType.Student,
-                TypeUser.Teacher => RoleType.Teacher,
-                _ => RoleType.Admin
-            };
-
-            var result = await unitOfWork.UserRepository.CreateAsync(user);
-            if (result == Constants.Constants.OK)
-                return new RegisterResult { Successed = true };
-
-            return new RegisterResult { Successed = false, Error = result };
         }
 
         public async Task<LoginResult> LoginUser(LoginViewModel model)
@@ -145,6 +105,48 @@ namespace EStudy.Application.Services
         public async Task<List<UserShortViewModel>> GetAllTeachers()
         {
             return mapper.Map<List<UserShortViewModel>>(await unitOfWork.UserRepository.GetListByWhereAsync(d => d.Role == RoleType.Teacher));
+        }
+
+        public async Task<RegisterResult> RegisterTeacher(RegisterViewModel model)
+        {
+            if (await unitOfWork.UserRepository.IsExistAsync(d => d.Login == model.Login))
+                return new RegisterResult { Successed = false, Error = Constants.Constants.LoginBusy };
+
+            var user = new UserBuilder()
+                .SetFirstname(model.FirstName)
+                .SetLastname(model.LastName)
+                .SetLogin(model.Login)
+                .SetPassword(PasswordManager.GeneratePasswordHash(model.Password))
+                .SetConfirmCode(Generator.GetString(30))
+                .Build();
+            user.Role = RoleType.Teacher;
+
+            var result = await unitOfWork.UserRepository.CreateAsync(user);
+            if (result == Constants.Constants.OK)
+                return new RegisterResult { Successed = true };
+
+            return new RegisterResult { Successed = false, Error = result };
+        }
+
+        public async Task<RegisterResult> RegisterStudent(RegisterViewModel model)
+        {
+            if (await unitOfWork.UserRepository.IsExistAsync(d => d.Login == model.Login))
+                return new RegisterResult { Successed = false, Error = Constants.Constants.LoginBusy };
+
+            var user = new UserBuilder()
+                .SetFirstname(model.FirstName)
+                .SetLastname(model.LastName)
+                .SetLogin(model.Login)
+                .SetPassword(PasswordManager.GeneratePasswordHash(model.Password))
+                .SetConfirmCode(Generator.GetString(30))
+                .Build();
+            user.Role = RoleType.Student;
+
+            var result = await unitOfWork.UserRepository.CreateAsync(user);
+            if (result == Constants.Constants.OK)
+                return new RegisterResult { Successed = true };
+
+            return new RegisterResult { Successed = false, Error = result };
         }
     }
 }

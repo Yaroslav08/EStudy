@@ -12,7 +12,8 @@ namespace EStudy.Application.Interfaces
         Task<List<UserShortViewModel>> SearchUsers(string name, int count, int skip, string param = null);
         Task<List<UserNotConfirmed>> GetNotConfirmedUsers(int count, int skip);
         Task<string> ConfirmUser(ConfirmViewModel model);
-        Task<RegisterResult> RegisterUser(RegisterViewModel model);
+        Task<RegisterResult> RegisterTeacher(RegisterViewModel model);
+        Task<RegisterResult> RegisterStudent(RegisterViewModel model);
         Task<LoginResult> LoginUser(LoginViewModel model);
         Task<int> GetAllUsersCount();
         Task<bool> ValidTeacherCode(string code);

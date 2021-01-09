@@ -28,7 +28,6 @@ namespace EStudy.Domain.Models
         public string Login { get; set; }
         [Required, MinLength(20), MaxLength(2500)]
         public string PasswordHash { get; set; }
-        [Required]
         public RoleType Role { get; set; } = RoleType.Student;
         [MinLength(3), MaxLength(25), Phone]
         public string Phone { get; set; }
