@@ -118,8 +118,8 @@ namespace EStudy.Application.Services
                 .SetLogin(model.Login)
                 .SetPassword(PasswordManager.GeneratePasswordHash(model.Password))
                 .SetConfirmCode(Generator.GetString(30))
+                .SetRole(RoleType.Teacher)
                 .Build();
-            user.Role = RoleType.Teacher;
 
             var result = await unitOfWork.UserRepository.CreateAsync(user);
             if (result == Constants.Constants.OK)
@@ -139,8 +139,8 @@ namespace EStudy.Application.Services
                 .SetLogin(model.Login)
                 .SetPassword(PasswordManager.GeneratePasswordHash(model.Password))
                 .SetConfirmCode(Generator.GetString(30))
+                .SetRole(RoleType.Student)
                 .Build();
-            user.Role = RoleType.Student;
 
             var result = await unitOfWork.UserRepository.CreateAsync(user);
             if (result == Constants.Constants.OK)
