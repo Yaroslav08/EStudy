@@ -1,5 +1,6 @@
 ﻿using EStudy.Application;
 using EStudy.Application.ViewModels.Auth;
+using EStudy.Domain.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
@@ -56,7 +57,7 @@ namespace EStudy.MVC.Controllers
             return View(model);
         }
 
-        private async Task Authenticate(Domain.Models.User user)
+        private async Task Authenticate(User user)
         {
             var claims = new List<Claim>
             {
@@ -68,6 +69,13 @@ namespace EStudy.MVC.Controllers
                 claims.Add(new Claim("Username", user.Username));
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
+        }
+
+        [HttpGet("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Login", "Identity");
         }
     }
 }

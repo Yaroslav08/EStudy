@@ -110,13 +110,5 @@ namespace EStudy.MVC.Controllers
             else
                 return LocalRedirect($"~/");
         }
-
-
-        [HttpGet("logout")]
-        public async Task<IActionResult> Logout()
-        {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Login", "Home");
-        }
     }
 }
