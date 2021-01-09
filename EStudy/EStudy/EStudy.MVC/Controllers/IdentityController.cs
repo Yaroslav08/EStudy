@@ -82,6 +82,35 @@ namespace EStudy.MVC.Controllers
             return await _dataManager.UserService.RegisterTeacher(model);
         }
 
+        [HttpGet("identity/confirm")]
+        public async Task<IActionResult> TryConfirmUser(string code, int userId)
+        {
+            var res = await _dataManager.UserService.TryConfirmUser(new ConfirmViewModel
+            {
+                Code = code,
+                UserId = userId,
+                IP = HttpContext.Connection.RemoteIpAddress.ToString()
+            });
+            if (res.Successed)
+                return LocalRedirect("ConfirmSuccess"); //ToDo "redirect to true page"
+            if (!res.NeedGroupCode)
+            {
+                ViewBag.Error = "Some error";
+                return View("Error");
+            }
+            return View(new ConfirmViewModel
+            {
+                Code = code,
+                UserId = userId
+            });
+        }
+
+
+
+
+
+
+
 
         [HttpGet("identity/login")]
         public IActionResult Login(string returnUrl)

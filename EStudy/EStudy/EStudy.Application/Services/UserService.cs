@@ -37,34 +37,6 @@ namespace EStudy.Application.Services
                  _ => mapper.Map<List<UserShortViewModel>>(await unitOfWork.UserRepository.SearchAsync(name, count, skip))
              };
 
-        public async Task<string> ConfirmUser(ConfirmViewModel model)
-        {
-            var user = await unitOfWork.UserRepository.GetByWhereAsTrackingAsync(d => d.ConfirmCode == model.Code);
-            if (user == null) return Constants.Constants.TokenNotValid;
-            if (user.IsConfirmed) return Constants.Constants.AlreadyConfirmed;
-            if (user.CodeValidUntil < DateTime.Now) return Constants.Constants.TokenExpired;
-            user.IsConfirmed = true;
-            user.ConfirmedAt = DateTime.Now;
-            user.ConfirmedFromIP = model.IP;
-            if (user.Role != RoleType.Student)
-            {
-                return await unitOfWork.UserRepository.UpdateAsync(user);
-            }
-            var group = await unitOfWork.GroupRepository.GetByWhereAsync(d => d.CodeForConnect == model.GroupCode);
-            if (group == null) return Constants.Constants.GroupByCodeNotFound;
-            var groupMember = new GroupMember
-            {
-                UserId = user.Id,
-                GroupId = group.Id,
-                MemberRole = GroupMemberRole.Student,
-                CreatedFromIP = model.IP,
-                CreatedByUserId = model.UserId,
-                Title = "Студент"
-            };
-            await unitOfWork.UserRepository.UpdateAsync(user);
-            return await unitOfWork.GroupMemberRepository.CreateAsync(groupMember);
-        }
-
         public async Task<LoginResult> LoginUser(LoginViewModel model)
         {
             var user = await unitOfWork.UserRepository.GetByWhereAsync(d => d.Login == model.Login);
@@ -147,6 +119,22 @@ namespace EStudy.Application.Services
                 return new RegisterResult { Successed = true };
 
             return new RegisterResult { Successed = false, Error = result };
+        }
+
+        public async Task<ConfirmResult> TryConfirmUser(ConfirmViewModel model)
+        {
+            var user = await unitOfWork.UserRepository.GetByWhereAsTrackingAsync(d => d.Id == model.UserId);
+            if (user.IsConfirmed)
+                return new ConfirmResult { Successed = false, Error = "Користувач вже підтверджений" };
+            if(user.Role != RoleType.Teacher)
+            {
+                return new ConfirmResult { Successed = false, Error = "" };
+            }
+        }
+
+        public async Task<ConfirmResult> ConfirmUser(ConfirmViewModel model)
+        {
+            throw new NotImplementedException();
         }
     }
 }

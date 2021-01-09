@@ -10,7 +10,6 @@ namespace EStudy.Application.ViewModels.Auth
     {
         [MinLength(20), MaxLength(40)]
         public string Code { get; set; }
-        [Required, MinLength(10), MaxLength(12)]
         public string GroupCode { get; set; }
     }
 }
