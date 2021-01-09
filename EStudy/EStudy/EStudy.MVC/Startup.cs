@@ -1,4 +1,5 @@
 using EStudy.Infrastructure.IoC;
+using EStudy.MVC.Notification;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -51,7 +52,6 @@ namespace EStudy.MVC
             app.UseStaticFiles();
 
             app.UseRouting();
-
             app.UseAuthentication();
             app.UseAuthorization();
 
@@ -60,6 +60,7 @@ namespace EStudy.MVC
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapHub<NotificationHub>("Notify");
             });
         }
     }
