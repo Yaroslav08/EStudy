@@ -125,16 +125,71 @@ namespace EStudy.Application.Services
         {
             var user = await unitOfWork.UserRepository.GetByWhereAsTrackingAsync(d => d.Id == model.UserId);
             if (user.IsConfirmed)
-                return new ConfirmResult { Successed = false, Error = "Користувач вже підтверджений" };
+                return new ConfirmResult { Successed = false, Error = "Користувач вже підтверджений", NeedGroupCode = false };
             if(user.Role != RoleType.Teacher)
             {
-                return new ConfirmResult { Successed = false, Error = "" };
+                return new ConfirmResult { Successed = false, NeedGroupCode = true };
             }
+            if (user.CodeValidUntil > DateTime.Now)
+            {
+                return new ConfirmResult { Successed = false, NeedGroupCode = false, Error = "Час життя коду вичерпано" };
+            }
+            if (user.ConfirmCode != model.Code)
+            {
+                return new ConfirmResult { Successed = false, NeedGroupCode = false, Error = "Код не є валдіним" };
+            }
+            user.IsConfirmed = true;
+            user.ConfirmedAt = DateTime.Now;
+            user.ConfirmedFromIP = model.IP;
+            var save = await unitOfWork.UserRepository.UpdateAsync(user);
+
+            return save == Constants.Constants.OK ?
+                new ConfirmResult { Successed = true, NeedGroupCode = false } :
+                new ConfirmResult { Successed = false, NeedGroupCode = false, Error = save };
         }
 
         public async Task<ConfirmResult> ConfirmUser(ConfirmViewModel model)
         {
-            throw new NotImplementedException();
+            var user = await unitOfWork.UserRepository.GetByWhereAsTrackingAsync(d => d.Id == model.UserId);
+            if (user.IsConfirmed)
+                return new ConfirmResult { Successed = false, Error = "Користувач вже підтверджений", NeedGroupCode = false };
+
+            if (user.Role != RoleType.Student)
+            {
+                return new ConfirmResult { Successed = false, NeedGroupCode = false, Error = "Ви не студент" };
+            }
+
+            if (user.CodeValidUntil > DateTime.Now)
+            {
+                return new ConfirmResult { Successed = false, NeedGroupCode = false, Error = "Час життя коду вичерпано" };
+            }
+            if (user.ConfirmCode != model.Code)
+            {
+                return new ConfirmResult { Successed = false, NeedGroupCode = false, Error = "Код не є валдіним" };
+            }
+            user.IsConfirmed = true;
+            user.ConfirmedAt = DateTime.Now;
+            user.ConfirmedFromIP = model.IP;
+            var save = await unitOfWork.UserRepository.UpdateAsync(user);
+
+
+            var group = await unitOfWork.GroupRepository.GetByWhereAsync(d => d.CodeForConnect == model.GroupCode);
+            if (group == null) return new ConfirmResult { Successed = false, NeedGroupCode = false, Error = "Код групи не валідний" };
+            var member = new GroupMember
+            {
+                UserId = model.UserId,
+                GroupId = group.Id,
+                MemberRole = GroupMemberRole.Student,
+                Title = "Студент",
+                CreatedFromIP = model.IP,
+                CreatedByUserId = model.UserId
+            };
+            var groupMemberResult = await unitOfWork.GroupMemberRepository.CreateAsync(member);
+            return groupMemberResult == Constants.Constants.OK ?
+                new ConfirmResult { Successed = true, NeedGroupCode = false } :
+                new ConfirmResult { Successed = false, NeedGroupCode = false, Error = groupMemberResult };
+
+            
         }
     }
 }

@@ -82,6 +82,8 @@ namespace EStudy.MVC.Controllers
             return await _dataManager.UserService.RegisterTeacher(model);
         }
 
+
+
         [HttpGet("identity/confirm")]
         public async Task<IActionResult> TryConfirmUser(string code, int userId)
         {
@@ -92,7 +94,7 @@ namespace EStudy.MVC.Controllers
                 IP = HttpContext.Connection.RemoteIpAddress.ToString()
             });
             if (res.Successed)
-                return LocalRedirect("ConfirmSuccess"); //ToDo "redirect to true page"
+                return LocalRedirect("ConfirmSuccess"); //ToDo "redirect to real page"
             if (!res.NeedGroupCode)
             {
                 ViewBag.Error = "Some error";
@@ -105,10 +107,17 @@ namespace EStudy.MVC.Controllers
             });
         }
 
-
-
-
-
+        [HttpPost("identity/confirm")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ConfirmUser(ConfirmViewModel model)
+        {
+            model.IP = HttpContext.Connection.RemoteIpAddress.ToString();
+            var result = await _dataManager.UserService.ConfirmUser(model);
+            if (result.Successed)
+                return LocalRedirect(""); //ToDo "redirect to real page"
+            ModelState.AddModelError("", result.Error);
+            return View(model);
+        }
 
 
 
