@@ -52,6 +52,12 @@ namespace EStudy.Application.Builders
             return this;
         }
 
+        public UserBuilder SetRole(RoleType role)
+        {
+            user.Role = role;
+            return this;
+        }
+
         public User Build()
         {
             return user;
