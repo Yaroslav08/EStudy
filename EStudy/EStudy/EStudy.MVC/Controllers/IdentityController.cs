@@ -144,7 +144,6 @@ namespace EStudy.MVC.Controllers
             var result = await _dataManager.UserService.LoginUser(model);
             if (result.Successed)
             {
-                Console.WriteLine(result.Successed.ToString());
                 await Authenticate(result.User);
                 if (string.IsNullOrEmpty(model.ReturnUrl))
                     return LocalRedirect("~/");

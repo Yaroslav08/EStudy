@@ -4,9 +4,9 @@
     ViewData["Title"] = "- Підтвердження успішне";
 }
 <h2 class="text-center">
-    Аккаунт успішно пдітвелджно
+    Аккаунт успішно підтверджено
 </h2>
-@Url.ActionLink("Вхід", "Identity", "Login")
+<p>@Url.ActionLink("Login", "Identity")</p>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

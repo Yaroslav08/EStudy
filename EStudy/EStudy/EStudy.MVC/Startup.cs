@@ -30,8 +30,8 @@ namespace EStudy.MVC
             services.AddEStudyAutoMapper();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                .AddCookie(options =>
-                {
-                   options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/login");
+               {
+                   options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/identity/login");
                });
             services.AddControllersWithViews();
         }

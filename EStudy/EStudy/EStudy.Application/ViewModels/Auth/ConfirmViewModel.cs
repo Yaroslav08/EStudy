@@ -8,7 +8,6 @@ namespace EStudy.Application.ViewModels.Auth
 {
     public class ConfirmViewModel : RequestModel
     {
-        [MinLength(20), MaxLength(40)]
         public string Code { get; set; }
         public string GroupCode { get; set; }
     }

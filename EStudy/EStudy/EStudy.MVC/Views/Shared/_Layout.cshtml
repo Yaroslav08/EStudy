@@ -44,13 +44,13 @@
                         @Html.ActionLink(User.Claims.FirstOrDefault(d=>d.Type=="Fullname").Value, "GetMe", "Home", null, new { @class= "nav-link" })
                     </li>
                     <li class="nav-item">
-                        @Html.ActionLink("Вийти", "Logout", "Home", null, new { @class = "nav-link" })
+                        @Html.ActionLink("Вийти", "Logout", "Identity", null, new { @class = "nav-link" })
                     </li>
                 }
                 else
                 {
                     <li class="nav-item">
-                        @Html.ActionLink("Увійти", "Login", "Home", null, new { @class = "nav-link" })
+                        @Html.ActionLink("Увійти", "Login", "Identity", null, new { @class = "nav-link" })
                     </li>
                 }
             </ul>
@@ -64,7 +64,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2020 - E-Study
+            &copy; 2020 - 2021 (E-Study)
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

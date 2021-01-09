@@ -130,7 +130,7 @@ namespace EStudy.Application.Services
             {
                 return new ConfirmResult { Successed = false, NeedGroupCode = true };
             }
-            if (user.CodeValidUntil > DateTime.Now)
+            if (user.CodeValidUntil < DateTime.Now)
             {
                 return new ConfirmResult { Successed = false, NeedGroupCode = false, Error = "Час життя коду вичерпано" };
             }
