@@ -94,7 +94,7 @@ namespace EStudy.MVC.Controllers
                 IP = HttpContext.Connection.RemoteIpAddress.ToString()
             });
             if (res.Successed)
-                return LocalRedirect("ConfirmSuccess"); //ToDo "redirect to real page"
+                return View("ConfirmSuccess");
             if (!res.NeedGroupCode)
             {
                 ViewBag.Error = "Some error";
@@ -114,7 +114,7 @@ namespace EStudy.MVC.Controllers
             model.IP = HttpContext.Connection.RemoteIpAddress.ToString();
             var result = await _dataManager.UserService.ConfirmUser(model);
             if (result.Successed)
-                return LocalRedirect(""); //ToDo "redirect to real page"
+                return View("ConfirmSuccess");
             ModelState.AddModelError("", result.Error);
             return View(model);
         }

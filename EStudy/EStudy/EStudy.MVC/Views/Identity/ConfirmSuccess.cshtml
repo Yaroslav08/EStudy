@@ -1,0 +1,12 @@
+﻿@model EStudy.Application.ViewModels.Auth.ConfirmViewModel
+
+@{
+    ViewData["Title"] = "- Підтвердження успішне";
+}
+<h2 class="text-center">
+    Аккаунт успішно пдітвелджно
+</h2>
+@Url.ActionLink("Вхід", "Identity", "Login")
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
