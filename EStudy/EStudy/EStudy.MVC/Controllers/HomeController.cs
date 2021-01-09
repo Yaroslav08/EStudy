@@ -53,9 +53,9 @@ namespace EStudy.MVC.Controllers
         {
             model.IP = HttpContext.Connection.RemoteIpAddress.ToString();
             var result = await dataManager.UserService.ConfirmUser(model);
-            if (result == Constants.Constants.OK)
+            if (result.Successed)
                 return LocalRedirect("~/login");
-            ModelState.AddModelError("", result);
+            ModelState.AddModelError("", result.Error);
             return View();
         }
 
