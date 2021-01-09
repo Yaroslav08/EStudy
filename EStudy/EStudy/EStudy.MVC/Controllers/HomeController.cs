@@ -41,40 +41,6 @@ namespace EStudy.MVC.Controllers
             return View(user);
         }
 
-
-        [HttpGet("register")]
-        public IActionResult Register()
-        {
-            if (User.Identity.IsAuthenticated)
-                return LocalRedirect("~/");
-            return View();
-        }
-
-        [HttpPost("register")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterViewModel model)
-        {
-
-            if (model.TypeUser == TypeUser.Student && !await dataManager.UserService.ValidStudentCode(model.Code))
-            {
-                ModelState.AddModelError("", Constants.Constants.StudentCodeNotValid);
-                return View();
-            }
-            if (model.TypeUser == TypeUser.Teacher && !await dataManager.UserService.ValidTeacherCode(model.Code))
-            {
-                ModelState.AddModelError("", Constants.Constants.TeacherCodeNotValid);
-                return View();
-            }
-
-            var res = await dataManager.UserService.RegisterUser(model);
-            if (res.Successed)
-            {
-                return View("RegisterSuccess");
-            }
-            ModelState.AddModelError("", res.Error);
-            return View(model);
-        }
-
         [HttpGet("confirm")]
         public IActionResult Confirm(string code)
         {

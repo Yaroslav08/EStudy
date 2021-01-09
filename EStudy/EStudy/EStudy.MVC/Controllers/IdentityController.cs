@@ -24,6 +24,63 @@ namespace EStudy.MVC.Controllers
             _dataManager = dataManager;
         }
 
+        [HttpGet("identity/register")]
+        public IActionResult Register()
+        {
+            if (User.Identity.IsAuthenticated)
+                return LocalRedirect("~/");
+            return View();
+        }
+
+        [HttpPost("identity/register")]
+        public async Task<IActionResult> Register(RegisterViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Перевірте правильність введених даних");
+                return View(model);
+            }
+            var res = model.type switch
+            {
+                "s" => await RegisterStudent(model),
+                "t" => await RegisterTeacher(model),
+                _ => new RegisterResult { Successed = false, Error = "Оберіть тип користувача" }
+            };
+            if (res.Successed)
+            {
+                return View("RegisterSuccess");
+            }
+            ModelState.AddModelError("", res.Error);
+            return View(model);
+        }
+
+        private async Task<RegisterResult> RegisterStudent(RegisterViewModel model)
+        {
+            if(!await _dataManager.UserService.ValidStudentCode(model.Code))
+            {
+                return new RegisterResult
+                {
+                    Successed = false,
+                    Error = "Код студента не валідний"
+                };
+            }
+            return await _dataManager.UserService.RegisterStudent(model);
+        }
+
+        private async Task<RegisterResult> RegisterTeacher(RegisterViewModel model)
+        {
+            if (!await _dataManager.UserService.ValidTeacherCode(model.Code))
+            {
+                return new RegisterResult
+                {
+                    Successed = false,
+                    Error = "Код викладача не валідний"
+                };
+            }
+            return await _dataManager.UserService.RegisterTeacher(model);
+        }
+
+
         [HttpGet("identity/login")]
         public IActionResult Login(string returnUrl)
         {
@@ -71,7 +128,7 @@ namespace EStudy.MVC.Controllers
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
         }
 
-        [HttpGet("logout")]
+        [HttpGet("identity/logout")]
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
