@@ -94,36 +94,6 @@ namespace EStudy.MVC.Controllers
         }
 
 
-        [HttpGet("login")]
-        public IActionResult Login(string returnUrl)
-        {
-            if (User.Identity.IsAuthenticated)
-                return LocalRedirect("~/");
-            return View(new LoginViewModel
-            {
-                ReturnUrl = returnUrl
-            });
-        }
-
-        [HttpPost("login")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model)
-        {
-            Console.OutputEncoding = Encoding.UTF8;
-            var result = await dataManager.UserService.LoginUser(model);
-            if(result.Successed)
-            {
-                Console.WriteLine(result.Successed.ToString());
-                await Authenticate(result.User);
-                if (string.IsNullOrEmpty(model.ReturnUrl))
-                    return LocalRedirect("~/");
-                return LocalRedirect(model.ReturnUrl);
-            }
-            ModelState.AddModelError("", result.Error);
-            return View(model);
-        }
-
-
 
         [HttpGet("search")]
         public IActionResult Search([FromQuery]string query)
@@ -139,22 +109,6 @@ namespace EStudy.MVC.Controllers
                 return LocalRedirect($"~/group/search?q={query}");
             else
                 return LocalRedirect($"~/");
-        }
-
-
-
-        private async Task Authenticate(Domain.Models.User user)
-        {
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Id.ToString()),
-                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role.ToString()),
-                new Claim("Fullname", user.FirstName + " " + user.LastName)
-            };
-            if (!string.IsNullOrEmpty(user.Username))
-                claims.Add(new Claim("Username", user.Username));
-            ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
         }
 
 
