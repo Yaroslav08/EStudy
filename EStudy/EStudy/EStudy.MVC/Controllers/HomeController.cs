@@ -15,7 +15,7 @@ using EStudy.Application;
 
 namespace EStudy.MVC.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly IDataManager dataManager;
         private readonly ILogger<HomeController> logger;

@@ -11,7 +11,7 @@ using EStudy.Application;
 namespace EStudy.MVC.Controllers
 {
     [Route("user")]
-    public class UserController : Controller
+    public class UserController : BaseController
     {
         private readonly IDataManager dataManager;
         private readonly ILogger<UserController> logger;

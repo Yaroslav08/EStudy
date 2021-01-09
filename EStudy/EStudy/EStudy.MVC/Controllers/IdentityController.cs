@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EStudy.MVC.Controllers
 {
-    public class IdentityController : Controller
+    public class IdentityController : BaseController
     {
         public IActionResult Index()
         {

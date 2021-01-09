@@ -13,7 +13,7 @@ namespace EStudy.MVC.Controllers
 {
     [Route("department")]
     [Authorize(Roles = "Admin")]
-    public class DepartmentController : Controller
+    public class DepartmentController : BaseController
     {
         private readonly IDataManager dataManager;
         private readonly ILogger<DepartmentController> logger;
