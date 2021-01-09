@@ -1,13 +1,10 @@
-﻿using EStudy.Application.Interfaces;
+﻿using EStudy.Application;
 using EStudy.Application.ViewModels.Specialty;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using EStudy.Application;
 
 namespace EStudy.MVC.Controllers
 {
