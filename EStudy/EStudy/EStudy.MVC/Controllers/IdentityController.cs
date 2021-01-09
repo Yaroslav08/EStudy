@@ -25,22 +25,24 @@ namespace EStudy.MVC.Controllers
         }
 
         [HttpGet("identity/register")]
-        public IActionResult Register()
+        public IActionResult Register(string type)
         {
             if (User.Identity.IsAuthenticated)
                 return LocalRedirect("~/");
+            ViewBag.Type = type;
             return View();
         }
 
         [HttpPost("identity/register")]
-        public async Task<IActionResult> Register(RegisterViewModel model)
+        public async Task<IActionResult> Register([FromQuery] string type, RegisterViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 ModelState.AddModelError("", "Перевірте правильність введених даних");
                 return View(model);
             }
-            var res = model.type switch
+            model.IP = HttpContext.Connection.RemoteIpAddress.ToString();
+            var res = type switch
             {
                 "s" => await RegisterStudent(model),
                 "t" => await RegisterTeacher(model),

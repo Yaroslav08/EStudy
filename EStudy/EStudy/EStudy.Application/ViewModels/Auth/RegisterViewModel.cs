@@ -23,7 +23,6 @@ namespace EStudy.Application.ViewModels.Auth
         public string Password { get; set; }
         [Required(ErrorMessage = "Код обов'язковий"), MinLength(15), MaxLength(20)]
         public string Code { get; set; }
-        public string type { get; set; }
     }
 
     public enum TypeUser
