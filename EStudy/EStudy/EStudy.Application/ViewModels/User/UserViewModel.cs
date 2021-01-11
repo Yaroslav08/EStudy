@@ -18,5 +18,10 @@ namespace EStudy.Application.ViewModels.User
         public string Role { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
+        public string Twitter { get; set; }
+        public string Instagram { get; set; }
+        public string Facebook { get; set; }
+        public string GitHub { get; set; }
+        public string WebSite { get; set; }
     }
 }
