@@ -3,56 +3,55 @@
 @{
     ViewData["Title"] = "GetGroupMembers";
 }
-
-<h1>GetGroupMembers</h1>
-@if (Model == null || Model.Count() == 0)
-{
-    <h3 class="text-center">
-        Учасників не знайдено
-    </h3>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(d=>d.User.Fullname)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Role)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Title)
-                </th>
-                @if (User.IsInRole("Admin"))
-                {
-                    <th></th>
-                }
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+<div class="jumbotron">
+    @if (Model == null || Model.Count() == 0)
+    {
+        <h3 class="text-center">
+            Учасників не знайдено
+        </h3>
+    }
+    else
+    {
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>
-                        <a href="~/user/@item.User.Id">@item.User.Fullname</a>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Role)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Title)
-                    </td>
+                    <th>
+                        @Html.DisplayNameFor(d=>d.User.Fullname)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Role)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
                     @if (User.IsInRole("Admin"))
                     {
-                        <td>
-                            @Html.ActionLink("Редагувати", "EditMember", new { id = item.Id }) |
-                        </td>
+                        <th></th>
                     }
                 </tr>
-            }
-        </tbody>
-    </table>
-}
-
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a href="~/user/@item.User.Id">@item.User.Fullname</a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Role)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <td>
+                                @Html.ActionLink("Редагувати", "EditMember", new { id = item.Id }) |
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

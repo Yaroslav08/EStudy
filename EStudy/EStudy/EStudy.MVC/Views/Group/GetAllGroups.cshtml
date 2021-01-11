@@ -4,75 +4,77 @@
     ViewData["Title"] = "- Групи";
 }
 
-@if (Model == null || Model.Count() == 0)
-{
-    <h2 class="text-center">Груп ще немає</h2>
-    @if (User.IsInRole("Admin"))
+<div class="jumbotron">
+    @if (Model == null || Model.Count() == 0)
     {
-        <a asp-action="CreateGroup" asp-controller="Group">Створити групу</a>
+        <h2 class="text-center">Груп ще немає</h2>
+        @if (User.IsInRole("Admin"))
+        {
+            <a asp-action="CreateGroup" asp-controller="Group">Створити групу</a>
+        }
     }
-}
-else
-{
-    <h2 class="text-center">
-        Усі групи
-    </h2>
+    else
+    {
+        <h2 class="text-center">
+            Усі групи
+        </h2>
 
-    @if (User.IsInRole("Admin"))
-    {
-        <a asp-action="CreateGroup" asp-controller="Group">Створити групу</a>
-    }
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Course)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.StartStudy)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.EndStudy)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IsReleased)
-                </th>
-                @if (User.IsInRole("Admin"))
-                {
-                    <th></th>
-                }
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+        @if (User.IsInRole("Admin"))
+        {
+            <a asp-action="CreateGroup" asp-controller="Group">Створити групу</a>
+        }
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>
-                        <a href="~/group/@item.Id">@item.Name</a>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Course)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.StartStudy)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EndStudy)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IsReleased)
-                    </td>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Course)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.StartStudy)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EndStudy)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsReleased)
+                    </th>
                     @if (User.IsInRole("Admin"))
                     {
-                        <td>
-                            @Html.ActionLink("Редагувати", "EditGroup", new { id = item.Id })
-                        </td>
+                        <th></th>
                     }
                 </tr>
-            }
-        </tbody>
-    </table>
-}
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a href="~/group/@item.Id">@item.Name</a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Course)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StartStudy)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EndStudy)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IsReleased)
+                        </td>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <td>
+                                @Html.ActionLink("Редагувати", "EditGroup", new { id = item.Id })
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

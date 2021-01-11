@@ -4,66 +4,68 @@
     ViewData["Title"] = "- Спеціальності";
 }
 
-@if (Model == null || Model.Count() == 0)
-{
-    <h2 class="text-center">Спеціальностей ще немає</h2>
-    @if (User.IsInRole("Admin"))
+<div class="jumbotron">
+    @if (Model == null || Model.Count() == 0)
     {
-        <a asp-action="CreateSpecialty" asp-controller="Specialty">Створити спеціальність</a>
+        <h2 class="text-center">Спеціальностей ще немає</h2>
+        @if (User.IsInRole("Admin"))
+        {
+            <a asp-action="CreateSpecialty" asp-controller="Specialty">Створити спеціальність</a>
+        }
     }
-}
-else
-{
-    <h2 class="text-center">
-        Усі спеціальності
-    </h2>
+    else
+    {
+        <h2 class="text-center">
+            Усі спеціальності
+        </h2>
 
-    @if (User.IsInRole("Admin"))
-    {
-        <a asp-action="CreateSpecialty" asp-controller="Specialty">Створити спеціальність</a>
-    }
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Shifr)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Code)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Qualification)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+        @if (User.IsInRole("Admin"))
+        {
+            <a asp-action="CreateSpecialty" asp-controller="Specialty">Створити спеціальність</a>
+        }
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>
-                        <a href="~/specialty/@item.Id">@item.Name</a>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Shifr)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Code)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Qualification)
-                    </td>
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <td>
-                            @Html.ActionLink("Редагувати", "Edit", new { id = item.Id })
-                        </td>
-                    }
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Shifr)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Code)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Qualification)
+                    </th>
+                    <th></th>
                 </tr>
-            }
-        </tbody>
-    </table>
-}
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a href="~/specialty/@item.Id">@item.Name</a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Shifr)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Code)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Qualification)
+                        </td>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <td>
+                                @Html.ActionLink("Редагувати", "Edit", new { id = item.Id })
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

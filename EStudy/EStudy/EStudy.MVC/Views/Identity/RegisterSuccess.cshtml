@@ -4,10 +4,12 @@
 @{
     ViewData["Title"] = "- Успішна реєстрація";
 }
-@if (ViewBag.Confirm != null)
-{
-    @Html.ActionLink("Підтвердити акаунт", "Confirm", "Home", new { Code=ViewBag.Confirm.Code, UserId = ViewBag.Confirm.UserId })
-}
-<p>
-    Перейдіть будь-ласка на пошту для підтвердження акаунту
-</p>
+<div class="jumbotron">
+    @if (ViewBag.Confirm != null)
+    {
+        @Html.ActionLink("Підтвердити акаунт", "Confirm", "Home", new { Code = ViewBag.Confirm.Code, UserId = ViewBag.Confirm.UserId })
+    }
+    <p>
+        Перейдіть будь-ласка на пошту для підтвердження акаунту
+    </p>
+</div>
