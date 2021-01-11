@@ -25,5 +25,19 @@ namespace EStudy.Application.ViewModels.User
         public string Facebook { get; set; }
         public string GitHub { get; set; }
         public string WebSite { get; set; }
+
+        public bool IsHaveAnySocialNetworks()
+        {
+            if (string.IsNullOrWhiteSpace(Twitter) &&
+                string.IsNullOrWhiteSpace(Instagram) &&
+                string.IsNullOrWhiteSpace(Facebook) &&
+                string.IsNullOrWhiteSpace(GitHub) &&
+                string.IsNullOrWhiteSpace(WebSite))
+            {
+                return false;
+            }
+            return true;
+        }
+
     }
 }

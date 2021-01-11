@@ -4,14 +4,16 @@ using EStudy.Infrastructure.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EStudy.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(EStudyContext))]
-    partial class EStudyContextModelSnapshot : ModelSnapshot
+    [Migration("20210111201937_SocialNetworkLinks")]
+    partial class SocialNetworkLinks
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
