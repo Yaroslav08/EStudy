@@ -13,6 +13,8 @@ namespace EStudy.Application.ViewModels.User
         public string LastName { get; set; }
         public string Username { get; set; }
         public string About { get; set; }
+        public string Location { get; set; }
+        public DateTime? Born { get; set; }
         public string Avatar50 { get; set; }
         public string Avatar { get; set; }
         public string Role { get; set; }

@@ -19,6 +19,8 @@ namespace EStudy.Domain.Models
         [MinLength(5), MaxLength(500)]
         public string About { get; set; }
         public DateTime? Born { get; set; }
+        [MinLength(4), MaxLength(250)]
+        public string Location { get; set; }
         public int? Age { get; set; }
         [MinLength(10), MaxLength(250)]
         public string Avatar50 { get; set; }
