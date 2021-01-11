@@ -19,6 +19,10 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse">
+            <form class="form-inline" asp-action="Search" asp-controller="Home" method="get">
+                <input class="form-control mr-sm-2" type="search" name="query" placeholder="Пошук" aria-label="Search" />
+                <button class="btn btn-outline-light my-2 my-sm-0">Знайти</button>
+            </form>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="~/university">Університет</a>
@@ -33,15 +37,11 @@
                     <a class="nav-link" href="~/group/all">Групи</a>
                 </li>
             </ul>
-            <form class="form-inline" asp-action="Search" asp-controller="Home" method="get">
-                <input class="form-control mr-sm-2" type="search" name="query" placeholder="Пошук" aria-label="Search" />
-                <button class="btn btn-outline-light my-2 my-sm-0">Знайти</button>
-            </form>
             <ul class="navbar-nav">
                 @if (User.Identity.IsAuthenticated)
                 {
                     <li class="nav-item">
-                        @Html.ActionLink(User.Claims.FirstOrDefault(d=>d.Type=="Fullname").Value, "GetMe", "Home", null, new { @class= "nav-link" })
+                        @Html.ActionLink(User.Claims.FirstOrDefault(d => d.Type == "Fullname").Value, "GetMe", "Home", null, new { @class = "nav-link" })
                     </li>
                     <li class="nav-item">
                         @Html.ActionLink("Вийти", "Logout", "Identity", null, new { @class = "nav-link" })
