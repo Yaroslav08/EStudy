@@ -37,6 +37,11 @@ namespace EStudy.Domain.Models
         public string Email { get; set; }
         [Required]
         public bool IsShowEmail { get; set; } = true;
+        public string Twitter { get; set; }
+        public string Instagram { get; set; }
+        public string Facebook { get; set; }
+        public string GitHub { get; set; }
+        public string WebSite { get; set; }
 
         [Required]
         public bool IsConfirmed { get; set; } = false;
