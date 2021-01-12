@@ -202,8 +202,14 @@ namespace EStudy.Application.Services
             var userFromDb = await unitOfWork.UserRepository.GetByWhereAsTrackingAsync(d => d.Id == model.Id);
             if (userFromDb == null)
                 return Constants.Constants.UserNotFoundById;
-            if (await unitOfWork.UserRepository.IsExistAsync(d => d.Username == model.Username))
-                return Constants.Constants.UsernameExist;
+            var usernameId = await unitOfWork.UserRepository.IsExistUsernameAsync(model.Username);
+            if (usernameId.Item1)
+            {
+                if (usernameId.Item2 != model.Id)
+                {
+                    return Constants.Constants.UsernameExist;
+                }
+            }
             var user = mapper.Map<UserEditModel, User>(model, userFromDb);
             return await unitOfWork.UserRepository.UpdateAsync(user);
         }
