@@ -3,6 +3,7 @@ using EStudy.Application.ViewModels.Auth;
 using EStudy.Domain.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
@@ -168,6 +169,7 @@ namespace EStudy.MVC.Controllers
 
 
         [HttpGet("identity/edit")]
+        [Authorize]
         public async Task<IActionResult> EditProfile()
         {
             var currentUser = await _dataManager.UserService.GetForEditUser(GetId());
@@ -177,7 +179,11 @@ namespace EStudy.MVC.Controllers
         }
 
 
+
+
+
         [HttpGet("identity/logout")]
+        [Authorize]
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
