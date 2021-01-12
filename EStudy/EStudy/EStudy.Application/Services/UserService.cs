@@ -196,5 +196,11 @@ namespace EStudy.Application.Services
         {
             return mapper.Map<UserEditModel>(await unitOfWork.UserRepository.GetByWhereAsync(d => d.Id == id));
         }
+
+        public async Task<string> EditUser(UserEditModel model)
+        {
+            var userFromDb = await unitOfWork.UserRepository.GetByWhereAsTrackingAsync(d => d.Id == model.Id);
+
+        }
     }
 }

@@ -8,6 +8,8 @@ namespace EStudy.Application.ViewModels.User
 {
     public class UserEditModel : RequestModel
     {
+        [Required]
+        public int Id { get; set; }
         [Required, MinLength(3), MaxLength(25)]
         public string FirstName { get; set; }
         [MinLength(3), MaxLength(30)]

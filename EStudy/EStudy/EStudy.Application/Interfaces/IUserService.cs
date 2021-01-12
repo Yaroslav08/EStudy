@@ -10,6 +10,7 @@ namespace EStudy.Application.Interfaces
     {
         Task<UserViewModel> GetUserById(int id);
         Task<UserEditModel> GetForEditUser(int id);
+        Task<string> EditUser(UserEditModel model);
         Task<List<UserShortViewModel>> SearchUsers(string name, int count, int skip, string param = null);
         Task<List<UserNotConfirmed>> GetNotConfirmedUsers(int count, int skip);
         Task<ConfirmResult> TryConfirmUser(ConfirmViewModel model);
