@@ -25,6 +25,14 @@ namespace EStudy.MVC.Controllers
             return View();
         }
 
+        [HttpGet("me")]
+        [Authorize]
+        public async Task<IActionResult> GetMe()
+        {
+            var user = await dataManager.UserService.GetUserById(Convert.ToInt32(User.Identity.Name));
+            return View(user);
+        }
+
 
         [HttpGet("search")]
         public IActionResult Search([FromQuery]string query)

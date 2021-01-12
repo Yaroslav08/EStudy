@@ -73,7 +73,7 @@
                         <h4>@Model.FirstName @Model.LastName</h4>
                         <p class="text-secondary mb-1">@Model.About</p>
                         <p class="text-muted font-size-sm">@Model.Location</p>
-                        <button class="btn btn-outline-primary">Редагувати профіль</button>
+                        <a href="identity/edit" class="btn btn-outline-primary">Редагувати профіль</a>
                     </div>
                 </div>
             </div>
@@ -129,7 +129,7 @@
                         <h6 class="mb-0">Повне ім'я</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                        @Model.FirstName @Model.LastName
+                        @Model.LastName @Model.FirstName @Model.MiddleName
                     </div>
                 </div>
                 @if (!string.IsNullOrWhiteSpace(Model.Email))
@@ -170,4 +170,6 @@
                 }
             </div>
         </div>
+
+    </div>
 </div>
