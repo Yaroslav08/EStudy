@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EStudy.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(EStudyContext))]
-    [Migration("20210111201937_SocialNetworkLinks")]
-    partial class SocialNetworkLinks
+    [Migration("20210112124557_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -893,6 +893,9 @@ namespace EStudy.Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(25)
                         .HasColumnType("nvarchar(25)");
+
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
 
                     b.Property<string>("GitHub")
                         .HasColumnType("nvarchar(max)");

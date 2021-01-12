@@ -892,6 +892,9 @@ namespace EStudy.Infrastructure.Data.Migrations
                         .HasMaxLength(25)
                         .HasColumnType("nvarchar(25)");
 
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
                     b.Property<string>("GitHub")
                         .HasColumnType("nvarchar(max)");
 

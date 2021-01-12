@@ -16,6 +16,8 @@ namespace EStudy.Domain.Models
         public string LastName { get; set; }
         [MinLength(4), MaxLength(25)]
         public string Username { get; set; }
+        [Required]
+        public GenderType Gender { get; set; }
         [MinLength(5), MaxLength(500)]
         public string About { get; set; }
         public DateTime? Born { get; set; }
@@ -56,5 +58,12 @@ namespace EStudy.Domain.Models
         public List<GroupMember> GroupMembers { get; set; }
         public List<Course> Courses { get; set; }
         public List<Homework> Homeworks { get; set; }
+    }
+
+    public enum GenderType
+    {
+        Female,
+        Male,
+        Other
     }
 }

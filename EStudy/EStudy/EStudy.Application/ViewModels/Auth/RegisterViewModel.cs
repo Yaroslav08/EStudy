@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EStudy.Constants;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -15,6 +16,10 @@ namespace EStudy.Application.ViewModels.Auth
         [Required(ErrorMessage = "Прізвище обов'язково"), MinLength(3, ErrorMessage = "Мінімальна довжина 3 символів"), MaxLength(25, ErrorMessage = "Максимальна довжина 25 символів")]
         [DisplayName("Прізвище")]
         public string LastName { get; set; }
+        [Required, Range(0,3)]
+        [DisplayName("Стать")]
+        public int GenderValue { get; set; }
+
         [Required(ErrorMessage = "Логін обов'язковий"), MinLength(5, ErrorMessage = "Мінімальна довжина 5 символів"), MaxLength(50, ErrorMessage = "Максимальна довжина 50 символів")]
         [DisplayName("Логін")]
         public string Login { get; set; }

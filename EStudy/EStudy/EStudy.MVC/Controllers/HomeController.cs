@@ -30,6 +30,8 @@ namespace EStudy.MVC.Controllers
         public async Task<IActionResult> GetMe()
         {
             var user = await dataManager.UserService.GetUserById(Convert.ToInt32(User.Identity.Name));
+            if (user == null)
+                return LocalRedirect("~/identity/logout");
             return View(user);
         }
 

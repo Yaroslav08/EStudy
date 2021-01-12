@@ -11,11 +11,11 @@ namespace EStudy.Constants
         public string UkrName { get; set; }
     }
 
-    public class Genders
+    public static class Genders
     {
-        private List<Gender> genders;
+        private static List<Gender> genders;
 
-        public List<Gender> GetGenders()
+        public static List<Gender> GetGenders()
         {
             if (genders == null || genders.Count == 0)
             {
@@ -30,6 +30,11 @@ namespace EStudy.Constants
                     {
                         Value = 1,
                         UkrName = "Чоловік"
+                    },
+                    new Gender
+                    {
+                        Value = 2,
+                        UkrName = "Інша"
                     }
                 };
             }

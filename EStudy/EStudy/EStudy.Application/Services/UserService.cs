@@ -92,7 +92,13 @@ namespace EStudy.Application.Services
                 .SetConfirmCode(Generator.GetString(30))
                 .SetRole(RoleType.Teacher)
                 .Build();
-
+            user.Gender = model.GenderValue switch
+            {
+                0 => GenderType.Female,
+                1 => GenderType.Male,
+                2 => GenderType.Other,
+                _ => GenderType.Other
+            };
             var result = await unitOfWork.UserRepository.CreateAsync(user);
             if (result == Constants.Constants.OK)
                 return new RegisterResult { Successed = true };
@@ -113,7 +119,13 @@ namespace EStudy.Application.Services
                 .SetConfirmCode(Generator.GetString(30))
                 .SetRole(RoleType.Student)
                 .Build();
-
+            user.Gender = model.GenderValue switch
+            {
+                0 => GenderType.Female,
+                1 => GenderType.Male,
+                2 => GenderType.Other,
+                _ => GenderType.Other
+            };
             var result = await unitOfWork.UserRepository.CreateAsync(user);
             if (result == Constants.Constants.OK)
                 return new RegisterResult { Successed = true };
