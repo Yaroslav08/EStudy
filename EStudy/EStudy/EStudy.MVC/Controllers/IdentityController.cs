@@ -165,6 +165,18 @@ namespace EStudy.MVC.Controllers
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
         }
 
+
+
+        [HttpGet("identity/edit")]
+        public async Task<IActionResult> EditProfile()
+        {
+            var currentUser = await _dataManager.UserService.GetForEditUser(GetId());
+            if (currentUser == null)
+                return LocalRedirect("identity/logout");
+            return View(currentUser);
+        }
+
+
         [HttpGet("identity/logout")]
         public async Task<IActionResult> Logout()
         {
