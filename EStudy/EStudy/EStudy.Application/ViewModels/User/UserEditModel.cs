@@ -20,6 +20,9 @@ namespace EStudy.Application.ViewModels.User
         [Required, MinLength(3), MaxLength(25)]
         [DisplayName("Прізвище")]
         public string LastName { get; set; }
+        [Required, Range(0, 3)]
+        [DisplayName("Стать")]
+        public int GenderValue { get; set; }
         [MinLength(4), MaxLength(25)]
         [DisplayName("Нікнейм")]
         public string Username { get; set; }

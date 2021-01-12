@@ -223,6 +223,13 @@ namespace EStudy.Application.Services
                 }
             }
             var user = mapper.Map<UserEditModel, User>(model, userFromDb);
+            user.Gender = model.GenderValue switch
+            {
+                0 => GenderType.Female,
+                1 => GenderType.Male,
+                2 => GenderType.Other,
+                _ => GenderType.Other
+            };
             return await unitOfWork.UserRepository.UpdateAsync(user);
         }
     }

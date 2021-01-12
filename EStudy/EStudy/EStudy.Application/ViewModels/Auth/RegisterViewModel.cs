@@ -19,7 +19,6 @@ namespace EStudy.Application.ViewModels.Auth
         [Required, Range(0,3)]
         [DisplayName("Стать")]
         public int GenderValue { get; set; }
-
         [Required(ErrorMessage = "Логін обов'язковий"), MinLength(5, ErrorMessage = "Мінімальна довжина 5 символів"), MaxLength(50, ErrorMessage = "Максимальна довжина 50 символів")]
         [DisplayName("Логін")]
         public string Login { get; set; }

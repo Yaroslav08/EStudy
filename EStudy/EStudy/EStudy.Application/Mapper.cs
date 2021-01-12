@@ -24,7 +24,8 @@ namespace EStudy.Application
                 .ForMember(d => d.Phone, s => s.MapFrom(d => d.IsShowPhone ? d.Phone : null));
             CreateMap<User, UserShortViewModel>()
                 .ForMember(d => d.Avatar, s => s.MapFrom(d => d.Avatar50));
-            CreateMap<User, UserEditModel>();
+            CreateMap<User, UserEditModel>()
+                .ForMember(d => d.GenderValue, s => s.MapFrom(d => Convert.ToInt32(d.Gender)));
             CreateMap<User, UserNotConfirmed>()
                 .ForMember(d => d.Role, s => s.MapFrom(d => d.Role.ToString()));
             CreateMap<UserEditModel, User>();
