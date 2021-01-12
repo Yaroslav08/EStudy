@@ -26,34 +26,6 @@ namespace EStudy.MVC.Controllers
         }
 
 
-        [HttpGet("me")]
-        [Authorize]
-        public async Task<IActionResult> GetMe()
-        {
-            var user = await dataManager.UserService.GetUserById(Convert.ToInt32(User.Identity.Name));
-            return View(user);
-        }
-
-        [HttpGet("confirm")]
-        public IActionResult Confirm(string code)
-        {
-            return View();
-        }
-
-
-        [HttpPost("confirm")]
-        public async Task<IActionResult> Confirm([FromQuery] string code, ConfirmViewModel model)
-        {
-            model.IP = HttpContext.Connection.RemoteIpAddress.ToString();
-            var result = await dataManager.UserService.ConfirmUser(model);
-            if (result.Successed)
-                return LocalRedirect("~/login");
-            ModelState.AddModelError("", result.Error);
-            return View();
-        }
-
-
-
         [HttpGet("search")]
         public IActionResult Search([FromQuery]string query)
         {
