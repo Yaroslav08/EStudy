@@ -191,5 +191,10 @@ namespace EStudy.Application.Services
 
             
         }
+
+        public async Task<UserEditModel> GetForEditUser(int id)
+        {
+            return mapper.Map<UserEditModel>(await unitOfWork.UserRepository.GetByWhereAsync(d => d.Id == id));
+        }
     }
 }
