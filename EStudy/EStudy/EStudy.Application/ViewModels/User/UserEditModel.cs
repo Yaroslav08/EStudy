@@ -27,6 +27,7 @@ namespace EStudy.Application.ViewModels.User
         [DisplayName("Про себе")]
         public string About { get; set; }
         [DisplayName("Дата народження")]
+        [DataType(DataType.Date)]
         public DateTime? Born { get; set; }
         [MinLength(4), MaxLength(250)]
         [DisplayName("Ваше місцезнаходження (або місто народження)")]
@@ -38,11 +39,13 @@ namespace EStudy.Application.ViewModels.User
         [DisplayName("Телефон")]
         public string Phone { get; set; }
         [Required]
+        [DisplayName("Інші користувачі можуть бачити телефон")]
         public bool IsShowPhone { get; set; }
         [MinLength(5), MaxLength(100), EmailAddress]
         [DisplayName("Електронна пошта")]
         public string Email { get; set; }
         [Required]
+        [DisplayName("Інші користувачі можуть бачити пошту")]
         public bool IsShowEmail { get; set; }
         public string Twitter { get; set; }
         public string Instagram { get; set; }
