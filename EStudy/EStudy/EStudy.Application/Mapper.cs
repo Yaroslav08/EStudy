@@ -27,6 +27,7 @@ namespace EStudy.Application
             CreateMap<User, UserEditModel>();
             CreateMap<User, UserNotConfirmed>()
                 .ForMember(d => d.Role, s => s.MapFrom(d => d.Role.ToString()));
+            CreateMap<UserEditModel, User>();
 
 
             CreateMap<University, UniversityViewModel>()

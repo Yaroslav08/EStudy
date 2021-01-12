@@ -23,6 +23,7 @@ namespace EStudy.Constants
         public const string UserNotExist = "Користувача з таким логіном не існує";
         public const string NotConfirmed = "Користувач не підтвердив акаунт";
         public const string PasswordNotComapre = "Пароль не правильний";
+        public const string UsernameExist = "Нікнейм вже зайнятий";
         #endregion
 
 
