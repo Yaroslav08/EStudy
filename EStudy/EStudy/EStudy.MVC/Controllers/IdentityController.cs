@@ -1,5 +1,6 @@
 ﻿using EStudy.Application;
 using EStudy.Application.ViewModels.Auth;
+using EStudy.Application.ViewModels.User;
 using EStudy.Domain.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -178,7 +179,20 @@ namespace EStudy.MVC.Controllers
             return View(currentUser);
         }
 
-
+        [HttpPost("identity/edit")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditProfile(UserEditModel model)
+        {
+            model.IP = HttpContext.Connection.RemoteIpAddress.ToString();
+            model.UserId = GetId();
+            var result = await _dataManager.UserService.EditUser(model);
+            if (result != Constants.Constants.OK)
+            {
+                ModelState.AddModelError("", result);
+                return View(model);
+            }
+            return LocalRedirect("/me");
+        }
 
 
 
