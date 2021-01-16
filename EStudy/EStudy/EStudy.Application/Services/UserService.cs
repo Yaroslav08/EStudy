@@ -101,7 +101,10 @@ namespace EStudy.Application.Services
             };
             var result = await unitOfWork.UserRepository.CreateAsync(user);
             if (result == Constants.Constants.OK)
+            {
+                //ToDo send to email confirm
                 return new RegisterResult { Successed = true };
+            }
 
             return new RegisterResult { Successed = false, Error = result };
         }
@@ -128,7 +131,10 @@ namespace EStudy.Application.Services
             };
             var result = await unitOfWork.UserRepository.CreateAsync(user);
             if (result == Constants.Constants.OK)
+            {
+                //ToDo send to email confirm
                 return new RegisterResult { Successed = true };
+            }
 
             return new RegisterResult { Successed = false, Error = result };
         }
