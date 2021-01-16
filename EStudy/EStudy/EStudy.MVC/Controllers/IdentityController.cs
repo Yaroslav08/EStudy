@@ -168,17 +168,6 @@ namespace EStudy.MVC.Controllers
         }
 
 
-
-        [HttpGet("identity/edit")]
-        [Authorize]
-        public async Task<IActionResult> EditProfile()
-        {
-            var currentUser = await _dataManager.UserService.GetForEditUser(GetId());
-            if (currentUser == null)
-                return LocalRedirect("identity/logout");
-            return View(currentUser);
-        }
-
         [HttpPost("identity/edit")]
         [ValidateAntiForgeryToken]
         [Authorize]
