@@ -186,13 +186,6 @@ namespace EStudy.MVC.Controllers
 
 
 
-        [HttpGet("identity/password")]
-        [Authorize]
-        public IActionResult ChangePassword()
-        {
-            return View();
-        }
-
         [HttpPost("identity/password")]
         [Authorize]
         [ValidateAntiForgeryToken]
@@ -212,7 +205,7 @@ namespace EStudy.MVC.Controllers
 
         [HttpGet("identity/setting")]
         [Authorize]
-        public async Task<IActionResult> SettingAsync()
+        public async Task<IActionResult> Setting()
         {
             var setting = await _dataManager.UserService.GetUserSetting(GetId());
             return View(setting);
