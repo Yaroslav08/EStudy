@@ -238,5 +238,18 @@ namespace EStudy.Application.Services
             };
             return await unitOfWork.UserRepository.UpdateAsync(user);
         }
+
+        public async Task<string> ChangePassword(PasswordChangeViewModel model)
+        {
+            var user = await unitOfWork.UserRepository.GetByWhereAsTrackingAsync(d => d.Id == model.UserId);
+            if (user == null)
+                return Constants.Constants.UserNotExist;
+            if (!user.IsConfirmed)
+                return Constants.Constants.NotConfirmed;
+            if (!PasswordManager.VerifyPasswordHash(model.OldPassword, user.PasswordHash))
+                return Constants.Constants.PasswordNotComapre;
+            user.PasswordHash = PasswordManager.GeneratePasswordHash(model.NewPassword);
+            return await unitOfWork.UserRepository.UpdateAsync(user);
+        }
     }
 }
