@@ -9,6 +9,7 @@ namespace EStudy.Application.Interfaces
     public interface IUserService
     {
         Task<UserViewModel> GetUserById(int id);
+        Task<UserViewModel> GetUserByUsername(string name);
         Task<UserEditModel> GetForEditUser(int id);
         Task<string> EditUser(UserEditModel model);
         Task<List<UserShortViewModel>> SearchUsers(string name, int count, int skip, string param = null);

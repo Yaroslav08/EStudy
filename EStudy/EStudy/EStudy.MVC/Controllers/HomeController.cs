@@ -42,15 +42,15 @@ namespace EStudy.MVC.Controllers
         public async Task<IActionResult> GetUser(string name)
         {
             name = name.ToLower();
-            if(name.StartsWith("@"))
+            if (name.StartsWith("@"))
             {
                 var user = await dataManager.UserService.GetUserByUsername(name.Split("@").Last());
-                return View("GetUser", user);
+                return View("~/Views/User/GetUser.cshtml", user);
             }
             if (name.StartsWith("id"))
             {
                 var user = await dataManager.UserService.GetUserById(Convert.ToInt32(name.Split("id").Last()));
-                return View("GetUser", user);
+                return View("~/Views/User/GetUser.cshtml", user);
             }
             return LocalRedirect("~/");
         }
@@ -58,7 +58,7 @@ namespace EStudy.MVC.Controllers
 
 
         [HttpGet("search")]
-        public IActionResult Search([FromQuery]string query)
+        public IActionResult Search([FromQuery] string query)
         {
             var req = HttpContext.Request.Headers["Referer"].ToString();
             if (query.Length <= 2)

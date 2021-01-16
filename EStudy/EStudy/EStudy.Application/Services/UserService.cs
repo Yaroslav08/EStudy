@@ -272,5 +272,10 @@ namespace EStudy.Application.Services
             user.EditedByUserId = model.UserId;
             return await unitOfWork.UserRepository.UpdateAsync(user);
         }
+
+        public async Task<UserViewModel> GetUserByUsername(string name)
+        {
+            return mapper.Map<UserViewModel>(await unitOfWork.UserRepository.GetByWhereAsync(d => d.Username == name));
+        }
     }
 }
