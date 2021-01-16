@@ -41,15 +41,20 @@ namespace EStudy.MVC.Controllers
         [HttpGet("{name}")]
         public async Task<IActionResult> GetUser(string name)
         {
-            name = name.ToLower();
             if (name.StartsWith("@"))
             {
-                var user = await dataManager.UserService.GetUserByUsername(name.Split("@").Last());
+                string username = name.Split("@").Last();
+                if (username == GetUsername())
+                    return LocalRedirect("~/me");
+                var user = await dataManager.UserService.GetUserByUsername(username);
                 return View("~/Views/User/GetUser.cshtml", user);
             }
             if (name.StartsWith("id"))
             {
-                var user = await dataManager.UserService.GetUserById(Convert.ToInt32(name.Split("id").Last()));
+                int id = Convert.ToInt32(name.Split("id").Last());
+                if (GetId() == id)
+                    return LocalRedirect("~/me");
+                var user = await dataManager.UserService.GetUserById(id);
                 return View("~/Views/User/GetUser.cshtml", user);
             }
             return LocalRedirect("~/");
