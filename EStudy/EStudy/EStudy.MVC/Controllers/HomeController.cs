@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace EStudy.MVC.Controllers
@@ -34,6 +35,26 @@ namespace EStudy.MVC.Controllers
                 return LocalRedirect("~/identity/logout");
             return View(user);
         }
+
+
+
+        [HttpGet("{name}")]
+        public async Task<IActionResult> GetUser(string name)
+        {
+            name = name.ToLower();
+            if(name.StartsWith("@"))
+            {
+                var user = await dataManager.UserService.GetUserByUsername(name.Split("@").Last());
+                return View("GetUser", user);
+            }
+            if (name.StartsWith("id"))
+            {
+                var user = await dataManager.UserService.GetUserById(Convert.ToInt32(name.Split("id").Last()));
+                return View("GetUser", user);
+            }
+            return LocalRedirect("~/");
+        }
+
 
 
         [HttpGet("search")]
