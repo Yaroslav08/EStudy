@@ -254,5 +254,23 @@ namespace EStudy.Application.Services
                 User = user
             };
         }
+
+        public async Task<string> EditUsername(UsernameEditModel model)
+        {
+            var user = await unitOfWork.UserRepository.GetByWhereAsTrackingAsync(d => d.Id == model.UserId);
+            if (user == null)
+                return Constants.Constants.UserNotFoundById;
+            if (model.Username == user.Username)
+                return Constants.Constants.OK;
+            var res = await unitOfWork.UserRepository.IsExistUsernameAsync(model.Username);
+            if (res.Item2 != model.UserId && res.Item1)
+                return Constants.Constants.UsernameExist;
+            user.Username = model.Username;
+            user.IsEdit = true;
+            user.DateLastEdit = DateTime.Now;
+            user.EditedFromIP = model.IP;
+            user.EditedByUserId = model.UserId;
+            return await unitOfWork.UserRepository.UpdateAsync(user);
+        }
     }
 }

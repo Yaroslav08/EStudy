@@ -25,5 +25,6 @@ namespace EStudy.Application.Interfaces
         Task<List<UserShortViewModel>> GetAllTeachers();
         Task<string> ChangePassword(PasswordChangeViewModel model);
         Task<SettingViewModel> GetUserSetting(int userId);
+        Task<string> EditUsername(UsernameEditModel model);
     }
 }
