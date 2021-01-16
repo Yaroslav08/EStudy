@@ -251,5 +251,16 @@ namespace EStudy.Application.Services
             user.PasswordHash = PasswordManager.GeneratePasswordHash(model.NewPassword);
             return await unitOfWork.UserRepository.UpdateAsync(user);
         }
+
+        public async Task<SettingViewModel> GetUserSetting(int userId)
+        {
+            var user = await GetForEditUser(userId);
+            if (user == null)
+                return null;
+            return new SettingViewModel
+            {
+                User = user
+            };
+        }
     }
 }

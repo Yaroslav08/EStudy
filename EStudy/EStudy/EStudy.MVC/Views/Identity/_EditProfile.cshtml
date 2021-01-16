@@ -1,0 +1,101 @@
+﻿@model EStudy.Application.ViewModels.User.UserEditModel
+
+<form asp-action="EditProfile" asp-controller="Identity">
+    <input asp-for="Id" type="hidden" />
+    <div class="form-group">
+        <label asp-for="FirstName" class="control-label"></label>
+        <input asp-for="FirstName" class="form-control" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="MiddleName" class="control-label"></label>
+        <input asp-for="MiddleName" class="form-control" />
+        <span asp-validation-for="MiddleName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LastName" class="control-label"></label>
+        <input asp-for="LastName" class="form-control" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="GenderValue" class="control-label"></label>
+        <select asp-for="GenderValue" class="form-control"
+                asp-items="@(new SelectList(EStudy.Constants.Genders.GetGenders(),"Value", "UkrName"))">
+        </select>
+        <span asp-validation-for="GenderValue" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Username" class="control-label"></label>
+        <input asp-for="Username" class="form-control" />
+        <span asp-validation-for="Username" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="About" class="control-label"></label>
+        <input asp-for="About" class="form-control" />
+        <span asp-validation-for="About" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Born" class="control-label"></label>
+        <input asp-for="Born" class="form-control" />
+        <span asp-validation-for="Born" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Location" class="control-label"></label>
+        <input asp-for="Location" class="form-control" />
+        <span asp-validation-for="Location" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Avatar" class="control-label"></label>
+        <input asp-for="Avatar" class="form-control" />
+        <span asp-validation-for="Avatar" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Phone" class="control-label"></label>
+        <input asp-for="Phone" class="form-control" />
+        <span asp-validation-for="Phone" class="text-danger"></span>
+    </div>
+    <div class="form-group form-check">
+        <label class="form-check-label">
+            <input class="form-check-input" asp-for="IsShowPhone" /> Чи зможуть бачити інші користувачі телефон
+        </label>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email" class="control-label"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group form-check">
+        <label class="form-check-label">
+            <input class="form-check-input" asp-for="IsShowEmail" /> Чи зможуть бачити інші користувачі пошту
+        </label>
+    </div>
+    <div class="form-group">
+        <label asp-for="Twitter" class="control-label"></label>
+        <input asp-for="Twitter" class="form-control" />
+        <span asp-validation-for="Twitter" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Instagram" class="control-label"></label>
+        <input asp-for="Instagram" class="form-control" />
+        <span asp-validation-for="Instagram" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Facebook" class="control-label"></label>
+        <input asp-for="Facebook" class="form-control" />
+        <span asp-validation-for="Facebook" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="GitHub" class="control-label"></label>
+        <input asp-for="GitHub" class="form-control" />
+        <span asp-validation-for="GitHub" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="WebSite" class="control-label"></label>
+        <input asp-for="WebSite" class="form-control" />
+        <span asp-validation-for="WebSite" class="text-danger"></span>
+    </div>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <input type="submit" value="Зберегти" class="btn btn-primary" />
+    </div>
+</form>

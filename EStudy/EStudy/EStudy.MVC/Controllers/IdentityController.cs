@@ -222,9 +222,11 @@ namespace EStudy.MVC.Controllers
 
 
         [HttpGet("identity/setting")]
-        public IActionResult Setting()
+        [Authorize]
+        public async Task<IActionResult> SettingAsync()
         {
-            return View();
+            var setting = await _dataManager.UserService.GetUserSetting(GetId());
+            return View(setting);
         }
 
 
