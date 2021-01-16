@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -205,7 +206,7 @@ namespace EStudy.MVC.Controllers
         [HttpPost("identity/username")]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ChangeUsername(UsernameEditModel model)
+        public async Task<IActionResult> EditUsername(UsernameEditModel model)
         {
             model.UserId = GetId();
             model.IP = GetIP();
@@ -213,8 +214,9 @@ namespace EStudy.MVC.Controllers
             if (res != Constants.Constants.OK)
             {
                 ModelState.AddModelError("", res);
-                return View(model);
+                return PartialView("_EditUsername", model);
             }
+            ChangeClaim("Username", model.Username);
             return LocalRedirect("~/me");
         }
 
@@ -224,6 +226,10 @@ namespace EStudy.MVC.Controllers
         public async Task<IActionResult> Setting()
         {
             var setting = await _dataManager.UserService.GetUserSetting(GetId());
+            setting.Username = new UsernameEditModel
+            {
+                Username = GetUsername()
+            };
             return View(setting);
         }
 

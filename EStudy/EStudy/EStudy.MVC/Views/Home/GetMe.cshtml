@@ -155,7 +155,19 @@
                         </div>
                     </div>
                 }
-                @if (!string.IsNullOrWhiteSpace(Model.Email))
+                @if (!string.IsNullOrWhiteSpace(Model.Username))
+                {
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Username</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            <a href="&#64;@Model.Username">@Model.Username</a>
+                        </div>
+                    </div>
+                }
+                @if (!string.IsNullOrWhiteSpace(Model.Phone))
                 {
                     <hr>
                     <div class="row">
@@ -167,7 +179,7 @@
                         </div>
                     </div>
                 }
-                @if (!string.IsNullOrWhiteSpace(Model.Email))
+                @if (!string.IsNullOrWhiteSpace(Model.Location))
                 {
                     <hr>
                     <div class="row">

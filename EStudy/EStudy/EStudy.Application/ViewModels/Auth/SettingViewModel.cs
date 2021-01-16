@@ -10,5 +10,6 @@ namespace EStudy.Application.ViewModels.Auth
     {
         public UserEditModel User { get; set; }
         public PasswordChangeViewModel Password { get; set; }
+        public UsernameEditModel Username { get; set; }
     }
 }
