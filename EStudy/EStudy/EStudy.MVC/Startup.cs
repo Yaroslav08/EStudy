@@ -60,7 +60,7 @@ namespace EStudy.MVC
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapHub<NotificationHub>("Notify");
+                endpoints.MapHub<NotificationHub>("notify");
             });
         }
     }

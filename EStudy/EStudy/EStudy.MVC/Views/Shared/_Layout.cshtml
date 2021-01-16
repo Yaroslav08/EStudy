@@ -20,8 +20,8 @@
         </button>
         <div class="collapse navbar-collapse">
             <form class="form-inline" asp-action="Search" asp-controller="Home" method="get">
-                <input class="form-control mr-sm-2" type="search" name="query" placeholder="Пошук" aria-label="Search" />
-                <button class="btn btn-outline-light my-2 my-sm-0">Знайти</button>
+                <input id="srcText" class="form-control mr-sm-2" type="search" name="query" placeholder="Пошук" aria-label="Search" />
+                <button class="btn btn-outline-light my-2 my-sm-0" id="sendBtn">Знайти</button>
             </form>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
@@ -61,7 +61,25 @@
             @RenderBody()
         </main>
     </div>
-
+    <div class="modal" tabindex="-1" role="dialog" id="myModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Modal body text goes here.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2020 - 2021 (E-Study)
@@ -70,6 +88,13 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="js/signalr/dist/browser/signalr.min.js"></script>
+    <script>
+        const hubConnection = new signalR.HubConnectionBuilder()
+            .withUrl("/notify")
+            .build();
+        hubConnection.start();
+    </script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
