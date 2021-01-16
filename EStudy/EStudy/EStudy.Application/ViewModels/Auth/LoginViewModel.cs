@@ -14,6 +14,7 @@ namespace EStudy.Application.ViewModels.Auth
         public string Login { get; set; }
         [Required(ErrorMessage = "Пароль обовя'зковий"), MinLength(8, ErrorMessage = "Мінімальна довжина 8 символів"), MaxLength(25, ErrorMessage = "Максимальна довжина 25 символів")]
         [DisplayName("Пароль")]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
         public string ReturnUrl { get; set; }
     }
