@@ -181,6 +181,7 @@ namespace EStudy.MVC.Controllers
 
         [HttpPost("identity/edit")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> EditProfile(UserEditModel model)
         {
             model.IP = HttpContext.Connection.RemoteIpAddress.ToString();
@@ -192,6 +193,30 @@ namespace EStudy.MVC.Controllers
                 return View(model);
             }
             return LocalRedirect("/me");
+        }
+
+
+
+        [HttpGet("identity/password")]
+        [Authorize]
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost("identity/password")]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChangePassword(PasswordChangeViewModel model)
+        {
+            model.UserId = GetId();
+            var res = await _dataManager.UserService.ChangePassword(model);
+            if (res != Constants.Constants.OK)
+            {
+                ModelState.AddModelError("", res);
+                return View(model);
+            }
+            return LocalRedirect("~/identity/logout");
         }
 
 
