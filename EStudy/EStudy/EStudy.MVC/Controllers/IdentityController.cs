@@ -221,6 +221,13 @@ namespace EStudy.MVC.Controllers
 
 
 
+        [HttpGet("identity/setting")]
+        public IActionResult Setting()
+        {
+            return View();
+        }
+
+
         [HttpGet("identity/logout")]
         [Authorize]
         public async Task<IActionResult> Logout()
