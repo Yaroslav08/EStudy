@@ -22,6 +22,9 @@
                 <input type="submit" value="Увійти" class="btn btn-primary" />
             </div>
         </form>
+        @Html.ActionLink("Зареєструватися як студент", "Register", "Identity", new { type = "s" })
+        <br />
+        @Html.ActionLink("Зареєструватися як викладач", "Register", "Identity", new { type = "t" })
     </div>
 </div>
 @section Scripts {
