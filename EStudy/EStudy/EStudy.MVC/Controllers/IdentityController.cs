@@ -202,6 +202,22 @@ namespace EStudy.MVC.Controllers
         }
 
 
+        [HttpPost("identity/username")]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChangeUsername(UsernameEditModel model)
+        {
+            model.UserId = GetId();
+            model.IP = GetIP();
+            var res = await _dataManager.UserService.EditUsername(model);
+            if (res != Constants.Constants.OK)
+            {
+                ModelState.AddModelError("", res);
+                return View(model);
+            }
+            return LocalRedirect("~/me");
+        }
+
 
         [HttpGet("identity/setting")]
         [Authorize]
