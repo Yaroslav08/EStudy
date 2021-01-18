@@ -3,6 +3,7 @@ using EStudy.MVC.Notification;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,7 +32,7 @@ namespace EStudy.MVC
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                .AddCookie(options =>
                {
-                   options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/identity/login");
+                   options.LoginPath = new PathString("/identity/login");
                });
             services.AddControllersWithViews();
         }
