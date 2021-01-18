@@ -37,6 +37,7 @@ namespace EStudy.MVC.Controllers
 
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetDepartment(int id)
         {
             var depart = await dataManager.DepartmentService.GetDepartmentById(id);
