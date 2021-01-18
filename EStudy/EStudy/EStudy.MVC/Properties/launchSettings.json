@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "EStudy.MVC": {
+    "Kestrel": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "",
