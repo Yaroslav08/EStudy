@@ -19,6 +19,12 @@ namespace EStudy.Infrastructure.Data.Repositories
             }).ToListAsync();
         }
 
+        public async Task<int> GetUniversityId()
+        {
+            var university = await db.Universities.AsNoTracking().Select(d => new University { Id = d.Id }).SingleOrDefaultAsync();
+            return university.Id;
+        }
+
         public async Task<List<Department>> SearchAsync(string q)
         {
             return await db.Departments

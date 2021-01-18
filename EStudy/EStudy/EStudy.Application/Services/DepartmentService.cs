@@ -40,6 +40,7 @@ namespace EStudy.Application.Services
         {
             var depart = await unitOfWork.DepartmentRepository.GetByWhereAsTrackingAsync(d => d.Id == model.Id);
             if (depart == null) return Constants.Constants.DepartmentNotFound;
+            model.UniversityId = await unitOfWork.DepartmentRepository.GetUniversityId();
             return await unitOfWork.DepartmentRepository.UpdateAsync(model.GetDepartmentToDb(depart));
         }
 
