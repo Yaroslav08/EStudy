@@ -277,5 +277,29 @@ namespace EStudy.Application.Services
         {
             return mapper.Map<UserViewModel>(await unitOfWork.UserRepository.GetByWhereAsync(d => d.Username == name));
         }
+
+        public async Task<string> ChangeEmail(EmailChangeViewModel model)
+        {
+            var user = await unitOfWork.UserRepository.GetByWhereAsTrackingAsync(d => d.Login == model.OldEmail);
+            if (user == null)
+                return Constants.Constants.UserNotExist;
+            var res = await unitOfWork.UserRepository.IsExistLoginAsync(model.NewEmail);
+            if (user.Id == res.Item2)
+                return Constants.Constants.OK;
+            if(res.Item1)
+                return Constants.Constants.LoginBusy;
+            user.IsConfirmed = false;
+            user.ConfirmCode = Generator.GetString(30);
+            user.ConfirmedFromIP = null;
+            user.ConfirmedAt = null;
+            user.Login = model.NewEmail;
+            var updated = await unitOfWork.UserRepository.UpdateAsync(user);
+            if (updated == Constants.Constants.OK)
+            {
+                //ToDo send to email confirm
+                return Constants.Constants.OK;
+            }
+            return Constants.Constants.Error;
+        }
     }
 }

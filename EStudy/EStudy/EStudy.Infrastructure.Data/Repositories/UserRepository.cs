@@ -77,6 +77,14 @@ namespace EStudy.Infrastructure.Data.Repositories
                 .ToListAsync();
         }
 
+        public async Task<(bool, int)> IsExistLoginAsync(string login)
+        {
+            var user = await db.Users.AsNoTracking().Select(d => new User { Id = d.Id }).SingleOrDefaultAsync(d => d.Login == login);
+            if (user == null)
+                return (false, 0);
+            return (true, user.Id);
+        }
+
         public async Task<(bool, int)> IsExistUsernameAsync(string username)
         {
             var user = await db.Users.AsNoTracking().SingleOrDefaultAsync(d => d.Username == username);
