@@ -1,12 +1,10 @@
 ﻿@model EStudy.Application.ViewModels.Group.GroupViewModel
 
 @{
-    ViewData["Title"] = "GetGroup";
+    ViewData["Title"] = $"- {Model.Name}";
 }
 
 <div class="jumbotron">
-    <h4>GroupViewModel</h4>
-    <hr />
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Id)

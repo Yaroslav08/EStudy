@@ -40,13 +40,17 @@ namespace EStudy.MVC.Controllers
         public async Task<IActionResult> GetGroup(int id)
         {
             var group = await dataManager.GroupService.GetGroupById(id);
+            if (group == null)
+            {
+                ViewBag.Error = "Група не знайдено";
+                return View("Error");
+            }
             return View(group);
         }
 
         [HttpGet("{id}/members")]
         public async Task<IActionResult> GetGroupMembers(int id)
         {
-            //var members = await groupService.GetGroupMembers(id);
             return View(await dataManager.GroupService.GetGroupMembers(id));
         }
 
