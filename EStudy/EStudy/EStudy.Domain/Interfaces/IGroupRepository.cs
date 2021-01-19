@@ -8,6 +8,6 @@ namespace EStudy.Domain.Interfaces
 {
     public interface IGroupRepository : IRepository<Group>
     {
-        Task<List<Group>> SearchGroupsAsync(string name, int count, int skip, bool? isReleased);
+        Task<List<Group>> SearchGroupsAsync(string name, bool isReleased);
     }
 }

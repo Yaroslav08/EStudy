@@ -94,7 +94,7 @@ namespace EStudy.MVC.Controllers
         }
 
         [HttpDelete("remove")]
-        public async Task<IActionResult> Remove(int id)
+        public IActionResult Remove(int id)
         {
             return LocalRedirect("~/department/all");
         }

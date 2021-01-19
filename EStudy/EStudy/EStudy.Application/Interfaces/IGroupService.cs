@@ -12,7 +12,6 @@ namespace EStudy.Application.Interfaces
         Task<string> CreateGroup(GroupCreateModel model);
         Task<string> EditGroup(GroupEditModel model);
         Task<GroupViewModel> GetGroupById(int id);
-        Task<List<GroupViewModel>> SearchGroups(string name, int count, int skip, bool? isReleased = null);
 
         Task<string> CreateEmail(EmailCreateModel model);
         Task<string> EditEmail(EmailEditModel model);
@@ -25,7 +24,7 @@ namespace EStudy.Application.Interfaces
         Task<List<GroupViewModel>> GetAllGroups();
         Task<List<SpecialtyViewModel>> GetAllSpecialties();
         Task<GroupEditModel> GetForEdit(int id);
-        Task<List<GroupViewModel>> Search(string q, int count, int skip, bool? IsReleased);
+        Task<List<GroupViewModel>> Search(string q, bool isReleased);
         Task<List<GroupMemberViewModel>> GetGroupMembers(int id);
     }
 }

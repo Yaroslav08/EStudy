@@ -44,11 +44,6 @@ namespace EStudy.Application.Services
             return mapper.Map<GroupViewModel>(await unitOfWork.GroupRepository.GetByWhereAsync(d => d.Id == id));
         }
 
-        public async Task<List<GroupViewModel>> SearchGroups(string name, int count, int skip, bool? isReleased = null)
-        {
-            return mapper.Map<List<GroupViewModel>>(await unitOfWork.GroupRepository.SearchGroupsAsync(name, count, skip, isReleased));
-        }
-
         public async Task<string> CreateEmail(EmailCreateModel model)
         {
             var email = mapper.Map<Email>(model);
@@ -131,9 +126,9 @@ namespace EStudy.Application.Services
             return mapper.Map<List<SpecialtyViewModel>>(await unitOfWork.SpecialtyRepository.GetAllShortSpecialtyAsync());
         }
 
-        public async Task<List<GroupViewModel>> Search(string q, int count, int skip, bool? IsReleased)
+        public async Task<List<GroupViewModel>> Search(string q, bool IsReleased)
         {
-            return mapper.Map<List<GroupViewModel>>(await unitOfWork.GroupRepository.SearchGroupsAsync(q, count, skip, IsReleased));
+            return mapper.Map<List<GroupViewModel>>(await unitOfWork.GroupRepository.SearchGroupsAsync(q, IsReleased));
         }
 
         public async Task<GroupEditModel> GetForEdit(int id)

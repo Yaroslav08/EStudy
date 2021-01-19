@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace EStudy.MVC.Controllers
@@ -66,14 +67,15 @@ namespace EStudy.MVC.Controllers
         public IActionResult Search([FromQuery] string query)
         {
             var req = HttpContext.Request.Headers["Referer"].ToString();
+            var encode = WebUtility.UrlEncode(query);
             if (query.Length <= 2)
                 return Redirect(req);
             if (req.Contains("/department/"))
-                return LocalRedirect($"~/department/search?q={query}");
+                return LocalRedirect($"~/department/search?q={encode}");
             if (req.Contains("/specialty/"))
-                return LocalRedirect($"~/specialty/search?q={query}");
+                return LocalRedirect($"~/specialty/search?q={encode}");
             if (req.Contains("/group/"))
-                return LocalRedirect($"~/group/search?q={query}");
+                return LocalRedirect($"~/group/search?q={encode}");
             else
                 return LocalRedirect($"~/");
         }

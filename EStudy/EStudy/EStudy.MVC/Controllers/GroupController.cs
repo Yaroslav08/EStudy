@@ -30,9 +30,10 @@ namespace EStudy.MVC.Controllers
 
         [HttpGet("search")]
         [AllowAnonymous]
-        public async Task<IActionResult> Search(string q, bool? IsReleased, int count = 50, int skip = 2)
+        public async Task<IActionResult> Search(string q, bool isReleased = false)
         {
-            return View("GetAllGroups", await dataManager.GroupService.Search(q, count, skip, IsReleased));
+            var groups = await dataManager.GroupService.Search(q, isReleased);
+            return View("GetAllGroups", groups);
         }
 
 
