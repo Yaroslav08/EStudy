@@ -24,6 +24,11 @@ namespace EStudy.Constants
         public const string NotConfirmed = "Користувач не підтвердив акаунт";
         public const string PasswordNotComapre = "Пароль не правильний";
         public const string UsernameExist = "Нікнейм вже зайнятий";
+
+        public const string TwitterLinkBroken = "Посилання на Twitter не дійсне";
+        public const string FacebookLinkBroken = "Посилання на Facebook не дійсне";
+        public const string InstagramLinkBroken = "Посилання на Instagram не дійсне";
+        public const string GitHubLinkBroken = "Посилання на GitHub не дійсне";
         #endregion
 
 

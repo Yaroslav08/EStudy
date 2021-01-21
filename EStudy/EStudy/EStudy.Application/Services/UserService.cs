@@ -11,6 +11,7 @@ using Extensions;
 using EStudy.Domain.Models;
 using EStudy.Application.Builders;
 using EStudy.Domain.Models.Enums;
+using EStudy.Constants;
 
 namespace EStudy.Application.Services
 {
@@ -217,6 +218,14 @@ namespace EStudy.Application.Services
 
         public async Task<string> EditUser(UserEditModel model)
         {
+            if (!SocialLinksValidate.TwitterIsValid(model.Twitter))
+                return Constants.Constants.TwitterLinkBroken;
+            if (!SocialLinksValidate.TwitterIsValid(model.Facebook))
+                return Constants.Constants.FacebookLinkBroken;
+            if (!SocialLinksValidate.TwitterIsValid(model.Instagram))
+                return Constants.Constants.InstagramLinkBroken;
+            if (!SocialLinksValidate.TwitterIsValid(model.GitHub))
+                return Constants.Constants.GitHubLinkBroken;
             var userFromDb = await unitOfWork.UserRepository.GetByWhereAsTrackingAsync(d => d.Id == model.Id);
             if (userFromDb == null)
                 return Constants.Constants.UserNotFoundById;

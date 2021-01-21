@@ -7,14 +7,14 @@ namespace EStudy.Constants
 {
     public class SocialLinksValidate
     {
-        private bool BaseUrlIsValid(string url)
+        private static bool BaseUrlIsValid(string url)
         {
             if (url.StartsWith("https://") || url.StartsWith("http://"))
                 return true;
             return false;
         }
 
-        public bool TwitterIsValid(string url)
+        public static bool TwitterIsValid(string url)
         {
             if (!BaseUrlIsValid(url))
                 return false;
@@ -23,7 +23,7 @@ namespace EStudy.Constants
             return false;
         }
 
-        public bool InstagramIsValid(string url)
+        public static bool InstagramIsValid(string url)
         {
             if (!BaseUrlIsValid(url))
                 return false;
@@ -32,7 +32,7 @@ namespace EStudy.Constants
             return false;
         }
 
-        public bool FacebookIsValid(string url)
+        public static bool FacebookIsValid(string url)
         {
             if (!BaseUrlIsValid(url))
                 return false;
@@ -41,7 +41,7 @@ namespace EStudy.Constants
             return false;
         }
 
-        public bool GitHubIsValid(string url)
+        public static bool GitHubIsValid(string url)
         {
             if (!BaseUrlIsValid(url))
                 return false;
