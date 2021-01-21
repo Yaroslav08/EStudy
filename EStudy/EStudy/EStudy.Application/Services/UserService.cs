@@ -218,13 +218,13 @@ namespace EStudy.Application.Services
 
         public async Task<string> EditUser(UserEditModel model)
         {
-            if (!SocialLinksValidate.TwitterIsValid(model.Twitter))
+            if (!SocialLinksValidate.IsValidUrl(model.Twitter, "https://twitter.com", "https://www.twitter.com"))
                 return Constants.Constants.TwitterLinkBroken;
-            if (!SocialLinksValidate.FacebookIsValid(model.Facebook))
+            if (!SocialLinksValidate.IsValidUrl(model.Facebook, "https://facebook.com", "https://www.facebook.com"))
                 return Constants.Constants.FacebookLinkBroken;
-            if (!SocialLinksValidate.InstagramIsValid(model.Instagram))
+            if (!SocialLinksValidate.IsValidUrl(model.Instagram, "https://instagram.com", "https://www.instagram.com"))
                 return Constants.Constants.InstagramLinkBroken;
-            if (!SocialLinksValidate.GitHubIsValid(model.GitHub))
+            if (!SocialLinksValidate.IsValidUrl(model.GitHub, "https://github.com", "https://www.github.com"))
                 return Constants.Constants.GitHubLinkBroken;
             var userFromDb = await unitOfWork.UserRepository.GetByWhereAsTrackingAsync(d => d.Id == model.Id);
             if (userFromDb == null)
