@@ -34,7 +34,7 @@ namespace EStudy.MVC
                {
                    options.LoginPath = new PathString("/identity/login");
                });
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddJsonOptions(opt => opt.JsonSerializerOptions.PropertyNamingPolicy = null);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
