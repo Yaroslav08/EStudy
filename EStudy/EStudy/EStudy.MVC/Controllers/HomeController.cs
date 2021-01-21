@@ -48,7 +48,7 @@ namespace EStudy.MVC.Controllers
                 if (username == GetUsername())
                     return LocalRedirect("~/me");
                 var user = await dataManager.UserService.GetUserByUsername(username);
-                return View("~/Views/User/GetUser.cshtml", user);
+                return View(user);
             }
             if (name.StartsWith("id"))
             {
@@ -56,7 +56,7 @@ namespace EStudy.MVC.Controllers
                 if (GetId() == id)
                     return LocalRedirect("~/me");
                 var user = await dataManager.UserService.GetUserById(id);
-                return View("~/Views/User/GetUser.cshtml", user);
+                return View(user);
             }
             return LocalRedirect("~/");
         }
