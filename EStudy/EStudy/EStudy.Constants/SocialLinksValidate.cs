@@ -18,7 +18,7 @@ namespace EStudy.Constants
         {
             if (!BaseUrlIsValid(url))
                 return false;
-            if (url.StartsWith("https://twitter.com") || url.StartsWith("https://api.twitter.com"))
+            if (url.StartsWith("https://twitter.com") || url.StartsWith("https://www.twitter.com"))
                 return true;
             return false;
         }
@@ -27,7 +27,7 @@ namespace EStudy.Constants
         {
             if (!BaseUrlIsValid(url))
                 return false;
-            if (url.StartsWith("https://instagram.com"))
+            if (url.StartsWith("https://instagram.com") || url.StartsWith("https://www.instagram.com"))
                 return true;
             return false;
         }
@@ -36,7 +36,7 @@ namespace EStudy.Constants
         {
             if (!BaseUrlIsValid(url))
                 return false;
-            if (url.StartsWith("https://facebook.com"))
+            if (url.StartsWith("https://facebook.com") || url.StartsWith("https://www.facebook.com"))
                 return true;
             return false;
         }
@@ -45,7 +45,7 @@ namespace EStudy.Constants
         {
             if (!BaseUrlIsValid(url))
                 return false;
-            if (url.StartsWith("https://github.com") || url.StartsWith("https://api.github.com/users"))
+            if (url.StartsWith("https://github.com") || url.StartsWith("https://www.github.com"))
                 return true;
             return false;
         }

@@ -220,11 +220,11 @@ namespace EStudy.Application.Services
         {
             if (!SocialLinksValidate.TwitterIsValid(model.Twitter))
                 return Constants.Constants.TwitterLinkBroken;
-            if (!SocialLinksValidate.TwitterIsValid(model.Facebook))
+            if (!SocialLinksValidate.FacebookIsValid(model.Facebook))
                 return Constants.Constants.FacebookLinkBroken;
-            if (!SocialLinksValidate.TwitterIsValid(model.Instagram))
+            if (!SocialLinksValidate.InstagramIsValid(model.Instagram))
                 return Constants.Constants.InstagramLinkBroken;
-            if (!SocialLinksValidate.TwitterIsValid(model.GitHub))
+            if (!SocialLinksValidate.GitHubIsValid(model.GitHub))
                 return Constants.Constants.GitHubLinkBroken;
             var userFromDb = await unitOfWork.UserRepository.GetByWhereAsTrackingAsync(d => d.Id == model.Id);
             if (userFromDb == null)
